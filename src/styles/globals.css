@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔹 讓點擊 Navbar 時滾動更流暢 */
+html {
+  scroll-behavior: smooth;
+}
