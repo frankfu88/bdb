@@ -28,7 +28,80 @@ export default function ProductsPage() {
 </p>
       </section>
 
-      
+              {/* 🔹 初生動物高壓氧艙的作用 */}
+<section className="py-16 bg-gradient-to-b from-gray-100 to-gray-50">
+  <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">初生動物高壓氧艙的作用</h2>
+  <div className="max-w-4xl mx-auto text-gray-700">
+    <p className="text-lg text-center mb-8 leading-relaxed">
+      高壓氧艙技術在初生動物的健康管理中發揮關鍵作用，能夠提升存活率並促進成長發育。
+    </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="p-6 bg-white rounded-lg shadow-md flex items-start">
+        <span className="text-green-600 text-3xl font-bold mr-4">1</span>
+        <p>
+          <strong>提升母體受孕率</strong>：懷孕前進行高壓氧及光療調理，每日一次（60 分鐘），可增強母體健康，提高受孕機率。
+        </p>
+      </div>
+      <div className="p-6 bg-white rounded-lg shadow-md flex items-start">
+        <span className="text-green-600 text-3xl font-bold mr-4">2</span>
+        <p>
+          <strong>改善胚胎發育</strong>：懷孕期間每日吸氧及光療 60 分鐘，有助於胎兒健康發展，增強母體與胎兒免疫力。
+        </p>
+      </div>
+      <div className="p-6 bg-white rounded-lg shadow-md flex items-start">
+        <span className="text-green-600 text-3xl font-bold mr-4">3</span>
+        <p>
+          <strong>降低幼獸夭折率</strong>：初生動物出生後 10-15 天內每日吸氧 60 分鐘，之後每 3 天一次，可增強成長與免疫力，顯著減少幼獸夭折率。
+        </p>
+      </div>
+      <div className="p-6 bg-white rounded-lg shadow-md flex items-start">
+        <span className="text-green-600 text-3xl font-bold mr-4">4</span>
+        <p>
+          <strong>促進產後恢復</strong>：母體產後持續吸氧及光療 7 天，加速傷口癒合並促進身體恢復，減少修護期與藥物需求。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{/* 🔹 特點介紹 */}
+<section className="bg-gradient-to-b from-white to-gray-100 p-12 rounded-lg shadow-lg mb-16">
+  <h3 className="text-4xl font-bold text-center text-gray-900 mb-10">特點介紹</h3>
+  <p className="text-gray-700 text-lg leading-relaxed text-center max-w-3xl mx-auto mb-8">
+    高壓氧艙搭載多層設計與先進光療技術，提升動物健康與治療效果。結合藍光、紅光與高壓氧供應，打造最佳恢復環境。
+  </p>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">提升存活率</h4>
+      <p className="text-gray-600">可改善動物或寵物天折率超過 50%。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">多層抽屜式設計</h4>
+      <p className="text-gray-600">可容納 100 只動物或 10 只受孕母體，方便管理。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">高效氧艙</h4>
+      <p className="text-gray-600">艙內可達 2.0 ATA，氧濃度 40%，出氧濃度 96%。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">雙泄壓閥</h4>
+      <p className="text-gray-600">高安全性防爆系統，確保穩定運行。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">紫外線滅菌</h4>
+      <p className="text-gray-600">結合負離子淨化，有效抗菌除味，維持環境清潔。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">光療系統</h4>
+      <p className="text-gray-600">藍光穩定情緒，紅光與紅外光促進生長與免疫力。</p>
+    </div>
+    <div className="p-6 bg-white rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+      <h4 className="text-xl font-semibold mb-2">恆溫空調</h4>
+      <p className="text-gray-600">溫度可設定 20℃ ~ 35℃，適應各種需求。</p>
+    </div>
+  </div>
+</section>
     
      {/* 🔹 光療技術原理 */}
 <section className="py-16">
@@ -100,43 +173,8 @@ export default function ProductsPage() {
         </table>
       </section>
         
-            {/* 🔹 特點介紹 */}
-      <section className="bg-gray-50 p-8 rounded-lg shadow-md mb-12">
-        <h3 className="text-2xl font-semibold text-center mb-6">特點介紹</h3>
-        <p className="text-gray-700 text-lg leading-relaxed text-center">
-          高壓氧艙搭載多層設計與先進光療技術，提升動物健康與治療效果。結合藍光、紅光與高壓氧供應，打造最佳恢復環境。
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">提升存活率</h4>
-            <p className="text-gray-600">可改善動物或寵物天折率超過 50%。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">多層抽屜式設計</h4>
-            <p className="text-gray-600">可容納 100 只動物或 10 只受孕母體，方便管理。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">高效氧艙</h4>
-            <p className="text-gray-600">艙內可達 2.0 ATA，氧濃度 40%，出氧濃度 96%。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">雙泄壓閥</h4>
-            <p className="text-gray-600">高安全性防爆系統，確保穩定運行。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">紫外線滅菌</h4>
-            <p className="text-gray-600">結合負離子淨化，有效抗菌除味，維持環境清潔。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">光療系統</h4>
-            <p className="text-gray-600">藍光穩定情緒，紅光與紅外光促進生長與免疫力。</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">恆溫空調</h4>
-            <p className="text-gray-600">溫度可設定 20℃ ~ 35℃，適應各種需求。</p>
-          </div>
-        </div>
-      </section>
+
+
 
     {/* 🔹 規格說明 */}
     <section className="py-16">
@@ -164,7 +202,7 @@ export default function ProductsPage() {
           </tbody>
         </table>
       </section>
-      
+
       {/* 🔹 CTA 行動召喚 */}
       <section className="py-16 text-center bg-gradient-to-r from-green-500 to-blue-400 text-white rounded-lg shadow-md mt-12">
         <h2 className="text-3xl font-semibold">想深入了解產品？立即聯繫我們！</h2>

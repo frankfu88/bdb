@@ -22,23 +22,86 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* 🔹 產品特色 */}
-      <section className="py-16">
-        <h2 className="text-3xl font-semibold text-center mb-10">產品特色</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          {[
-            { src: "/oxygen-increase.png", title: "提升血氧", desc: "增強細胞活力，促進新陳代謝與組織修復。" },
-            { src: "/light-therapy.png", title: "結合光療", desc: "紅光 & 藍光促進細胞修復，減少發炎反應。" },
-            { src: "/medical-certification.png", title: "醫療級技術", desc: "符合國際標準，安全有效，獲專家推薦。" },
-          ].map((item, index) => (
-            <div key={index} className="p-6 bg-gray-100 rounded-lg shadow-md transition-transform duration-300 hover:scale-105">
-              <Image src={item.src} alt={item.title} width={100} height={100} className="mx-auto" />
-              <h3 className="text-xl font-semibold mt-4">{item.title}</h3>
-              <p className="text-gray-600 mt-2">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* 🔹 品牌介紹 */}
+<section className="py-16 bg-gray-50">
+  <h2 className="text-3xl font-semibold text-center mb-10">關於我們</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 className="text-2xl font-bold text-gray-900">專業研發，領先技術</h3>
+      <p className="text-gray-700 leading-relaxed mt-4">
+        我們擁有 <strong>專業研發團隊</strong>，專注於 <strong>高壓氧技術與光療系統</strong> 的創新應用。
+        透過持續改良與測試，我們開發出 <strong>適用於醫療</strong>、<strong>運動恢復與寵物醫療</strong> 的高效氧艙技術。
+      </p>
+      <ul className="mt-6 space-y-2 text-gray-700">
+        <li>✅ 全球先進的高壓氧艙技術</li>
+        <li>✅ 專利氣壓控制系統，安全穩定</li>
+        <li>✅ 結合紅光 & 藍光，促進細胞修復</li>
+      </ul>
+    </div>
+    <Image 
+      src="/brand-tech.png" 
+      alt="品牌技術展示" 
+      width={500} 
+      height={300} 
+      className="rounded-lg shadow-md"
+    />
+  </div>
+</section>
+
+
+      
+{/* 🔹 人用微壓氧艙 */}
+<section className="py-16">
+  <h2 className="text-3xl font-semibold text-center mb-10">人用微壓氧艙</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <Image 
+      src="/human-oxygen-chamber.png" 
+      alt="人用微壓氧艙" 
+      width={500} 
+      height={300} 
+      className="rounded-lg shadow-md"
+    />
+    <div>
+      <h3 className="text-2xl font-bold text-gray-900">專為人體設計，舒適安全</h3>
+      <p className="text-gray-700 leading-relaxed mt-4">
+        我們的微壓氧艙適用於 <strong>健康管理、運動恢復與睡眠改善</strong>。
+        透過 <strong>1.3-1.5 ATA 微壓技術</strong>，提升血氧供應，幫助細胞修復與增強免疫力。
+      </p>
+      <ul className="mt-6 space-y-2 text-gray-700">
+        <li>🌿 改善慢性疲勞，提高專注力</li>
+        <li>💪 適合運動員使用，加速恢復</li>
+        <li>😴 促進深層睡眠，緩解壓力</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{/* 🔹 寵物高壓氧艙 */}
+<section className="py-16 bg-gray-50">
+  <h2 className="text-3xl font-semibold text-center mb-10">寵物高壓氧艙</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 className="text-2xl font-bold text-gray-900">專業動物醫療氧艙</h3>
+      <p className="text-gray-700 leading-relaxed mt-4">
+        高壓氧技術已廣泛應用於<strong>寵物醫療</strong>，幫助加速傷口癒合、改善心肺功能與增強免疫力。
+        透過 <strong>2.0 ATA 高壓系統</strong>，提供最適合寵物康復的環境。
+      </p>
+      <ul className="mt-6 space-y-2 text-gray-700">
+        <li>🐶 皮膚病 & 慢性發炎治療</li>
+        <li>🐾 術後恢復，加快傷口癒合</li>
+        <li>🐕 幫助年長寵物改善關節問題</li>
+      </ul>
+    </div>
+    <Image 
+      src="/pet-oxygen-chamber.png" 
+      alt="寵物高壓氧艙" 
+      width={500} 
+      height={300} 
+      className="rounded-lg shadow-md"
+    />
+  </div>
+</section>
+
 
 {/* 🔹 合作夥伴 (簡約現代風格) */}
 <section className="py-16">
