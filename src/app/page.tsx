@@ -107,7 +107,7 @@ export default function HomePage() {
 <section className="py-16">
   <h2 className="text-3xl font-semibold text-center mb-10">合作夥伴</h2>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {["東南動物醫院", "羅大宇動物醫院", "亞幸動物醫院", "登羣動物醫院"].map((partner, index) => (
+    {["東南動物醫院", "羅大宇動物醫院", "亞幸動物醫院", "登羣動物醫院", "文志動物醫院"].map((partner, index) => (
       <div 
         key={index} 
         className="bg-white p-6 rounded-lg shadow-md text-center text-lg font-semibold text-gray-700 transition-all duration-300 hover:shadow-xl"
