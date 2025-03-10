@@ -1,92 +1,159 @@
-'use client';
+"use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ApplicationsPage() {
+  const router = useRouter();
+
   return (
-    <div className="max-w-6xl mx-auto px-6">
-      
-      {/* 🔹 Hero 區塊 */}
-      <section className="text-center py-16">
-        <h1 className="text-4xl font-bold text-gray-900 leading-snug">
-          高壓氧艙 & 光療技術應用
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">
-          透過 <strong>東南動物醫院</strong> 等醫療夥伴的臨床應用，高壓氧艙與光療技術已成功幫助
-          <strong>寵物康復、運動員恢復、醫療術後修復</strong>，提供高效、安全的解決方案。
-        </p>
-      </section>
+    <main className="bg-white text-gray-900 py-20 px-6">
+      <section className="max-w-6xl mx-auto">
+        
+        
+        
+        {/* 🔹 高壓氧治療 HBOT */}
+        <div className="bg-[#F5F1ED] shadow-md rounded-3xl p-8 mt-12">
+          <h2 className="text-3xl font-bold text-center text-gray-800">高壓氧治療 HBOT</h2>
+          <p className="text-lg text-center text-gray-700 mt-2">
+          藉由壓力和氧氣，提高血漿及組織含氧濃度並增強血中白血球殺菌和自癒能力，以達到治療目的。
+          </p>
 
-      {/* 🔹 東南動物醫院應用案例 */}
-      <section className="py-16 bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center mb-10">東南動物醫院應用案例</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <Image src="/southeast-animal-hospital.png" alt="東南動物醫院" width={500} height={300} className="rounded-lg shadow-md" />
-          <div>
-            <h3 className="text-xl font-semibold mb-4">東南動物醫院：高壓氧艙應用</h3>
-            <p className="text-gray-700 leading-relaxed">
-              東南動物醫院率先導入 **高壓氧艙技術**，幫助寵物快速康復：
-            </p>
-            <ul className="list-disc pl-6 text-gray-700 leading-relaxed mt-3">
-              <li>🐶 **術後恢復**：幫助傷口癒合，減少發炎</li>
-              <li>🐱 **慢性病治療**：改善動物呼吸困難、關節炎</li>
-              <li>🐾 **神經系統修復**：用於脊髓受損 & 神經功能恢復</li>
-            </ul>
+          {/* 🔹 主要應用範圍 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {[
+              { category: "皮膚傷口", conditions: ["深層組織感染", "久不癒合的傷口", "燒燙傷 術後修復", "移植後癒合", "術後恢復"] },
+              { category: "心血管", conditions: ["心血管保養", "中風", "低血壓", "腦栓塞", "血管炎"] },
+              { category: "神經系統", conditions: ["腦/脊神經損傷", "大腦缺血", "四肢癱瘓", "周邊神經病變"] },
+              { category: "口腔", conditions: ["牙髓炎", "牙周病", "口腔發炎"] },
+              { category: "腸胃道", conditions: ["腸道炎", "胃潰瘍", "腹膜炎", "黃疸"] },
+              { category: "肌肉骨骼", conditions: ["骨折修復", "肌腱炎", "骨頭感染", "脊椎盤疾病"] },
+              { category: "感染性疾病", conditions: ["敗血症", "內毒血症", "膿皮症"] },
+              { category: "老年疾病", conditions: ["老年症候群", "退化性疾病"] },
+              { category: "癌症", conditions: ["放射治療後修復"] }
+            ].map((item, index) => (
+              <div key={index} className="bg-white shadow-lg rounded-xl p-6 text-lg">
+                <h3 className="text-xl font-bold text-[#2266AA]">{item.category}</h3>
+                <ul className="list-disc pl-5 mt-2 text-gray-700 space-y-1">
+                  {item.conditions.map((condition, idx) => (
+                    <li key={idx}>{condition}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+        
+        {/* 🔹 禁忌症與相對禁忌症 */}
+<div className="bg-[#2266AA] text-white shadow-lg rounded-3xl p-8 mt-12">
+  <h2 className="text-3xl font-bold text-center">禁忌症與注意事項</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    
+    {/* ✅ 絕對禁忌症 */}
+    <div>
+      <h3 className="text-xl font-bold text-yellow-300">🚫 絕對禁忌症（不建議使用）</h3>
+      <ul className="list-disc pl-5 mt-2 text-lg">
+        <li>
+          <span className="font-semibold">氣胸（Pneumothorax）</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能導致肺部破裂，引發張力性氣胸，危及生命。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">未受控的氣道疾病</span>（如嚴重哮喘、肺氣腫 COPD）
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>增加肺部過度膨脹的風險，影響氣體交換。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">上呼吸道肺部感染</span>（如肺炎）
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能加重感染或造成肺部損傷。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">癲癇或未受控的神經系統疾病</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>高氧氣可能誘發癲癇發作。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">嚴重心臟疾病</span>（如充血性心衰竭）
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能增加心臟負擔，引發心律不整或心臟衰竭惡化。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">近期接受眼部手術</span>（如視網膜剝離修復）
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能影響眼內壓，影響術後恢復。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">耳損傷或耳咽管功能異常</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能因壓力變化造成耳損傷、疼痛或導致耳損傷。</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-      {/* 🔹 其他動物醫院應用 */}
-      <section className="py-16">
-        <h2 className="text-3xl font-semibold text-center mb-10">其他動物醫院應用</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 bg-gray-100 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-semibold mb-3">羅大宇動物醫院</h3>
-            <p className="text-gray-700">🐾 治療高齡犬的慢性病、皮膚病</p>
-          </div>
-          <div className="p-6 bg-gray-100 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-semibold mb-3">亞幸動物醫院</h3>
-            <p className="text-gray-700">🐾 幫助術後動物減少疼痛，提升氧氣循環</p>
-          </div>
-          <div className="p-6 bg-gray-100 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-semibold mb-3">登羣動物醫院</h3>
-            <p className="text-gray-700">🐾 提供高壓氧治療，增強呼吸功能</p>
-          </div>
-          <div className="p-6 bg-gray-100 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-semibold mb-3">其他合作夥伴</h3>
-            <p className="text-gray-700">🐾 持續擴展中，讓更多動物受惠！</p>
-          </div>
-        </div>
-      </section>
+    {/* ✅ 相對禁忌症 */}
+    <div>
+      <h3 className="text-xl font-bold text-yellow-400">⚠️ 相對禁忌症（需謹慎評估）</h3>
+      <ul className="list-disc pl-5 mt-2 text-lg">
+        <li>
+          <span className="font-semibold">血糖控制不佳的糖尿病</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能影響胰島素代謝，需密切監測血糖。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">嚴重焦慮或幽閉恐懼症</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>可能無法適應高壓氧環境，需額外鎮靜處理。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">懷孕</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>目前研究對懷孕影響有限，建議與獸醫師討論後再決定是否使用。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">發燒</span>（未控制的高體溫）
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>需先治療後再使用高壓氧。</li>
+          </ul>
+        </li>
+        <li>
+          <span className="font-semibold">高血壓</span>
+          <ul className="list-disc pl-5 mt-1 text-base">
+            <li>在治療前需監測血壓，確保穩定後再進入高壓氧艙。</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-      {/* 🔹 氧艙技術影片 */}
-      <section className="py-16 bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center mb-10">高壓氧艙應用影片</h2>
-        <div className="flex justify-center">
-          <iframe 
-            width="800" 
-            height="450" 
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
-            title="高壓氧艙應用影片"
-            className="rounded-lg shadow-md"
-            allowFullScreen
-          ></iframe>
-        </div>
-        <p className="text-center text-gray-600 mt-4">🎥 了解氧艙如何幫助動物 & 人類恢復健康！</p>
-      </section>
+  {/* ✅ 注意事項 */}
+  <p className="text-lg text-center mt-6">
+    如寵物有上述狀況，請與獸醫師討論風險，並確認是否適合接受高壓氧治療。
+  </p>
+</div>
 
-      {/* 🔹 CTA (行動召喚) */}
-      <section className="py-16 text-center bg-green-600 text-white rounded-lg shadow-md mt-12">
-        <h2 className="text-3xl font-semibold">想了解更多應用案例？</h2>
-        <p className="mt-4 text-lg">立即聯繫我們，獲取專業建議！</p>
-        <Link href="/contact">
-          <button className="mt-6 px-6 py-3 bg-white text-green-600 text-lg font-medium rounded-lg hover:bg-gray-200">
+
+        {/* 🔹 CTA 按鈕 */}
+        <div className="mt-12 bg-[#F5F1ED] text-gray-900 p-8 rounded-xl shadow-lg text-center">
+          <h2 className="text-2xl font-bold text-[#2266AA]">您的寵物是否需要高壓氧治療？</h2>
+          <p className="mt-2 text-lg text-gray-700">有任何問題請聯繫我們，專家將為您的寶貝提供建議！</p>
+          <button
+            onClick={() => router.push("/contact")}
+            className="mt-4 bg-[#2266AA] text-white py-3 px-6 rounded-lg text-lg font-bold hover:bg-[#1B5B99] transition"
+          >
             聯絡我們
           </button>
-        </Link>
+        </div>
       </section>
-
-    </div>
+    </main>
   );
 }
