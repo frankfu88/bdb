@@ -8,9 +8,10 @@ export default function ApplicationsPage() {
   return (
     <main className="bg-white text-gray-900 py-20 px-6">
       <section className="max-w-6xl mx-auto">
-        
-        
-        
+      <h2 className="text-3xl text-gray-800 text-center tracking-wide">
+          應用範圍
+          <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
+        </h2>
         {/* 🔹 高壓氧治療 HBOT */}
         <div className="bg-[#F5F1ED] shadow-md rounded-3xl p-8 mt-12">
           <h2 className="text-3xl font-bold text-center text-gray-800">高壓氧治療 HBOT</h2>
