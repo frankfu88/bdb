@@ -10,9 +10,16 @@ import BackToTop from "@/components/BackToTop";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [navbarHeight, setNavbarHeight] = useState(140); // 預設 navbar 高度
 
   useEffect(() => {
     setIsClient(true);
+    // 動態計算 navbar 高度
+    const header = document.querySelector('header');
+    if (header) {
+      const height = header.getBoundingClientRect().height;
+      setNavbarHeight(height);
+    }
   }, []);
 
   return (
@@ -116,9 +123,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
         </header>
-
-        {/* 🔹 主要內容區域 */}
-        <main className="mt-[120px] container mx-auto px-6">{children}</main>
+        
+        {/* 🔹 主要內容區域 - 動態調整頂部間距 */}
+        <main className={`mt-[${navbarHeight}px] container mx-auto px-6`} style={{ marginTop: `${navbarHeight}px` }}>
+          {children}
+        </main>
 
         {/* ✅ 回到頂部按鈕 */}
         <BackToTop />

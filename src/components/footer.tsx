@@ -22,11 +22,7 @@ export default function Footer() {
           <span>|</span>
           <Link href="/" className="hover:underline">
             免責聲明
-          </Link>
-          <span>|</span>
-          <Link href="/" className="hover:underline">
-            網站導覽
-          </Link>
+          </Link>          
         </div>
 
         {/* 右側 - 版權資訊 */}

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
+    <div className="w-full">
       
       {/* 🔹 頂部 Banner */}
       <div className="w-full h-[400px] relative overflow-hidden">
@@ -16,12 +16,19 @@ export default function AboutPage() {
           className="w-full h-full object-cover"
           priority
         />
+        {/* 🔹 右側文字區塊 */}
+        <div className="absolute inset-y-0 right-16 flex flex-col justify-center">
+          <h2 className="text-4xl font-bold text-gray-900">關於我們</h2>
+          <p className="text-lg text-gray-700 mt-2">
+          牠們不只是動物，而是我們心中最珍貴的存在
+          </p>
+        </div>
       </div>
 
       {/* 🔹 公司介紹 (無圖片) */}
       <section className="mt-12 px-6 max-w-7xl mx-auto">
         <h2 className="text-3xl text-gray-800 text-center tracking-wide">
-          關於我們
+          認識我們
           <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
         </h2>
         <p className="text-lg text-gray-700 mt-4 leading-relaxed text-center">

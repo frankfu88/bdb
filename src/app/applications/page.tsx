@@ -1,13 +1,33 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-export default function ApplicationsPage() {
-  const router = useRouter();
+
+export default function ProductsPage() {
 
   return (
-    <main className="bg-white text-gray-900 py-20 px-6">
-      <section className="max-w-6xl mx-auto">
+    <div className="w-full">
+      
+      {/* 🔹 頂部 Banner */}
+      <div className="w-full h-[400px] relative overflow-hidden">
+        <Image 
+          src="/images/banner/product.jpg"
+          alt="關於我們"
+          width={1920}
+          height={400} 
+          className="w-full h-full object-cover"
+          priority
+        />
+        {/* 🔹 右側文字區塊 */}
+        <div className="absolute inset-y-0 right-16 flex flex-col justify-center">
+          <h2 className="text-4xl font-bold text-gray-900">產品介紹</h2>
+          <p className="text-lg text-gray-700 mt-2">
+          牠們不只是動物，而是我們心中最珍貴的存在
+          </p>
+        </div>
+      </div>
+
+      <section className="mt-12 px-6 max-w-7xl mx-auto">
       <h2 className="text-3xl text-gray-800 text-center tracking-wide">
           應用範圍
           <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
@@ -143,18 +163,9 @@ export default function ApplicationsPage() {
 </div>
 
 
-        {/* 🔹 CTA 按鈕 */}
-        <div className="mt-12 bg-[#F5F1ED] text-gray-900 p-8 rounded-xl shadow-lg text-center">
-          <h2 className="text-2xl font-bold text-[#2266AA]">您的寵物是否需要高壓氧治療？</h2>
-          <p className="mt-2 text-lg text-gray-700">有任何問題請聯繫我們，專家將為您的寶貝提供建議！</p>
-          <button
-            onClick={() => router.push("/contact")}
-            className="mt-4 bg-[#2266AA] text-white py-3 px-6 rounded-lg text-lg font-bold hover:bg-[#1B5B99] transition"
-          >
-            聯絡我們
-          </button>
-        </div>
+       
       </section>
-    </main>
+
+    </div>
   );
 }
