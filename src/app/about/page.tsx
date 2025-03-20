@@ -17,7 +17,7 @@ export default function AboutPage() {
           priority
         />
         {/* 🔹 右側文字區塊 */}
-        <div className="absolute inset-y-0 right-16 flex flex-col justify-center">
+        <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
           <h2 className="text-4xl font-bold text-gray-900">關於我們</h2>
           <p className="text-lg text-gray-700 mt-2">
           牠們不只是動物，而是我們心中最珍貴的存在
@@ -112,13 +112,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 🔹 CTA 區塊 */}
+      {/* 🔹 CTA 區塊 - 調整為連結到 LINE 官方帳號 */}
       <section className="mt-16 py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-center rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
         <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>
-        <a href="/contact">
+        <a href="https://line.me/ti/p/@464hptwo" target="_blank" rel="noopener noreferrer">
           <button className="mt-6 px-6 py-3 bg-white text-blue-600 text-lg font-medium rounded-lg transition-all duration-300 hover:bg-gray-200 shadow-md">
-            聯絡我們
+            加入官方 LINE
           </button>
         </a>
       </section>

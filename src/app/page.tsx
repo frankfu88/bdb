@@ -18,7 +18,7 @@ export default function HomePage() {
           priority
         />
         {/* 🔹 右側文字區塊 */}
-        <div className="absolute inset-y-0 right-16 flex flex-col justify-center">
+        <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
           <h2 className="text-4xl font-bold text-gray-900">公司介紹</h2>
           <p className="text-lg text-gray-700 mt-2">
           牠們不只是動物，而是我們心中最珍貴的存在
@@ -170,17 +170,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 🔹 CTA 區塊 */}
-        <section className="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg shadow-lg mt-12 transition-transform duration-500 hover:scale-105">
+        {/* 🔹 CTA 區塊 - 點擊後導向 LINE 官方帳號 (已移除 hover 放大效果) */}
+        <section className="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg shadow-lg mt-12">
           <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
           <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>
-          <Link href="/contact">
+          <Link href="https://line.me/ti/p/@464hptwo" target="_blank">
             <button className="mt-6 px-6 py-3 bg-white text-blue-600 text-lg font-medium rounded-lg transition-all duration-300 hover:bg-gray-200 shadow-md">
-              聯絡我們
+              加入官方 LINE
             </button>
           </Link>
         </section>
-
+        
         {/* 🔹 底部空間 */}
         <div className="h-16"></div>
       </div>

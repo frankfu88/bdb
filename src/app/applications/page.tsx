@@ -19,7 +19,7 @@ export default function ProductsPage() {
           priority
         />
         {/* 🔹 右側文字區塊 */}
-        <div className="absolute inset-y-0 right-16 flex flex-col justify-center">
+        <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
           <h2 className="text-4xl font-bold text-gray-900">產品介紹</h2>
           <p className="text-lg text-gray-700 mt-2">
           牠們不只是動物，而是我們心中最珍貴的存在
