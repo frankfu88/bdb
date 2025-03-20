@@ -21,7 +21,7 @@ export default function ProductsPage() {
         <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
           <h2 className="text-4xl font-bold text-gray-900">產品介紹</h2>
           <p className="text-lg text-gray-700 mt-2">
-          牠們不只是動物，而是我們心中最珍貴的存在
+            牠們不只是動物，而是我們心中最珍貴的存在
           </p>
         </div>
       </div>
@@ -35,7 +35,8 @@ export default function ProductsPage() {
         {/* 文字說明 */}
         <div className="text-center max-w-3xl mx-auto mt-6">
           <p className="text-gray-600 text-lg leading-relaxed">
-            高壓氧艙搭載多層設計與先進光療技術，提升動物健康與治療效果。結合藍光、紅光與高壓氧供應，打造最佳恢復環境。
+            高壓氧艙搭載多層設計與先進光療技術，提升動物健康與治療效果。
+            結合藍光、紅光與高壓氧供應，打造最佳恢復環境。
           </p>
         </div>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -54,7 +55,7 @@ export default function ProductsPage() {
           ))}
         </div>
       </section>
-            
+
       {/* 🔹 初生動物高壓氧艙的作用 */}
       <section className="mt-16 py-16 bg-gradient-to-b from-gray-100 to-gray-50 rounded-xl shadow-md">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">初生動物高壓氧艙的作用</h2>
@@ -74,74 +75,6 @@ export default function ProductsPage() {
                 <p><strong>{item.title}</strong>：{item.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-    
-     {/* 🔹 光療技術原理 */}
-      <section className="py-16">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">光療技術原理</h2>
-
-        {/* 🔹 紅光 & 紅外光理療原理 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <Image src="/images/red-light-therapy.png" alt="紅光 & 紅外光理療" width={500} height={300} className="rounded-lg shadow-md" />
-          <div>
-            <h3 className="text-2xl font-semibold mb-4 text-red-500">紅光 & 紅外光理療原理</h3>
-            <ul className="list-disc pl-6 text-gray-700 leading-relaxed space-y-3">
-              <li>
-                <strong>安全且非侵入性的理療技術：</strong>紅光 & 紅外光理療是一種安全且非侵入性的理療技術，通過紅光和近紅外光照射、滲透皮膚組織，能夠啟動細胞粒線體，修復破損的皮膚及肌肉組織，促進身體的自我修復能力。
-              </li>
-              <li>
-                <strong>紅光與近紅外光的有效波長：</strong>紅光治療主要使用
-                <span className="text-red-500 font-semibold"> 630 nm - 700 nm</span> 紅光波長，
-                以及 <span className="text-red-500 font-semibold"> 700 nm - 1,100 nm</span> 近紅外光。
-                這些光波能夠深入皮膚與肌肉層，幫助傷口癒合、減少發炎、提升組織修復能力。
-              </li>
-              <li>
-                <strong>紅光對皮膚無害：</strong>與紫外線不同，紅光對皮膚無害，不會造成曬黑或色斑等問題。
-                它是一種安全的光療技術，適合長期使用。
-              </li>
-              <li>
-                <strong>粒線體與細胞能量：</strong>粒線體是細胞的 "發電機"，對紅光特別敏感。
-                紅光可以刺激粒線體產生更多的細胞能量（ATP），加速細胞修復、增強代謝，提升細胞活性。
-              </li>
-              <li>
-                <strong>促進細胞修復與再生：</strong>在紅光照射下，紅光會進入皮膚深層組織，刺激細胞中的粒線體，
-                提高細胞能量（ATP）、活性氧（ROS）及一氧化氮（NO）的產生，
-                進一步增強細胞功能與自我修復能力。這有助於傷口癒合、肌肉修復、減少發炎與疼痛，並促進整體健康。
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* 🔹 藍光的益處 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-12">
-          <div>
-            <h3 className="text-2xl font-semibold mb-4 text-blue-500">藍光的益處</h3>
-            <ul className="list-disc pl-6 text-gray-700 leading-relaxed space-y-3">
-              <li>
-                <strong>波長範圍：</strong>
-                藍光波長為 <span className="text-blue-500 font-semibold">450-495 nm</span>，屬於冷色光，對身心具有放鬆作用。
-              </li>
-              <li>
-                <strong>影響清醒狀態與專注力：</strong>
-                藍光影響我們的清醒程度、專注力、工作效率與整體活力，如同紫外線影響維生素生成。
-                在明亮光線下，藍光調節荷爾蒙分泌，幫助穩定情緒與生理時鐘。
-              </li>
-              <li>
-                <strong>調節生物節律：</strong>
-                白天藍光較高，夜晚則顯著減少。當環境變亮時，身體會釋放 <span className="text-blue-500 font-semibold">血清素</span> 和 <span className="text-blue-500 font-semibold">皮質醇</span>，
-                這兩種荷爾蒙幫助保持清醒與提升活力，而夜晚藍光減少時，則促進 <span className="text-blue-500 font-semibold">褪黑激素</span> 分泌，幫助入睡。
-              </li>
-              <li>
-                <strong>穩定情緒與提升記憶力：</strong>
-                藍光可以調節神經遞質，幫助穩定情緒、減少焦慮，同時增強認知能力與記憶力，使思考更加清晰。
-              </li>
-              <li>
-                <strong>促進視力發展與屈光發育：</strong>
-                適量的藍光有助於視力發展，並對屈光發育產生影響，兒童與青少年適當接觸藍光可降低近視風險。
-              </li>
-            </ul>
           </div>
         </div>
       </section>
@@ -181,10 +114,8 @@ export default function ProductsPage() {
           </table>
         </div>
       </section>
-
-
-
-      {/* 🔹 CTA 區塊 - 調整為連結到 LINE 官方帳號 */}
+      
+      {/* 🔹 CTA 區塊 */}
       <section className="mt-16 py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-center rounded-lg shadow-lg">
         <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
         <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>

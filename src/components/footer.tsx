@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Footer() {
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const [year] = useState<number>(new Date().getFullYear());
 
   return (
     <footer className="bg-[#1E3A8A] text-white py-4 px-6 mt-12 text-center">
