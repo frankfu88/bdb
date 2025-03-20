@@ -45,21 +45,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* 🔗 社群連結 */}
               <div className="flex items-center space-x-3">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" title="Facebook">
-                  <Image src="/images/facebook.png" alt="Facebook" width={24} height={24} />
+                  <Image src="/images/icons/facebook.png" alt="Facebook" width={24} height={24} />
                 </a>
                 <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram">
-                  <Image src="/images/instagram.png" alt="Instagram" width={24} height={24} />
+                  <Image src="/images/icons/instagram.png" alt="Instagram" width={24} height={24} />
                 </a>
                 <a href="https://line.me/ti/p/@464hptwo" target="_blank" rel="noopener noreferrer" title="LINE">
-                  <Image src="/images/line.png" alt="LINE" width={24} height={24} />
+                  <Image src="/images/icons/line.png" alt="LINE" width={24} height={24} />
                 </a>
               </div>
 
               {/* 📞 聯絡資訊 */}
               <div className="flex items-center space-x-3">
-                <Image src="/images/telephone.png" alt="電話" width={18} height={18} />
+                <Image src="/images/icons/telephone.png" alt="電話" width={18} height={18} />
                 <span>03-2871723</span>
-                <Image src="/images/location.png" alt="地址" width={18} height={18} />
+                <Image src="/images/icons/location.png" alt="地址" width={18} height={18} />
                 <span>桃園市中壢區青商路59號2號</span>
               </div>
             </div>
