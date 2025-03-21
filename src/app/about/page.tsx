@@ -32,22 +32,15 @@ export default function AboutPage() {
           <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
         </h2>
         <p className="text-lg text-gray-700 mt-4 leading-relaxed text-center">
-          寶的寶有限公司專注於微壓氧艙與動物高壓氧艙的研發、製造與銷售，致力於提升人類與動物的健康照護。
-          我們的所有氧艙設備皆與
-          <span className="text-[#2266AA] font-semibold"> 上海睿通機器人自動化股份有限公司</span> 共同研發與製造，
-          並經過嚴格的市場適用性評估與安全測試。
+          寶的寶有限公司專注於微壓氧艙與動物高壓氧艙的研發、製造與銷售，致力於提供更好的氧環境支持，幫助人類與動物維持良好狀態。
+          我們的所有氧艙設備皆與上海睿通機器人自動化股份有限公司共同研發與製造，並經過嚴格的市場適用性評估與安全測試。
         </p>
         <p className="text-lg text-gray-700 mt-4 leading-relaxed text-center">
           微壓氧艙產品獲得
           <span className="text-[#2266AA] font-semibold"> CNAS、CMA及CE</span> 國際認證，
-          適用於人體健康管理與恢復療程。
-          動物高壓氧艙則專為
-          <span className="text-[#2266AA] font-semibold"> 獸醫臨床需求</span> 設計，
-          提供
-          <span className="text-[#2266AA] font-semibold"> 單艙體</span> 與
-          <span className="text-[#2266AA] font-semibold"> 抽屜式艙體</span> 兩種選擇，
-          其中抽屜式艙體可同時治療多隻寵物，
-          有效提升動物醫院的治療效率。
+          適用於日常健康管理與環境調適。
+          動物高壓氧艙則專為獸醫院應用設計，提供單艙體與抽屜式艙體等選擇，其中抽屜式艙體可同時供多隻寵物使用，
+          有助於提升動物醫院的使用效率。
         </p>
       </section>
 
@@ -76,8 +69,7 @@ export default function AboutPage() {
               <h3 className="text-2xl text-[#2266AA] font-semibold">我們的理念</h3>
               <p className="text-gray-700 text-lg leading-relaxed mt-4">
                 寶的寶秉持
-                <span className="text-[#2266AA] font-semibold"> 求變創新、持續改進、卓越品質、超越期待</span> 的理念，
-                不斷優化產品與服務，推動微壓與高壓氧療法的應用與發展。
+                <span className="text-[#2266AA] font-semibold"> 求變創新、持續改進、卓越品質、超越期待</span> 的理念，不斷優化產品與服務，推動微壓與高壓氧艙技術的應用與發展。
               </p>
             </div>
           </div>
@@ -87,11 +79,10 @@ export default function AboutPage() {
             <div>
               <h3 className="text-2xl text-[#2266AA] font-semibold">零成本合作模式</h3>
               <p className="text-gray-700 text-lg leading-relaxed mt-4">
-                為協助獸醫院導入高壓氧技術，我們推出
+                為協助動物醫院引入高壓氧艙設備，我們推出
                 <span className="text-[#2266AA] font-semibold"> 零成本合作模式</span>，免押金、免設備購置費，
                 並提供
-                <span className="text-[#2266AA] font-semibold"> 終身免費維護、專業培訓及行銷輔導</span>，
-                讓更多動物醫療機構無憂升級診療技術。
+                <span className="text-[#2266AA] font-semibold"> 長期設備維護、專業應用指導及行銷輔導</span>，讓更多動物醫院能夠輕鬆擴展服務應用。
               </p>
             </div>
           </div>
@@ -102,9 +93,8 @@ export default function AboutPage() {
               <h3 className="text-2xl text-[#2266AA] font-semibold">攜手專業團隊，共創健康未來</h3>
               <p className="text-gray-700 text-lg leading-relaxed mt-4">
                 我們將持續攜手
-                <span className="text-[#2266AA] font-semibold"> 醫療與獸醫專業團隊</span>，
-                致力於人類與動物健康照護，讓每一次氧療都成為
-                <span className="text-[#2266AA] font-semibold"> 生命品質提升</span> 的關鍵。
+                <span className="text-[#2266AA] font-semibold"> 相關專業團隊</span>，致力於人類與動物的良好照護，讓每一次氧氣應用都能助益
+                <span className="text-[#2266AA] font-semibold"> 生活品質提升</span>。
               </p>
             </div>
           </div>
