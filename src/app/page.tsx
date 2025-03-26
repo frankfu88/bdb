@@ -48,9 +48,9 @@ export default function HomePage() {
           {/* 高壓氧艙種類展示 */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { title: "人用高壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", description: "適用於健康管理、運動恢復與睡眠改善，提供穩定的 1.3-1.5 ATA 微壓技術。" },
-              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/pet-single-chamber.png", description: "提供獨立的高氧環境，支持術後恢復、維持身體平衡，幫助毛孩保持最佳狀態。" },
-              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/pet-drawer-chamber.png", description: "多艙體設計，可同時照護多隻寵物，提升動物醫院的使用便利性。" }
+              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", description: "提供獨立的高氧環境，支持術後恢復、維持身體平衡，幫助毛孩保持最佳狀態。" },
+              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", description: "多艙體設計，可同時照護多隻寵物，提升動物醫院的使用便利性。" },
+              { title: "人用高壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", description: "適用於健康管理、運動恢復與睡眠改善，提供穩定的 1.3-1.5 ATA 微壓技術。" }
             ].map((item, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
                 <Image 
