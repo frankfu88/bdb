@@ -1,30 +1,18 @@
 'use client';
 
-import Image from "next/image";
-
+import Banner from "@/components/banner";
 
 export default function ProductsPage() {
 
   return (
     <div className="w-full">
-      
-      {/* 🔹 頂部 Banner */}
-      <div className="w-full h-[400px] relative overflow-hidden">
-        <Image 
-          src="/images/banner/product.jpg"
-          alt="關於我們"
-          width={1920}
-          height={400} 
-          className="w-full h-full object-cover"
-          priority
+      <div className="w-full">
+        {/* 🔹 使用共用 Banner */}
+        <Banner 
+          title="產品介紹"
+          description="牠們不只是動物，而是我們心中最珍貴的存在"
+          imageSrc="/images/banner/product.jpg"
         />
-        {/* 🔹 右側文字區塊 */}
-        <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-gray-900">產品介紹</h2>
-          <p className="text-lg text-gray-700 mt-2">
-          牠們不只是動物，而是我們心中最珍貴的存在
-          </p>
-        </div>
       </div>
 
       <section className="mt-12 px-6 max-w-7xl mx-auto">

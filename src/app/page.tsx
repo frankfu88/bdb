@@ -2,28 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Banner from "@/components/banner";
 
 export default function HomePage() {
   return (
     <div className="w-full">
-
-      {/* 🔹 Navbar 下方留空間，並顯示全寬 Banner 與公司介紹 */}
-      <div className="w-full h-[400px] relative overflow-hidden">
-        <Image
-          src="/images/banner/menu.jpg"
-          alt="網站橫幅"
-          layout="fill"
-          objectFit="cover"
-          className="absolute inset-0"
-          priority
+      <div className="w-full">
+        {/* 🔹 使用共用 Banner */}
+        <Banner 
+          title="公司介紹"
+          description="牠們不只是動物，而是我們心中最珍貴的存在"
+          imageSrc="/images/banner/menu.jpg"
         />
-        {/* 🔹 右側文字區塊 */}
-        <div className="absolute inset-y-0 right-20 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-gray-900">公司介紹</h2>
-          <p className="text-lg text-gray-700 mt-2">
-          牠們不只是動物，而是我們心中最珍貴的存在
-          </p>
-        </div>
       </div>
 
       {/* 🔹 內容區域恢復最大寬度 */}
@@ -79,24 +69,6 @@ export default function HomePage() {
             透過提供充足的氧氣，高壓氧艙有助於促進血液循環，維持毛孩的生理平衡，讓身體能夠更順利適應各種狀況。此外，高氧環境也有助於舒緩身體不適，減少局部腫脹，使毛孩的活動更為輕鬆自在，適合作為日常健康管理的一環。
           </p>
           
-          {/* 🔹 高壓氧的主要功效 */}
-          {/* <div className="mt-12 px-6 max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {[
-                { title: "加速傷口癒合", description: "透過增加受損組織的氧氣供應來促進傷口、燒傷和皮膚移植的快速癒合，促進膠原蛋白的生成與新血管形成。" },
-                { title: "減少發炎", description: "氧氣水平升高有助於減少發炎和腫脹，從而最大限度地減少寵物的疼痛和不適。" },
-                { title: "增強免疫反應", description: "改善免疫系統的功能，使其更有效地抵抗感染和促進康復。" },
-                { title: "手術恢復更快", description: "手術後，HBOT 可以幫助加快癒合並減少術後併發症，提高寵物的康復效率。" },
-                { title: "神經支持", description: "研究表明，HBOT 可以幫助改善患有脊髓損傷、腦外傷和其他神經系統疾病的寵物的神經功能。" }
-              ].map((item, index) => (
-                <div key={index} className="bg-[#4b7ad1] text-white p-6 shadow-lg rounded-lg hover:bg-[#1B5B99] transition-all">
-                  <h3 className="text-xl font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-white/90">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div> */}
-
           <div className="mt-12 px-6 max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
@@ -113,15 +85,12 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          
         </section>
 
         {/* 🔹 高壓氧艙原理說明 */}
         <section className="mt-12 bg-[#E6F0FA] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
           <h2 className="text-3xl font-semibold text-center text-[#2266AA]">高壓氧艙原理說明</h2>
           <div className="mt-8 max-w-4xl mx-auto">
-
-            {/* 避免使用治療等字樣版本 */}
             <ul className="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-4">
               <li>
                 <strong>亨利法則 - 壓力提升，氧氣溶解度增加</strong>  
@@ -156,51 +125,15 @@ export default function HomePage() {
               </li>
             </ul>
           </div>
-
-          {/* <div className="mt-8 max-w-4xl mx-auto">
-            <ul className="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-4">
-              <li>
-                <strong>亨利法則 - 壓力提升，氧氣溶解度增加</strong>  
-                根據亨利法則（Henry’s Law），氣體在液體中的溶解度會隨著壓力的增加而提升。  
-                在高壓氧艙內，當環境壓力上升至 1.3~1.5 大氣壓時，血液能攜帶的氧氣量顯著增加。  
-                這意味著即使血紅素攜氧能力已飽和，血液中的溶解氧（Dissolved Oxygen）仍能大幅提升，  
-                使氧氣更快地擴散到全身組織。
-              </li>
-              <li>
-                <strong>增強血氧含量與細胞能量</strong>  
-                在高壓環境下，氧氣分子變得更小，能更輕易穿透血管壁，進入組織細胞。  
-                血液中的氧氣提高 30% 以上，即使微血管受損或阻塞，身體仍能獲取足夠的氧氣供應，  
-                進一步促進組織修復、減少缺氧導致的細胞壞死。
-              </li>
-              <li>
-                <strong>增強組織修復與抗發炎作用</strong>  
-                高壓氧環境能啟動粒線體（Mitochondria），促進 ATP（三磷酸腺苷）的生成，  
-                ATP 是細胞的主要能量來源，能加速細胞修復、組織生長，並減少發炎反應。  
-                - 抑制發炎：降低發炎因子，減少腫脹與疼痛。  
-                - 促進傷口癒合：幫助燒燙傷、傷口、術後恢復。  
-                - 增強免疫力：提高白血球活性，幫助抵抗感染。
-              </li>
-              <li>
-                <strong>增強微循環與排毒效果</strong>  
-                高壓氧可促進血管新生（Angiogenesis），即新微血管的生長，有助於受損或老化組織的恢復。  
-                透過增加氧氣供應，還能加速體內毒素與代謝廢物的排除，如：  
-                - 減少乳酸堆積（運動後疲勞恢復）  
-                - 加速酒精代謝（醒酒、解宿醉）  
-                - 促進肝臟解毒（幫助代謝廢物排除）
-              </li>
-            </ul>
-          </div> */}
         </section>
 
-
-        {/* 🔹 我家貓狗適合寵物高壓氧艙嗎？ */}
+        {/* 🔹 我家貓狗適合高壓氧艙嗎？ */}
         <section className="mt-12 bg-[#F9F9F9] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
           <h2 className="text-3xl font-semibold text-center text-[#2266AA]">我家貓狗適合高壓氧艙嗎？</h2>
           <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
             如果家裡的毛孩有以下狀況，高壓氧環境或許能提供額外支持，協助維持良好的身體狀態與活力。
           </p>
 
-          {/* 主要應用情境 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 text-center">
             {[
               { title: "皮膚與傷口修復", description: "適用於不易恢復的皮膚狀況、燒燙傷及術後修復過程。" },
@@ -223,38 +156,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 🔹 我家貓狗適合寵物高壓氧療程嗎？ */}
-        {/* <section className="mt-12 bg-[#F9F9F9] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold text-center text-[#2266AA]">我家貓狗適合寵物高壓氧療程嗎？</h2>
-          <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
-            如果家裡毛孩有以下症狀，高壓氧治療（HBOT）可能提供額外的幫助，促進康復與提升生活品質。
-          </p> */}
-
-          {/* 主要適應症 */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 text-center">
-            {[
-              { title: "傷口癒合", description: "適用於不易癒合的傷口、燒燙傷及皮膚移植後的修復。" },
-              { title: "術後恢復", description: "骨科及軟組織手術後，可加速癒合並減少術後發炎反應。" },
-              { title: "感染控制", description: "適用於深部膿瘍、膿皮症、骨髓炎等細菌感染問題。" },
-              { title: "神經系統疾病", description: "中風、癱瘓、腦炎、腦膜炎等，幫助神經修復與康復。" },
-              { title: "心血管疾病", description: "適用於心臟病、腦栓塞，提高血氧濃度，改善血管修復能力。" },
-              { title: "創傷性損傷", description: "擠壓傷、頭部創傷、脊髓損傷，可減少組織壞死並加速修復。" },
-              { title: "牙齒疾病", description: "可應用於牙齦發炎、牙周病等口腔健康問題。" },
-              { title: "癌症治療輔助", description: "放射性治療後可協助組織修復，減少治療引起的組織壞死。" },
-              { title: "呼吸系統疾病", description: "肺炎、吸入性損傷（如煙霧或瀕臨溺水），改善低氧狀態。" },
-              { title: "運動損傷", description: "車禍或運動造成的扭傷、肌腱損傷等，減少發炎並加速恢復。" },
-              { title: "老年疾病", description: "適用於老年症候群、退化性疾病，幫助延緩衰老並提升活動力。" }
-            ].map((item, index) => (
-              <div key={index} className="bg-white shadow-md rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-[#2266AA]">{item.title}</h3>
-                <p className="mt-2 text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div> */}
-        {/* </section> */}
-        
-
-        {/* 🔹 CTA 區塊 - 點擊後導向 LINE 官方帳號 (已移除 hover 放大效果) */}
+        {/* 🔹 CTA 區塊 - 點擊後導向 LINE 官方帳號 */}
         <section className="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg shadow-lg mt-12">
           <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
           <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>
