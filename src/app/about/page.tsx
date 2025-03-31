@@ -42,7 +42,7 @@ export default function AboutPage() {
         <div className="w-full md:w-1/3 flex items-stretch">
           <div className="relative w-full h-auto md:h-full flex items-center">
             <Image
-              src="/images/about.png"
+              src="/images/about_dog.jpg" 
               alt="寶的寶高壓氧艙"
               width={400}
               height={400}
