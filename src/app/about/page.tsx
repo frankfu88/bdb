@@ -12,7 +12,7 @@ export default function AboutPage() {
         <Banner 
           title="關於我們"
           description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/about.jpg"
+          imageSrc="/images/banner/banner.jpg"
         />
       </div>
 

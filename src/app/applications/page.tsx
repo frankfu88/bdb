@@ -11,7 +11,7 @@ export default function ProductsPage() {
         <Banner 
           title="產品介紹"
           description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/product.jpg"
+          imageSrc="/images/banner/banner.jpg"
         />
       </div>
 

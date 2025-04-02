@@ -12,7 +12,7 @@ export default function HomePage() {
         <Banner 
           title="公司介紹"
           description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/menu.jpg"
+          imageSrc="/images/banner/banner.jpg"
         />
       </div>
 
