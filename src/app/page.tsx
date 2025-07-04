@@ -21,17 +21,14 @@ export default function HomePage() {
         {/* 🔹 關於諾亞高壓氧艙 */}
         <section className="mt-12 px-6 max-w-7xl mx-auto">
           <h2 className="text-3xl text-gray-800 text-center tracking-wide">
-            關於諾亞高壓氧艙
+            關於寶的寶高壓氧艙
             <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
           </h2>
 
           {/* 文字說明 */}
           <div className="text-center max-w-3xl mx-auto mt-6">
             <p className="text-gray-600 text-lg leading-relaxed">
-              寶的寶有限公司引進中國
-              <span className="text-gray-700">上海睿通机器人自动化股份有限公司</span>
-              的高壓氧設備，專為人用與寵物用設計。所有產品皆通過
-              <span className="text-gray-700">CNAS、CMA、CE</span> 認證，讓使用者更加放心。
+              寶的寶有限公司專注於微壓與動物高壓氧艙的研發與製造，提供安全、可靠的氧療設備，促進人類與動物健康。所有產品均與上海睿通機器人自動化股份有限公司共同開發，並通過CNAS、CMA、CE等國際認證，品質與安全皆達國際標準。
             </p>
           </div>
 

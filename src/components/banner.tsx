@@ -16,15 +16,15 @@ export default function Banner({ title, description, imageSrc }: BannerProps) {
         src={imageSrc}
         alt={title}
         layout="fill"
-        objectFit="contain"
+        objectFit="cover"
         className="absolute inset-0"
         priority
       />
       
       {/* ✅ 文字區塊保持一致 */}
-      <div className="absolute inset-y-0 right-8 sm:right-28 flex flex-col justify-center px-4 sm:px-0 w-[40%] sm:w-[35%] md:w-[30%] lg:w-[25%]">
-        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">{title}</h2>
-        <p className="text-base text-gray-700 mt-2">{description}</p>
+      <div className="absolute bottom-6 right-6 sm:bottom-20 sm:right-40 flex flex-col items-start px-4 w-auto max-w-[70%]">
+        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 text-left">{title}</h2>
+        <p className="text-base text-gray-700 mt-2 text-right">{description}</p>
       </div>
     </div>
   );
