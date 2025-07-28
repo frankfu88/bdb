@@ -11,8 +11,9 @@ export default function HomePage() {
         {/* 🔹 使用共用 Banner */}
         <Banner 
           title="公司介紹"
-          description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/banner.jpg"
+          // description="牠們不只是動物，而是我們心中最珍貴的存在"
+          imageSrc="/images/banner/home.jpg"
+          mobileImageSrc="/images/banner/mobile.jpg"
         />
       </div>
 

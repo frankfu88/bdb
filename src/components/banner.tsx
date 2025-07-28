@@ -1,31 +1,40 @@
 'use client';
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface BannerProps {
   title: string;
-  description: string;
-  imageSrc: string;
+  description?: string;
+  imageSrc: string; // desktop 預設圖片
+  mobileImageSrc?: string; // mobile 圖片（可選）
 }
 
-export default function Banner({ title, description, imageSrc }: BannerProps) {
+export default function Banner({ title, imageSrc, mobileImageSrc }: BannerProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640); // sm: 640px
+    };
+
+    handleResize(); // 初次渲染時先偵測一次
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const srcToUse = isMobile && mobileImageSrc ? mobileImageSrc : imageSrc;
+
   return (
-    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] overflow-hidden">
-      {/* ✅ 統一圖片尺寸 */}
+    <div className="w-full">
       <Image
-        src={imageSrc}
+        src={srcToUse}
         alt={title}
-        layout="fill"
-        objectFit="cover"
-        className="absolute inset-0"
+        width={isMobile ? 360 : 1200}
+        height={isMobile ? 120 : 400}
+        className="w-full h-auto"
         priority
       />
-      
-      {/* ✅ 文字區塊保持一致 */}
-      <div className="absolute bottom-6 right-6 sm:bottom-20 sm:right-40 flex flex-col items-start px-4 w-auto max-w-[70%]">
-        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 text-left">{title}</h2>
-        <p className="text-base text-gray-700 mt-2 text-right">{description}</p>
-      </div>
     </div>
   );
 }
