@@ -9,10 +9,11 @@ export default function AboutPage() {
 
       <div className="w-full">
         {/* 🔹 使用共用 Banner */}
-        <Banner 
-          title="關於我們"
-          description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/banner.jpg"
+        <Banner
+          title="公司介紹"
+          // description="牠們不只是動物，而是我們心中最珍貴的存在"
+          imageSrc="/images/banner/home.jpg"
+          mobileImageSrc="/images/banner/mobile.jpg"
         />
       </div>
 
