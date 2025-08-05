@@ -7,126 +7,128 @@ import Banner from "@/components/banner";
 export default function HomePage() {
   return (
     <div className="w-full">
-      <div className="w-full">
-        {/* 🔹 使用共用 Banner */}
+      {/* 🔹 使用共用 Banner */}
         <Banner 
           title="公司介紹"
           // description="牠們不只是動物，而是我們心中最珍貴的存在"
           imageSrc="/images/banner/home.jpg"
           mobileImageSrc="/images/banner/mobile.jpg"
         />
-      </div>
-
+      
       {/* 🔹 內容區域恢復最大寬度 */}
       <div className="max-w-6xl mx-auto px-6">
         {/* 🔹 關於諾亞高壓氧艙 */}
-        <section className="mt-12 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl text-gray-800 text-center tracking-wide">
+        <section className="mt-20 px-6 max-w-7xl mx-auto">
+          {/* <h2 className="text-3xl text-gray-800 text-center tracking-wide">
             關於寶的寶高壓氧艙
             <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
-          </h2>
+          </h2> */}
 
           {/* 文字說明 */}
-          <div className="text-center max-w-3xl mx-auto mt-6">
+          {/* <div className="text-center max-w-3xl mx-auto mt-6">
             <p className="text-gray-600 text-lg leading-relaxed">
               寶的寶有限公司專注於微壓與動物高壓氧艙的研發與製造，提供安全、可靠的氧療設備，促進人類與動物健康。所有產品均與上海睿通機器人自動化股份有限公司共同開發，並通過CNAS、CMA、CE等國際認證，品質與安全皆達國際標準。
             </p>
-          </div>
+          </div> */}
 
-          {/* 高壓氧艙種類展示 */}
+          <h2 className="font-serif text-3xl text-center font-semibold text-green-900">產品列表</h2>
+          <p className="mt-2 text-center text-gray-600">嶄新的技術、無與倫比的工藝設計</p>
+
+          {/* 高壓氧艙種類展示：改為圖片底部藍色遮罩樣式 */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", description: "提供獨立的高氧環境，支持術後恢復、維持身體平衡，幫助寵物保持最佳狀態。" },
-              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", description: "多艙體設計，可同時照護多隻寵物，提升動物醫院的使用便利性。" },
-              { title: "人用高壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", description: "適用於健康管理、運動恢復與睡眠改善，提供穩定的 1.3-1.5 ATA 微壓技術。" }
+            {[ 
+              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "#" },
+              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "#" },
+              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "#" }
             ].map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
-                <Image 
-                  src={item.img} 
+              <a
+                key={index}
+                href={item.link}
+                className="relative block group overflow-hidden shadow-md"
+              >
+                <Image
+                  src={item.img}
                   alt={item.title}
-                  width={400}
-                  height={250}
-                  className="rounded-lg object-cover mx-auto"
+                  width={600}
+                  height={400}
+                  // className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <h3 className="text-lg text-gray-800 mt-4">{item.title}</h3>
-                <p className="text-gray-600 mt-2 text-sm leading-relaxed">{item.description}</p>
-              </div>
+                <div className="font-serif absolute bottom-0 left-0 w-full bg-green-900/80 text-white text-center py-4 px-2">
+                  <span className="text-lg font-bold">{item.title}</span>
+                  <span className="ml-2 inline-block transform transition-transform group-hover:translate-x-1">→</span>
+                </div>
+              </a>
             ))}
           </div>
         </section>
 
         {/* 🔹 什麼是高壓氧 */}
-        <section className="mt-12 bg-[#E6F0FA] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold text-center text-[#2266AA]">什麼是高壓氧？</h2>
-          <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
-            高壓氧 <span className="text-[#2266AA]">Hyperbaric Oxygen (HBO)</span> 
-            是一種透過增加氧氣濃度來支持身體健康的方式。當寵物進入專門設計的高壓氧艙內，壓力的提升能夠幫助氧氣更有效地進入體內，使血液中的含氧量
-            <span className="font-semibold text-[#2266AA]">增加 40%~50%</span>，有助於維持良好的生理機能。
+        <section className="py-20 px-6 max-w-6xl mx-auto text-center">
+          <h2 className="font-serif text-3xl text-center font-semibold text-green-900 mb-4">
+            什麼是高壓氧？
+          </h2>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            高壓氧 Hyperbaric Oxygen (HBO) 是一種透過增加氧氣濃度來支持身體健康的方式。當寵物進入專門設計的高壓氧艙內，壓力的提升能幫助氧氣更有效地進入體內，使血液中的含氧量增加 40%~50%，有助於維持良好的生理機能。
           </p>
-          <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
-            透過提供充足的氧氣，高壓氧艙有助於促進血液循環，維持寵物的生理平衡，讓身體能夠更順利適應各種狀況。此外，高氧環境也有助於舒緩身體不適，減少局部腫脹，使寵物的活動更為輕鬆自在，適合作為日常健康管理的一環。
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mt-4">
+            高氧環境能促進血液循環、維持生理平衡，減少不適與腫脹，讓活動更輕鬆自在，
+            適合作為日常健康管理的一環。
           </p>
-          
-          <div className="mt-12 px-6 max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {[
-                { title: "維持肌膚健康", description: "提供充足氧氣，有助於肌膚維持良好狀態，支持寵物日常活動的舒適度。" },
-                { title: "調節身體狀態", description: "高氧環境有助於維持身體平衡，幫助寵物適應不同環境變化，讓日常活動更加輕鬆。" },
-                { title: "支持自然防禦力", description: "提供穩定氧氣補充，幫助維持身體機能，保持良好的活力與適應力。" },
-                { title: "促進日常恢復", description: "適合日常保養，可幫助寵物在運動或高強度活動後獲得舒適的放鬆體驗。" },
-                { title: "維持靈活度", description: "高氧環境支持身體循環，讓寵物能夠更自在地活動，維持靈活與穩定狀態。" }
-              ].map((item, index) => (
-                <div key={index} className="bg-[#4b7ad1] text-white p-6 shadow-lg rounded-lg hover:bg-[#1B5B99] transition-all">
-                  <h3 className="text-xl font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-white/90">{item.description}</p>
-                </div>
-              ))}
-            </div>
+
+          {/* 功能卡片 */}
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+            {[
+              { title: "維持肌膚健康", desc: "提供充足氧氣，支持日常活動的舒適度。" },
+              { title: "調節身體狀態", desc: "幫助適應不同環境變化，日常活動更輕鬆。" },
+              { title: "支持自然防禦力", desc: "維持身體機能，保持良好活力。" },
+              { title: "促進日常恢復", desc: "運動後獲得舒適的放鬆體驗。" },
+              { title: "維持靈活度", desc: "支持循環，維持穩定與靈活。" }
+            ].map((item, index) => (
+              <div key={index} className="border border-gray-200 p-4 hover:shadow-md transition">
+                <h3 className="font-serif font-bold text-[#1B5B49] mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
+
 
         {/* 🔹 高壓氧艙原理說明 */}
-        <section className="mt-12 bg-[#E6F0FA] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold text-center text-[#2266AA]">高壓氧艙原理說明</h2>
-          <div className="mt-8 max-w-4xl mx-auto">
-            <ul className="list-disc pl-6 text-lg text-gray-700 leading-relaxed space-y-4">
-              <li>
-                <strong>亨利法則 - 壓力提升，氧氣溶解度增加</strong>  
-                根據亨利法則（Henry’s Law），氣體在液體中的溶解度會隨著壓力的增加而提升。  
-                在高氧環境下，當壓力提高至 1.3~1.5 大氣壓時，氧氣可進一步溶解於血液，  
-                幫助氧氣更快速且廣泛地分佈至身體各處，維持整體良好狀態。
-              </li>
-              <li>
-                <strong>提升血氧含量，幫助維持良好循環</strong>  
-                在穩定的高氧環境下，氧氣可更容易進入血液並傳遞至身體各部位。  
-                當氧氣供應穩定，身體能維持更良好的循環狀態，支持日常活動所需的能量。
-              </li>
-              <li>
-                <strong>提供細胞充足能量，維持活力</strong>  
-                高氧環境有助於細胞的能量代謝，促進ATP（三磷酸腺苷）的合成，  
-                ATP是細胞運作所需的重要能量來源，可幫助維持穩定狀態。  
-                <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>促進日常適應力：幫助身體適應環境變化，維持穩定的內在狀態。</li>
-                  <li>支持日常循環：有助於維持身體機能與適應力，使寵物日常活動更順暢。</li>
-                  <li>提供穩定氧氣補充，支持整體平衡。</li>
-                </ul>
-              </li>
-              <li>
-                <strong>支持身體循環，維持穩定代謝</strong>  
-                高氧環境有助於循環調節，幫助維持良好的狀態。  
-                透過穩定的氧氣補充，可支持身體維持日常代謝機能，如：  
-                <ul className="list-disc pl-6 mt-2 space-y-2">
-                  <li>調節運動後的不適感，幫助放鬆</li>
-                  <li>支持體內廢物的正常代謝與排除</li>
-                  <li>維持身體機能的自然運作</li>
-                </ul>
-              </li>
-            </ul>
+        <section className="py-16 px-6 max-w-6xl mx-auto">
+          <h2 className="font-serif text-3xl text-center font-semibold text-green-900 mb-10">
+            高壓氧艙原理說明
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "提升溶解度",
+                desc: "壓力提升可增加氧氣在血液中的溶解度，加速輸送至全身。"
+              },
+              {
+                title: "提高血氧",
+                desc: "穩定的高氧環境讓氧氣更易進入血液並傳至全身，維持日常能量。"
+              },
+              {
+                title: "補充細胞能量",
+                desc: "促進ATP合成，提供細胞運作所需能量，支持穩定狀態。"
+              },
+              {
+                title: "穩定循環代謝",
+                desc: "支持正常循環與代謝，幫助排除廢物並維持自然運作。"
+              }
+            ].map((item, index) => (
+              <div key={index} className="p-6 border border-gray-200 hover:shadow-md transition">
+                <h3 className="text-xl font-serif font-bold text-[#1B5B49] mb-2">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
+
         {/* 🔹 我家貓狗適合高壓氧艙嗎？ */}
-        <section className="mt-12 bg-[#F9F9F9] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
+        {/* <section className="mt-12 bg-[#F9F9F9] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
           <h2 className="text-3xl font-semibold text-center text-[#2266AA]">我家貓狗適合高壓氧艙嗎？</h2>
           <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
             如果家裡的寵物有以下狀況，高壓氧環境或許能提供額外支持，協助維持良好的身體狀態與活力。
@@ -152,22 +154,110 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
-        {/* 🔹 CTA 區塊 - 點擊後導向 LINE 官方帳號 */}
-        <section className="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg shadow-lg mt-12">
-          <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
-          <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>
-          <Link href="https://line.me/ti/p/@464hptwo" target="_blank">
-            <button className="mt-6 px-6 py-3 bg-white text-blue-600 text-lg font-medium rounded-lg transition-all duration-300 hover:bg-gray-200 shadow-md">
-              加入官方 LINE
-            </button>
-          </Link>
-        </section>
-        
         {/* 🔹 底部空間 */}
         <div className="h-16"></div>
       </div>
+
+      {/* 🔹 CTA 區塊 – 深綠底三欄＋置中外框按鈕＋版權 */}
+        <section 
+          className="
+            relative 
+            left-1/2 
+            w-screen 
+            -translate-x-1/2 
+            bg-[#0F4D2F] 
+            text-white 
+            py-16
+          "
+        >
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* ── 第一欄：公司資訊 ── */}
+            <div className="space-y-4">
+              {/* Logo */}
+              <div className="flex items-center space-x-2 mb-2">
+                <Image
+                  src="/images/logo.png"
+                  alt="公司 Logo"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                />
+                <span className="font-serif font-semibold text-lg">寶的寶有限公司</span>
+              </div>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start">
+                  <Image src="/images/icons/telephone.png" alt="" width={20} height={20} />
+                  <span className="ml-2">服務電話 03-2871723</span>
+                </li>
+                <li className="flex items-start">
+                  <Image src="/images/icons/clock.png" alt="" width={20} height={20} />
+                  <span className="ml-2">服務時間 週一至週五 09:00 – 17:00（例假日休）</span>
+                </li>
+                <li className="flex items-start">
+                  <Image src="/images/icons/location.png" alt="" width={20} height={20} />
+                  <span className="ml-2">所在位置 桃園市中壢區青商路59號2樓</span>
+                </li>
+                <li className="flex items-start">
+                  <Image src="/images/icons/mail.png" alt="" width={20} height={20} />
+                  <span className="ml-2">電子信箱 frank.fu@bdb.com.tw</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* ── 第二欄：快速導覽 ── */}
+            <div>
+              <h3 className="font-serif font-semibold mb-4">快速導覽</h3>
+              <ul className="space-y-2 text-sm">
+                {[
+                  { label: "一 關於寶的寶", href: "/about" },
+                  { label: "一 最新消息", href: "/news" },
+                  { label: "一 產品介紹", href: "/products" },
+                  { label: "一 相關網站", href: "/links" },
+                  { label: "一 客戶服務", href: "/contact" },
+                ].map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="hover:text-green-200">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* ── 第三欄：產品連結 ── */}
+            <div>
+              <h3 className="font-serif font-semibold mb-4">產品連結</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/products/o2-prime" className="hover:text-green-200">
+                    — 高壓氧艙
+                  </Link>
+                </li>
+                {/* 依需求再新增更多 */}
+              </ul>
+            </div>
+          </div>
+
+          {/* ── 大按鈕：立即預約洽詢 ── */}
+          <div className="mt-12 text-center">
+            <Link
+              href="https://line.me/ti/p/@464hptwo"
+              target="_blank"
+              className="inline-flex items-center justify-center
+                        w-full max-w-xs md:max-w-md lg:max-w-lg
+                        px-6 py-4
+                        border border-white text-base font-medium tracking-wide
+                        hover:bg-white hover:text-[#0F4D2F]
+                        transition-colors"
+            >
+              <span>立即預約洽詢</span>
+              <span className="ml-2">→</span>
+            </Link>
+          </div>
+        </section>
+
     </div>
   );
 }

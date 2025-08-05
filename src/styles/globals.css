@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 🔹 讓點擊 Navbar 時滾動更流暢 */
+/* 🔷 讓點擊 Navbar 時滾動更流暢 */
 html {
   scroll-behavior: smooth;
 }

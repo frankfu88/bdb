@@ -6,19 +6,19 @@ import { useEffect, useState } from "react";
 interface BannerProps {
   title: string;
   description?: string;
-  imageSrc: string; // desktop 預設圖片
-  mobileImageSrc?: string; // mobile 圖片（可選）
+  imageSrc: string;
+  mobileImageSrc?: string;
 }
 
-export default function Banner({ title, imageSrc, mobileImageSrc }: BannerProps) {
+export default function Banner({ title, description, imageSrc, mobileImageSrc }: BannerProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640); // sm: 640px
+      setIsMobile(window.innerWidth < 640);
     };
 
-    handleResize(); // 初次渲染時先偵測一次
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -26,15 +26,22 @@ export default function Banner({ title, imageSrc, mobileImageSrc }: BannerProps)
   const srcToUse = isMobile && mobileImageSrc ? mobileImageSrc : imageSrc;
 
   return (
-    <div className="w-full">
+    <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[120px] sm:h-[400px]">
       <Image
         src={srcToUse}
         alt={title}
-        width={isMobile ? 360 : 1200}
-        height={isMobile ? 120 : 400}
-        className="w-full h-auto"
+        fill
+        className="object-cover"
         priority
       />
+      {description && (
+        <div className="absolute inset-0 flex items-center justify-center text-white bg-black/40">
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-4xl font-bold">{title}</h1>
+            <p className="mt-2 text-base sm:text-lg">{description}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

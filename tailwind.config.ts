@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        serif: ['"Noto Serif TC"', 'serif'], // 加這一段
+      },
     },
   },
   plugins: [],
