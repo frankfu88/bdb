@@ -1,124 +1,127 @@
 'use client';
 
-import Banner from "@/components/banner";
-
 export default function ProductsPage() {
-
   return (
     <div className="w-full">
-      <div className="w-full">
-        {/* 🔹 使用共用 Banner */}
-        <Banner 
-          title="公司介紹"
-          // description="牠們不只是動物，而是我們心中最珍貴的存在"
-          imageSrc="/images/banner/home.jpg"
-          mobileImageSrc="/images/banner/mobile.jpg"
-        />
-      </div>
 
-      {/* 🔹 特點介紹 */}
-      <section className="mt-16 px-6 max-w-7xl mx-auto">
-        <h2 className="text-3xl text-gray-800 text-center tracking-wide">
-          特點說明
-          <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
-        </h2>
-        
-        {/* 文字說明 */}
-        <div className="text-center max-w-3xl mx-auto mt-6">
-          <p className="text-gray-600 text-lg leading-relaxed">
-            高壓氧艙採用多層設計與先進光照技術，提供穩定氧氣供應，
-            結合藍光、紅光與高壓氧功能，打造適合動物放鬆與舒適休憩的環境。
+      {/* 🔹 內容區域回正 */}
+      <div className="max-w-6xl mx-auto px-6">
+        {/* 特點說明 */}
+        <section className="mt-16 mb-16">
+          <h2 className="text-3xl font-serif font-semibold text-center text-green-900">
+            特點說明
+          </h2>
+          <span className="block h-1 w-16 bg-green-900 mx-auto mt-2 mb-8"></span>
+
+          <p className="text-center text-gray-700 max-w-3xl mx-auto mb-12">
+            高壓氧艙採用多層抽屜設計與光療技術，穩定供氧並結合紫外線、負離子、藍／紅光
+            等多重淨化與放鬆功能，為寵物打造舒適安全的氧療空間。
           </p>
-        </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { title: "多層抽屜式設計", desc: "支持多隻寵物同時使用及進出，方便操作" },
-            { title: "高效氧艙", desc: "艙體內可提供高壓至2.0ATA（最大可承受8ATA)，氧濃度最大達40%，出氧濃度達96%" },
-            { title: "雙泄壓閥", desc: "專利高安全性雙泄壓閥防爆系統，確保穩定運行" },
-            { title: "紫外線滅菌", desc: "紫外線滅菌燈及負離子空氣淨化裝置，抗菌去味，維持環境清潔" },
-            { title: "光照系統", desc: "提供藍光照射幫助動物放鬆，搭配紅光及紅外光技術，支援動物日常照護" },
-            { title: "恆溫空調", desc: "可提供恆溫環境，依使用需求可設定溫度範圍為20℃～35℃" },
-          ].map((item, index) => (
-            <div key={index} className="p-6 bg-blue-50 rounded-xl shadow-md text-center">
-              <h4 className="text-2xl font-semibold text-blue-600 mb-3">{item.title}</h4>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 🔹 初生動物高壓氧艙的應用 */}
-      <section className="mt-16 py-16 bg-gradient-to-b from-gray-100 to-gray-50 rounded-xl shadow-md">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">初生動物高壓氧艙的應用</h2>
-        <div className="max-w-4xl mx-auto text-gray-700">
-          <p className="text-lg text-center mb-8 leading-relaxed">
-            高壓氧艙可提供穩定的氧氣與光照環境，支援母體與幼獸在不同階段的生理適應，協助維持良好的狀態。
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { num: "1", title: "母體健康管理", desc: "懷孕前可每日進行 60 分鐘的氧氣與光照適應，幫助母體維持良好的生理環境。" },
-              { num: "2", title: "支持胎兒發育", desc: "懷孕期間每日 60 分鐘的氧氣與光照環境，可穩定母體狀態，支援胎兒的健康發展。" },
-              { num: "3", title: "幼獸成長適應", desc: "初生幼獸出生後 10-15 天內可每日進行 60 分鐘的氧氣環境適應，之後每 3 天一次，幫助適應外界環境。" },
-              { num: "4", title: "產後恢復支援", desc: "母體產後可持續 7 天，每日 60 分鐘的氧氣與光照調節，協助穩定體力與環境適應。" },
-            ].map((item, index) => (
-              <div key={index} className="p-6 bg-white rounded-lg shadow-md flex items-start">
-                <span className="text-green-600 text-3xl font-bold mr-4">{item.num}</span>
-                <p><strong>{item.title}</strong>：{item.desc}</p>
+              { title: "多層抽屜式設計", desc: "支援多隻寵物同時使用，可獨立進出，操作便利。" },
+              { title: "高效氧艙", desc: "最高可承受 2.0 ATA，氧濃度最高達 96%。" },
+              { title: "雙洩壓閥", desc: "專利防爆雙洩壓系統，運行更安全穩定。" },
+              { title: "紫外線滅菌", desc: "UV 與負離子淨化，抗菌除味，保持艙內環境清新。" },
+              { title: "光照系統", desc: "藍光、紅光、紅外光療結合，促進放鬆與細胞修復。" },
+              { title: "恆溫控溫", desc: "20℃～35℃ 可調，恆溫環境更貼心舒適。" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 bg-green-50 rounded-xl shadow hover:shadow-lg transition"
+              >
+                <h3 className="text-2xl font-serif font-semibold text-green-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 🔹 規格說明 */}
-      <section className="py-16">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">規格說明</h2>
-        <div className="w-full flex justify-center">
-          <table className="w-full max-w-6xl border-collapse border border-gray-300 text-gray-800 text-center">
-            <thead>
-              <tr className="bg-green-700 text-white border border-gray-300">
-                <th className="p-3 border border-gray-300 text-center">規格參數</th>
-                <th className="p-3 border border-gray-300 text-center">高壓氧艙</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ["主機尺寸", "L115 × W75 × H165 CM"],
-                ["電源", "220V AC"],
-                ["功率", "最高 2000W，正常使用 1200W"],
-                ["艙體壓力", "1.2 ~ 2.0 ATA（可設定）"],
-                ["ICU 系統", "溫度 & 氧氣 控制系統"],
-                ["製氧方式", "鋰離子製氧分離篩"],
-                ["出氧濃度 / 艙內氧濃度", "96% / ≤40%"],
-                ["光療系統", "藍光、紅光、紅外光療"],
-                ["溫控系統", "艙內溫度可製冷 & 製暖"],
-                ["殺菌系統", "負離子、紫外線抗菌除味"],
-                ["應急系統", "快速洩壓鈕"],
-                ["下艙附滑軌拉板", "方便進出艙"],
-              ].map(([param, value], index) => (
-                <tr key={index} className="border border-gray-300">
-                  <td className="p-4 font-semibold text-center border border-gray-300">{param}</td>
-                  <td className="p-4 text-center border border-gray-300">{value}</td>
+        {/* 初生動物應用 */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-serif font-semibold text-center text-green-900">
+            初生動物高壓氧艙的應用
+          </h2>
+          <span className="block h-1 w-16 bg-green-900 mx-auto mt-2 mb-8"></span>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                num: "1",
+                title: "母體健康管理",
+                desc: "懷孕前每日 60 分鐘，穩定體質，促進母體健康。",
+              },
+              {
+                num: "2",
+                title: "支持胎兒發育",
+                desc: "懷孕期間每日 60 分鐘，穩定氧療與光療，支援胎兒發育。",
+              },
+              {
+                num: "3",
+                title: "幼獸成長適應",
+                desc: "出生後 10–15 天內每日 60 分鐘，再逐漸拉長間隔。",
+              },
+              {
+                num: "4",
+                title: "產後恢復支援",
+                desc: "產後 7 天每日 60 分鐘，補氧調理，協助恢復體力。",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6 bg-white rounded-lg shadow flex items-start"
+              >
+                <div className="text-green-900 text-3xl font-serif font-bold mr-4">
+                  {item.num}
+                </div>
+                <div>
+                  <h4 className="font-serif font-semibold mb-1">{item.title}</h4>
+                  <p className="text-gray-700">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 規格說明 */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-serif font-semibold text-center text-green-900">
+            規格說明
+          </h2>
+          <span className="block h-1 w-16 bg-green-900 mx-auto mt-2 mb-8"></span>
+
+          <div className="overflow-x-auto">
+            <table className="w-full max-w-6xl mx-auto text-gray-800 border-collapse">
+              <thead>
+                <tr className="bg-green-900 text-white">
+                  <th className="p-3 border">規格參數</th>
+                  <th className="p-3 border">高壓氧艙</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      
-      {/* 🔹 CTA 區塊 */}
-      <section className="mt-16 py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-center rounded-lg shadow-lg">
-        <h2 className="text-3xl font-semibold">想了解更多？立即聯絡我們！</h2>
-        <p className="mt-4 text-lg">提供最專業的產品建議與合作洽談。</p>
-        <a href="https://line.me/ti/p/@464hptwo" target="_blank" rel="noopener noreferrer">
-          <button className="mt-6 px-6 py-3 bg-white text-blue-600 text-lg font-medium rounded-lg transition-all duration-300 hover:bg-gray-200 shadow-md">
-            加入官方 LINE
-          </button>
-        </a>
-      </section>
-
+              </thead>
+              <tbody>
+                {[
+                  ["主機尺寸", "L115 × W75 × H165 CM"],
+                  ["電源", "220V AC"],
+                  ["功率", "最高 2000W，正常 1200W"],
+                  ["壓力範圍", "1.2 ~ 2.0 ATA"],
+                  ["製氧方式", "鋰離子製氧分離篩"],
+                  ["氧濃度", "≤96%"],
+                  ["溫控系統", "20℃～35℃"],
+                  ["殺菌系統", "UV + 負離子"],
+                  ["應急系統", "快速洩壓鈕"],
+                  ["下艙滑軌", "方便進出抽屜"],  
+                ].map(([key, val], i) => (
+                  <tr key={i} className="odd:bg-green-50">
+                    <td className="p-4 border text-center font-medium">{key}</td>
+                    <td className="p-4 border text-center">{val}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -52,11 +52,11 @@ export default function Header() {
       <div className="h-[100px] flex items-center justify-between px-4 sm:px-10 max-w-[1200px] mx-auto">
         <Link href="/" className="flex items-center" aria-label="首頁">
           <Image
-            src="/images/logo.png"
+            src="/images/logo_removebg.png"
             alt="寶的寶有限公司 Logo"
-            width={120}
-            height={50}
-            className="w-[100px] sm:w-[140px] h-[80px] sm:h-[100px] object-contain"
+            width={400}
+            height={400}
+            className="w-[220px] sm:w-[300px] h-[176px] sm:h-[240px] object-contain"
           />
         </Link>
 

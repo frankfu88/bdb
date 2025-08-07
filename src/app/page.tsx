@@ -1,45 +1,36 @@
 'use client';
 
 import Image from "next/image";
-import Link from "next/link";
 import Banner from "@/components/banner";
 
 export default function HomePage() {
   return (
     <div className="w-full">
-      {/* 🔹 使用共用 Banner */}
-        <Banner 
+       {/*  
+        這裡讓 Banner 滿版 (full-bleed)
+        去掉父層 container 的左右 padding/內邊距
+      */}
+      <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
+        <Banner
           title="公司介紹"
-          // description="牠們不只是動物，而是我們心中最珍貴的存在"
           imageSrc="/images/banner/home.jpg"
           mobileImageSrc="/images/banner/mobile.jpg"
         />
+      </div>
       
       {/* 🔹 內容區域恢復最大寬度 */}
       <div className="max-w-6xl mx-auto px-6">
         {/* 🔹 關於諾亞高壓氧艙 */}
         <section className="mt-20 px-6 max-w-7xl mx-auto">
-          {/* <h2 className="text-3xl text-gray-800 text-center tracking-wide">
-            關於寶的寶高壓氧艙
-            <span className="block h-[2px] w-16 bg-blue-500 mx-auto mt-2"></span>
-          </h2> */}
-
-          {/* 文字說明 */}
-          {/* <div className="text-center max-w-3xl mx-auto mt-6">
-            <p className="text-gray-600 text-lg leading-relaxed">
-              寶的寶有限公司專注於微壓與動物高壓氧艙的研發與製造，提供安全、可靠的氧療設備，促進人類與動物健康。所有產品均與上海睿通機器人自動化股份有限公司共同開發，並通過CNAS、CMA、CE等國際認證，品質與安全皆達國際標準。
-            </p>
-          </div> */}
-
-          <h2 className="font-serif text-3xl text-center font-semibold text-green-900">產品列表</h2>
-          <p className="mt-2 text-center text-gray-600">嶄新的技術、無與倫比的工藝設計</p>
+          <h2 className="font-serif text-4xl text-center font-semibold text-green-900">產品列表</h2>
+          <p className="mt-2 text-center text-gray-600">引領未來，創新無限</p>
 
           {/* 高壓氧艙種類展示：改為圖片底部藍色遮罩樣式 */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[ 
-              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "#" },
-              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "#" },
-              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "#" }
+              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "/products" },
+              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "/products" },
+              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "/products" }
             ].map((item, index) => (
               <a
                 key={index}
@@ -64,7 +55,7 @@ export default function HomePage() {
 
         {/* 🔹 什麼是高壓氧 */}
         <section className="py-20 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="font-serif text-3xl text-center font-semibold text-green-900 mb-4">
+          <h2 className="font-serif text-4xl text-center font-semibold text-green-900 mb-4">
             什麼是高壓氧？
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -95,7 +86,7 @@ export default function HomePage() {
 
         {/* 🔹 高壓氧艙原理說明 */}
         <section className="py-16 px-6 max-w-6xl mx-auto">
-          <h2 className="font-serif text-3xl text-center font-semibold text-green-900 mb-10">
+          <h2 className="font-serif text-4xl text-center font-semibold text-green-900 mb-10">
             高壓氧艙原理說明
           </h2>
 
@@ -157,106 +148,11 @@ export default function HomePage() {
         </section> */}
 
         {/* 🔹 底部空間 */}
-        <div className="h-16"></div>
+        {/* <div className="h-16"></div> */}
       </div>
 
-      {/* 🔹 CTA 區塊 – 深綠底三欄＋置中外框按鈕＋版權 */}
-        <section 
-          className="
-            relative 
-            left-1/2 
-            w-screen 
-            -translate-x-1/2 
-            bg-[#0F4D2F] 
-            text-white 
-            py-16
-          "
-        >
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* ── 第一欄：公司資訊 ── */}
-            <div className="space-y-4">
-              {/* Logo */}
-              <div className="flex items-center space-x-2 mb-2">
-                <Image
-                  src="/images/logo.png"
-                  alt="公司 Logo"
-                  width={48}
-                  height={48}
-                  className="object-contain"
-                />
-                <span className="font-serif font-semibold text-lg">寶的寶有限公司</span>
-              </div>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start">
-                  <Image src="/images/icons/telephone.png" alt="" width={20} height={20} />
-                  <span className="ml-2">服務電話 03-2871723</span>
-                </li>
-                <li className="flex items-start">
-                  <Image src="/images/icons/clock.png" alt="" width={20} height={20} />
-                  <span className="ml-2">服務時間 週一至週五 09:00 – 17:00（例假日休）</span>
-                </li>
-                <li className="flex items-start">
-                  <Image src="/images/icons/location.png" alt="" width={20} height={20} />
-                  <span className="ml-2">所在位置 桃園市中壢區青商路59號2樓</span>
-                </li>
-                <li className="flex items-start">
-                  <Image src="/images/icons/mail.png" alt="" width={20} height={20} />
-                  <span className="ml-2">電子信箱 frank.fu@bdb.com.tw</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* ── 第二欄：快速導覽 ── */}
-            <div>
-              <h3 className="font-serif font-semibold mb-4">快速導覽</h3>
-              <ul className="space-y-2 text-sm">
-                {[
-                  { label: "一 關於寶的寶", href: "/about" },
-                  { label: "一 最新消息", href: "/news" },
-                  { label: "一 產品介紹", href: "/products" },
-                  { label: "一 相關網站", href: "/links" },
-                  { label: "一 客戶服務", href: "/contact" },
-                ].map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="hover:text-green-200">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* ── 第三欄：產品連結 ── */}
-            <div>
-              <h3 className="font-serif font-semibold mb-4">產品連結</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/products/o2-prime" className="hover:text-green-200">
-                    — 高壓氧艙
-                  </Link>
-                </li>
-                {/* 依需求再新增更多 */}
-              </ul>
-            </div>
-          </div>
-
-          {/* ── 大按鈕：立即預約洽詢 ── */}
-          <div className="mt-12 text-center">
-            <Link
-              href="https://line.me/ti/p/@464hptwo"
-              target="_blank"
-              className="inline-flex items-center justify-center
-                        w-full max-w-xs md:max-w-md lg:max-w-lg
-                        px-6 py-4
-                        border border-white text-base font-medium tracking-wide
-                        hover:bg-white hover:text-[#0F4D2F]
-                        transition-colors"
-            >
-              <span>立即預約洽詢</span>
-              <span className="ml-2">→</span>
-            </Link>
-          </div>
-        </section>
+      
+      
 
     </div>
   );
