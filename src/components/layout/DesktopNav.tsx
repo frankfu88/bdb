@@ -75,6 +75,11 @@ export default function DesktopNav({ partnerRegions }: { partnerRegions: Region[
           </div>
         </li>
 
+        {/* 客戶服務 */}
+        <li className="px-5">
+          <Link href="/customer-service">客戶服務</Link>
+        </li>
+
         {/* 聯絡我們 */}
         <li className="px-5">
           <a

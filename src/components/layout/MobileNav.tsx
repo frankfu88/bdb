@@ -16,27 +16,31 @@ export default function MobileNav({
   closeMenu: () => void;
 }) {
   return (
-    <nav className="sm:hidden bg-white border-t">
-      <ul className="flex flex-col items-start p-4 space-y-4 text-base text-gray-700">
+    <nav className="sm:hidden bg-white border-t font-serif font-semibold">
+      <ul className="flex flex-col items-start p-4 space-y-4 text-base text-green-900">
         <li>
-          <Link href="/" onClick={closeMenu} className="hover:text-blue-600">
+          <Link href="/" onClick={closeMenu} className="hover:text-green-700">
             首頁
           </Link>
         </li>
+
         <li>
-          <Link href="/about" onClick={closeMenu} className="hover:text-blue-600">
+          <Link href="/about" onClick={closeMenu} className="hover:text-green-700">
             關於我們
           </Link>
         </li>
 
         <li>
-          <Link href="/products" onClick={closeMenu} className="hover:text-blue-600">
+          <Link href="/products" onClick={closeMenu} className="hover:text-green-700">
             產品介紹
           </Link>
         </li>
 
         <li className="w-full">
-          <button onClick={() => toggleRegion("合作夥伴")} className="hover:text-blue-600 w-full text-left">
+          <button
+            onClick={() => toggleRegion("合作夥伴")}
+            className="w-full text-left hover:text-green-700"
+          >
             合作夥伴
           </button>
 
@@ -46,7 +50,7 @@ export default function MobileNav({
                 <div key={region.region} className="mb-2">
                   <button
                     onClick={() => toggleRegion(region.region)}
-                    className="w-full text-left text-gray-800 bg-gray-50 px-3 py-2"
+                    className="w-full text-left bg-green-50 px-3 py-2 text-green-900"
                   >
                     {region.region}
                   </button>
@@ -60,7 +64,7 @@ export default function MobileNav({
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={closeMenu}
-                          className="block text-gray-700 hover:text-blue-600"
+                          className="block text-green-900 hover:text-green-700"
                         >
                           {p.name}
                         </a>
@@ -73,13 +77,24 @@ export default function MobileNav({
           )}
         </li>
 
+        {/* 客戶服務 */}
+        <li>
+          <Link
+            href="/customer-service"
+            onClick={closeMenu}
+            className="hover:text-green-700"
+          >
+            客戶服務
+          </Link>
+        </li>
+
         <li>
           <a
             href="https://line.me/ti/p/@464hptwo"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
-            className="hover:text-blue-600"
+            className="hover:text-green-700"
           >
             聯絡我們
           </a>

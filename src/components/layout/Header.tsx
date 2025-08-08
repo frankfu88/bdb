@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TopBar from "./TopBar";
@@ -38,6 +38,13 @@ const partnerRegions = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileRegionOpen, setMobileRegionOpen] = useState<{ [key: string]: boolean }>({});
+
+  // ✅ 新增：當關閉選單時自動 reset dropdown 開啟狀態
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      setMobileRegionOpen({});
+    }
+  }, [mobileMenuOpen]);
 
   const toggleRegion = (region: string) => {
     setMobileRegionOpen((prev) => ({ ...prev, [region]: !prev[region] }));

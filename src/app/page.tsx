@@ -12,7 +12,6 @@ export default function HomePage() {
       */}
       <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
         <Banner
-          title="公司介紹"
           imageSrc="/images/banner/home.jpg"
           mobileImageSrc="/images/banner/mobile.jpg"
         />

@@ -54,10 +54,10 @@ export default function AboutPage() {
   return (
     <div className="w-full">
 
-      {/* ── 第一區：關於寶的寶 + 兩張示意圖 ── */}
-      <section className="mt-16 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-8">
-        {/* 左側文字 */}
-        <div className="md:w-1/3">
+      {/* ── 第一區：關於寶的寶 ── */}
+      <section className="mt-16 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-8 md:gap-12">
+        {/* 左側文字區塊 */}
+        <div className="md:w-[30%] min-w-[280px]">
           <h2 className="text-5xl font-serif font-semibold text-green-900">關於寶的寶</h2>
           <h3 className="mt-1 text-xl tracking-widest uppercase text-indigo-200">ABOUT</h3>
 
@@ -69,21 +69,21 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* 右側圖片：等比例放大，不裁切 */}
-        <div className="md:w-2/3 flex flex-col sm:flex-row gap-6">
+        {/* 右側圖片區塊：只在桌機顯示，Mobile 隱藏 */}
+        <div className="hidden md:flex md:w-[80%] flex-col sm:flex-row gap-6 -ml-6 md:-ml-10">
           <div className="w-full">
             <Image
               src="/images/about/seed.png"
               alt="種子"
-              width={1600}         // 換成你的原始圖比例（示例值）
-              height={1067}        // 16:10 或依實際圖檔
+              width={1600}
+              height={1067}
               priority
-              className="w-full h-auto object-contain"
+              className="w-full h-auto max-h-[500px] object-contain"
             />
           </div>
         </div>
-
       </section>
+
 
       {/* ── 第二區：滿版背景＋浮動卡片（貼齊左邊） ── */}
       <section className="relative mt-16 h-[55vh] md:h-[65vh] w-full overflow-hidden">
@@ -137,22 +137,11 @@ export default function AboutPage() {
       </section>
       
       {/* ── 寶的寶優勢 ── */}
-      <section className="relative mt-24 overflow-hidden h-[90vh]">
-        {/* 1. 背景圖容器：絕對定位、寬度 100vw、水平置中 */}
-        <div className="absolute inset-0 left-1/2 w-screen -translate-x-1/2 h-full">
-          <Image
-            src="/images/about/skyline.png"
-            alt="advantages background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+      <section className="relative mt-24 overflow-hidden bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: "url(/images/about/skyline.png)" }}>
+        {/* 1. 遮罩 */}
+        <div className="absolute inset-0 bg-black/40 md:bg-black/30 z-0" />
 
-        {/* 2. 半透明遮罩：絕對佔滿 */}
-        <div className="absolute inset-0 bg-black/40 md:bg-black/30" />
-
-        {/* 3. 內容層：相對定位、置中 */}
+        {/* 2. 內容層 */}
         <div className="relative z-10 max-w-6xl mx-auto py-16 px-6">
           <h2 className="text-4xl font-serif font-bold text-white text-center">
             寶的寶優勢
@@ -161,14 +150,22 @@ export default function AboutPage() {
             精益求精，超出客戶想像與要求
           </p>
 
-          {/* 4. 卡片區塊 */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x border border-gray-300 bg-white bg-opacity-90 shadow-lg">
+          {/* ✅ 重點：每個格子都有完整 border，手機時一列一格，桌機三欄兩列 */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-1">
             {advantages.map((item, idx) => (
-              <div key={idx} className="p-8 flex flex-col items-center text-center">
+              <div
+                key={idx}
+                className="
+                  border border-white 
+                  bg-white bg-opacity-90 
+                  p-6 flex flex-col items-center text-center 
+                  shadow-sm
+                "
+              >
                 {item.icon}
                 <h3 className="mt-4 font-semibold text-blue-900">{item.title}</h3>
                 <div className="mt-2 h-[1px] w-8 bg-gray-300" />
-                <ul className="mt-2 space-y-1 text-gray-700">
+                <ul className="mt-2 space-y-1 text-gray-700 text-sm sm:text-base">
                   {item.desc.map((line, i) => (
                     <li key={i}>{line}</li>
                   ))}
