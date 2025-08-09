@@ -90,7 +90,7 @@ export default function GymsPage() {
                       {g.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-xs px-2 py-1 rounded-full bg-green-50 text-green-800 border border-green-200"
+                          className="text-xs px-2 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-200"
                         >
                           {t}
                         </span>

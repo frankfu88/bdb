@@ -52,6 +52,11 @@ export default function Footer() {
               快速導覽
             </h3>
             <ul className="space-y-3 text-center sm:text-left">
+               <li>
+                <Link href="/" className="hover:text-green-200">
+                  －首頁
+                </Link>
+              </li>
               <li>
                 <Link href="/about" className="hover:text-green-200">
                   －關於寶的寶

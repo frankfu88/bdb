@@ -117,7 +117,7 @@ export default function PetHospitalsPage() {
                       {h.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-xs px-2 py-1 rounded-full bg-green-50 text-green-800 border border-green-200"
+                          className="text-xs px-2 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-200"
                         >
                           {t}
                         </span>
@@ -138,7 +138,7 @@ export default function PetHospitalsPage() {
                         href={h.mapUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex justify-center items-center px-4 py-2 rounded-xl border border-green-200 text-green-900 hover:bg-green-50 w-full sm:w-auto min-h-[44px]"
+                        className="inline-flex justify-center items-center px-4 py-2 rounded-xl border border-gray-200 text-green-900 hover:bg-green-50 w-full sm:w-auto min-h-[44px]"
                       >
                         Google 導航
                       </a>

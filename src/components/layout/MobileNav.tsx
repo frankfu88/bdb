@@ -57,7 +57,7 @@ export default function MobileNav({
                 onClick={closeMenu}
                 className="block text-green-900 hover:text-green-700"
               >
-                人用高壓氧艙
+                人用微壓氧艙
               </Link>
             </div>
           )}

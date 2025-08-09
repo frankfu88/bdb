@@ -8,6 +8,12 @@ export default function DesktopNav({ }: { partnerRegions: Region[] }) {
   return (
     <nav className="hidden sm:flex flex-1 justify-end font-serif font-semibold">
       <ul className="flex items-center text-base text-green-900 divide-x divide-green-700">
+
+        {/* 首頁 */}
+        <li className="px-5">
+          <Link href="/">首頁</Link>
+        </li>
+
         {/* 關於我們 */}
         <li className="px-5">
           <Link href="/about">關於寶的寶</Link>
@@ -21,7 +27,7 @@ export default function DesktopNav({ }: { partnerRegions: Region[] }) {
           <div
             className="
               absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56
-              bg-white shadow-lg border border-green-100 z-10
+              bg-white shadow-lg border border-gray-100 z-10
               opacity-0 invisible transition-opacity duration-200
               group-hover:opacity-100 group-hover:visible
             "
@@ -30,7 +36,7 @@ export default function DesktopNav({ }: { partnerRegions: Region[] }) {
               寵物高壓氧艙
             </Link>
             <Link href="/products/human" className="block px-4 py-2 text-gray-600">
-              人用高壓氧艙
+              人用微壓氧艙
             </Link>
           </div>
         </li>
@@ -42,7 +48,7 @@ export default function DesktopNav({ }: { partnerRegions: Region[] }) {
           <div
             className="
               absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64
-              bg-white shadow-lg border border-green-100 z-10
+              bg-white shadow-lg border border-gray-100 z-10
               opacity-0 invisible transition-opacity duration-200
               group-hover:opacity-100 group-hover:visible
             "
