@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
+type ApiResp = { ok: boolean; message: string; code?: string; spam?: boolean };
+
 export default function CustomerServicePage() {
   const [sending, setSending] = useState(false);
   const [ok, setOk] = useState<string | null>(null);
@@ -12,21 +14,107 @@ export default function CustomerServicePage() {
     { src: '/images/certs/cqc.jpg', alt: '醫療器材許可證 2' },
   ];
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    // ✅ 簡單穩定版送出：延長逾時 + 更精準錯誤判斷
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
     setSending(true);
     setOk(null);
+
+    const formEl = e.currentTarget as HTMLFormElement;
+
+    const form = new FormData(formEl);
+    const website = String(form.get('website') || '').trim();
+    const name = String(form.get('name') || '').trim();
+    const phone = String(form.get('phone') || '').trim();
+    const email = String(form.get('email') || '').trim();
+    const message = String(form.get('message') || '').trim();
+
+    // 這兩個旗標用來在 finally 之後顯示訊息與是否清表單
+    let finalMsg: string | null = null;
+    let shouldReset = false;
+
+    // 共用：單次請求（30s 逾時）
+    const requestOnce = async (): Promise<"success" | { error: "TIMEOUT" | "NETWORK" | "API"; msg?: string }> => {
+      const ac = new AbortController();
+      const timeoutMs = 30000;
+      const t = setTimeout(() => ac.abort(), timeoutMs);
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, message, website }),
+          signal: ac.signal,
+        });
+        try {
+          const data = await res.json();
+          if (res.ok && data?.ok) return "success";
+          return { error: "API", msg: data?.message || '送出失敗，請稍後再試。' };
+        } catch {
+          if (res.ok) return "success"; // 非 JSON 但 2xx 視為成功
+          return { error: "API", msg: '送出失敗，請稍後再試。' };
+        }
+      } catch (err: any) {
+        if (err?.name === 'AbortError') return { error: 'TIMEOUT' };
+        return { error: 'NETWORK', msg: err?.message };
+      } finally {
+        clearTimeout(t);
+      }
+    };
+
     try {
-      const form = new FormData(e.currentTarget);
-      const payload = Object.fromEntries(form.entries());
-      console.log('contact payload:', payload);
-      await new Promise((r) => setTimeout(r, 800));
-      setOk('已送出，我們會盡快與您聯繫。');
-      e.currentTarget.reset();
-    } catch {
-      setOk('送出失敗，請稍後再試。');
+      // 蜜罐：視為成功
+      if (website) {
+        finalMsg = '已送出，我們會盡快與您聯繫。';
+        shouldReset = true;
+        return;
+      }
+
+      // 本地驗證
+      if (!name || !phone || !email || !message) {
+        finalMsg = '請完整填寫必填欄位。';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        finalMsg = '電子信箱格式不正確。';
+        return;
+      }
+
+      // 第一次請求
+      const first = await requestOnce();
+      if (first === 'success') {
+        finalMsg = '已送出，我們會盡快與您聯繫。';
+        shouldReset = true;
+        return;
+      }
+
+      // 網路錯誤重試一次
+      if (first.error === 'NETWORK') {
+        await new Promise(r => setTimeout(r, 1000));
+        const second = await requestOnce();
+        if (second === 'success') {
+          finalMsg = '已送出，我們會盡快與您聯繫。';
+          shouldReset = true;
+          return;
+        }
+        finalMsg =
+          second.error === 'TIMEOUT' ? '連線逾時，請稍後再試。' :
+          second.error === 'NETWORK' ? '網路異常，請檢查連線後重試。' :
+          (second.msg || '送出失敗，請稍後再試。');
+        return;
+      }
+
+      // 非網路錯誤（逾時或 API 訊息）
+      finalMsg = first.error === 'TIMEOUT'
+        ? '連線逾時，請稍後再試。'
+        : (first.msg || '送出失敗，請稍後再試。');
+
     } finally {
+      // 🚀 無論任何結果，一律回到「填完送出 →」
       setSending(false);
+
+      if (shouldReset) formEl.reset();
+      if (finalMsg) setOk(finalMsg);
     }
   }
 
@@ -129,23 +217,23 @@ export default function CustomerServicePage() {
         </div>
       </section>
 
-      {/* 聯絡我們（真正滿版 full-bleed，白字 + 黑框欄位） */}
-        <section
+      {/* 聯絡我們（滿版 + 白字 + 黑框欄位） */}
+      <section
         className="
-            relative
-            w-screen
-            left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]
-            py-16 md:py-20
-            overflow-hidden
+          relative
+          w-screen
+          left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]
+          py-16 md:py-20
+          overflow-hidden
         "
-        >
+      >
         {/* 背景圖 */}
         <Image
-            src="/images/customer-service/city.png"
-            alt="城市背景"
-            fill
-            className="object-cover object-center"
-            priority
+          src="/images/customer-service/city.png"
+          alt="城市背景"
+          fill
+          className="object-cover object-center"
+          priority
         />
 
         {/* 深色半透明遮罩：加強白字可讀性 */}
@@ -153,60 +241,60 @@ export default function CustomerServicePage() {
 
         {/* 標題區 */}
         <div className="relative max-w-6xl mx-auto px-6 text-center">
-            <h2 className="font-serif font-semibold text-4xl sm:text-4xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          <h2 className="font-serif font-semibold text-4xl sm:text-4xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             聯絡我們
-            </h2>
-            <p className="mt-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          </h2>
+          <p className="mt-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             我們重視您的聲音，提供即時且專業的協助，歡迎聯繫寶的寶！
-            </p>
+          </p>
         </div>
 
         {/* 表單區 */}
         <div className="relative mt-10 max-w-4xl mx-auto px-6">
-            <form onSubmit={onSubmit} className="space-y-5">
-            {/* 防機器人欄位 */}
+          <form onSubmit={onSubmit} className="space-y-5">
+            {/* 蜜罐防機器人欄位 */}
             <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
 
             {/* 兩欄 RWD */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
+              <div>
                 <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    姓名 <span className="text-red-300">*</span>
+                  姓名 <span className="text-red-300">*</span>
                 </label>
                 <input
-                    name="name"
-                    required
-                    placeholder="請輸入您的姓名"
-                    autoComplete="name"
-                    className="mt-2 w-full bg-black/30 text-white placeholder-white/80
+                  name="name"
+                  required
+                  placeholder="請輸入您的姓名"
+                  autoComplete="name"
+                  className="mt-2 w-full bg-black/30 text-white placeholder-white/80
                             border border-black rounded-md px-4 py-3 caret-white
                             backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                 />
-                </div>
+              </div>
 
-                <div>
+              <div>
                 <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    電話 <span className="text-red-300">*</span>
+                  電話 <span className="text-red-300">*</span>
                 </label>
                 <input
-                    name="phone"
-                    required
-                    inputMode="tel"
-                    autoComplete="tel"
-                    pattern="^[0-9\\-+\\s()]{6,}$"
-                    placeholder="請輸入您的電話"
-                    className="mt-2 w-full bg-black/30 text-white placeholder-white/80
+                  name="phone"
+                  required
+                  inputMode="tel"
+                  autoComplete="tel"
+                  pattern="^[0-9\\-+\\s()]{6,}$"
+                  placeholder="請輸入您的電話"
+                  className="mt-2 w-full bg-black/30 text-white placeholder-white/80
                             border border-black rounded-md px-4 py-3 caret-white
                             backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
                 />
-                </div>
+              </div>
             </div>
 
             <div>
-                <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 電子信箱 <span className="text-red-300">*</span>
-                </label>
-                <input
+              </label>
+              <input
                 type="email"
                 name="email"
                 required
@@ -215,14 +303,14 @@ export default function CustomerServicePage() {
                 className="mt-2 w-full bg-black/30 text-white placeholder-white/80
                             border border-black rounded-md px-4 py-3 caret-white
                             backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
-                />
+              />
             </div>
 
             <div>
-                <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              <label className="block text-md font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 內容 <span className="text-red-300">*</span>
-                </label>
-                <textarea
+              </label>
+              <textarea
                 name="message"
                 required
                 rows={6}
@@ -230,26 +318,29 @@ export default function CustomerServicePage() {
                 className="mt-2 w-full bg-black/30 text-white placeholder-white/80
                             border border-black rounded-md px-4 py-3 caret-white
                             backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black"
-                />
+              />
             </div>
 
             <div className="pt-2 text-center">
-                <button
+              <button
                 type="submit"
                 disabled={sending}
                 className="inline-block min-w-[220px] border-2 border-black text-white
                             bg-black/40 hover:bg-white hover:text-green-900
                             px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold
                             tracking-wide rounded-md transition disabled:opacity-60"
-                >
+              >
                 {sending ? '送出中…' : '填完送出 →'}
-                </button>
-                {ok && <p className="mt-3 text-green-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{ok}</p>}
+              </button>
+              {ok && (
+                <p className="mt-3 text-green-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                  {ok}
+                </p>
+              )}
             </div>
-            </form>
+          </form>
         </div>
-        </section>
-
+      </section>
     </main>
   );
 }
