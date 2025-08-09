@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Banner from "@/components/banner";
+import ContactSection from '@/components/ContactSection'; /* 共用表單元件 */
 
 export default function HomePage() {
   return (
@@ -27,9 +28,9 @@ export default function HomePage() {
           {/* 高壓氧艙種類展示：改為圖片底部藍色遮罩樣式 */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             {[ 
-              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "/products" },
-              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "/products" },
-              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "/products" }
+              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "/products/pet" },
+              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "/products/pet" },
+              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "/products/human" }
             ].map((item, index) => (
               <a
                 key={index}
@@ -41,7 +42,6 @@ export default function HomePage() {
                   alt={item.title}
                   width={600}
                   height={400}
-                  // className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="font-serif absolute bottom-0 left-0 w-full bg-green-900/80 text-white text-center py-4 px-2">
                   <span className="text-lg font-bold">{item.title}</span>
@@ -116,43 +116,9 @@ export default function HomePage() {
           </div>
         </section>
 
-
-        {/* 🔹 我家貓狗適合高壓氧艙嗎？ */}
-        {/* <section className="mt-12 bg-[#F9F9F9] text-gray-900 py-16 px-6 rounded-3xl max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold text-center text-[#2266AA]">我家貓狗適合高壓氧艙嗎？</h2>
-          <p className="text-lg text-center text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
-            如果家裡的寵物有以下狀況，高壓氧環境或許能提供額外支持，協助維持良好的身體狀態與活力。
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 text-center">
-            {[
-              { title: "皮膚與傷口修復", description: "適用於不易恢復的皮膚狀況、燒燙傷及術後修復過程。" },
-              { title: "術後調理", description: "骨科或軟組織手術後，幫助維持穩定狀態，減少不適感。" },
-              { title: "環境適應力支持", description: "適用於需要更多環境調適支持的寵物，例如對氣候變化較敏感者。" },
-              { title: "神經系統健康", description: "適用於需要額外支持神經系統運作的寵物，幫助維持良好的日常表現。" },
-              { title: "心血管調適", description: "適合希望透過氧氣供應維持穩定心血管循環的寵物。" },
-              { title: "外力影響調適", description: "可提供額外支持，協助調適突發狀況，例如碰撞或跌倒後的恢復期。" },
-              { title: "口腔健康", description: "適用於牙齦健康需求較高的寵物，幫助維持口腔環境穩定。" },
-              { title: "細胞健康管理", description: "適用於有特殊細胞健康需求的寵物，幫助維持良好狀態。" },
-              { title: "呼吸環境適應", description: "適用於需要調適呼吸環境的寵物，如空氣品質變化較敏感者。" },
-              { title: "運動後恢復", description: "適合喜愛運動的寵物，幫助放鬆與調整身體狀態。" },
-              { title: "熟齡寵物支持", description: "適用於熟齡寵物，提供更穩定的支持，幫助維持活力。" }
-            ].map((item, index) => (
-              <div key={index} className="bg-white shadow-md rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-[#2266AA]">{item.title}</h3>
-                <p className="mt-2 text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </section> */}
-
-        {/* 🔹 底部空間 */}
-        {/* <div className="h-16"></div> */}
+        {/* ✅ 共用表單：用元件引入 */}
+        <ContactSection />
       </div>
-
-      
-      
-
     </div>
   );
 }
