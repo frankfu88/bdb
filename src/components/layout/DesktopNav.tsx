@@ -52,26 +52,6 @@ export default function DesktopNav({ }: { partnerRegions: Region[] }) {
               <Link href="/locations/pet-hospitals" className="block px-4 py-2 text-gray-600">寵物醫院</Link>
               <Link href="/locations/gyms" className="block px-4 py-2 text-gray-600">健身房</Link>
             </div>
-
-            {/* 既有區域外連清單（若仍要保留） */}
-            {/* <div className="py-2">
-              {partnerRegions.map((region) => (
-                <div key={region.region} className="border-b last:border-b-0 border-green-100">
-                  <div className="px-4 py-2 text-gray-900 bg-green-50">{region.region}</div>
-                  {region.items.map((p) => (
-                    <a
-                      key={p.name}
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block px-6 py-2 text-gray-600"
-                    >
-                      {p.name}
-                    </a>
-                  ))}
-                </div>
-              ))}
-            </div> */}
           </div>
         </li>
 

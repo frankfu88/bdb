@@ -1,6 +1,6 @@
 'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 type Region = { region: string; items: { name: string; url: string }[] };
 
@@ -15,6 +15,8 @@ export default function MobileNav({
   mobileRegionOpen: Record<string, boolean>;
   closeMenu: () => void;
 }) {
+  const isLocationsOpen = !!mobileRegionOpen['服務據點'];
+
   return (
     <nav className="sm:hidden bg-white border-t font-serif font-semibold">
       <ul className="flex flex-col items-start p-4 space-y-4 text-base text-green-900">
@@ -33,14 +35,16 @@ export default function MobileNav({
         {/* 產品介紹（展開兩個分類） */}
         <li className="w-full">
           <button
-            onClick={() => toggleRegion("產品介紹")}
+            onClick={() => toggleRegion('產品介紹')}
             className="w-full text-left hover:text-green-700"
+            aria-expanded={!!mobileRegionOpen['產品介紹']}
+            aria-controls="mobile-products-panel"
           >
             產品介紹
           </button>
 
-          {mobileRegionOpen["產品介紹"] && (
-            <div className="pl-4 mt-1 space-y-1">
+          {mobileRegionOpen['產品介紹'] && (
+            <div id="mobile-products-panel" className="pl-4 mt-1 space-y-1">
               <Link
                 href="/products/pet"
                 onClick={closeMenu}
@@ -59,44 +63,43 @@ export default function MobileNav({
           )}
         </li>
 
-        {/* 服務據點 */}
+        {/* 服務據點（先顯示兩個分類捷徑，再可選的合作夥伴清單） */}
         <li className="w-full">
           <button
-            onClick={() => toggleRegion("服務據點")}
+            onClick={() => toggleRegion('服務據點')}
             className="w-full text-left hover:text-green-700"
+            aria-expanded={isLocationsOpen}
+            aria-controls="mobile-locations-panel"
           >
             服務據點
           </button>
 
-          {mobileRegionOpen["服務據點"] && (
-            <div className="mt-2 w-full">
-              {partnerRegions.map((region) => (
-                <div key={region.region} className="mb-2">
-                  <button
-                    onClick={() => toggleRegion(region.region)}
-                    className="w-full text-left bg-green-50 px-3 py-2 text-gray-600"
-                  >
-                    {region.region}
-                  </button>
+          {isLocationsOpen && (
+            <div id="mobile-locations-panel" className="mt-2 w-full">
+              {/* 分類捷徑（比照 DesktopNav） */}
+              <div className="pl-4 space-y-1 mb-2">
+                <Link
+                  href="/locations/pet-hospitals"
+                  onClick={closeMenu}
+                  className="block text-green-900 hover:text-green-700"
+                >
+                  寵物醫院
+                </Link>
+                <Link
+                  href="/locations/gyms"
+                  onClick={closeMenu}
+                  className="block text-green-900 hover:text-green-700"
+                >
+                  健身房
+                </Link>
+              </div>
 
-                  {mobileRegionOpen[region.region] && (
-                    <div className="pl-4 mt-1 space-y-1">
-                      {region.items.map((p) => (
-                        <a
-                          key={p.name}
-                          href={p.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={closeMenu}
-                          className="block text-green-900 hover:text-green-700 break-all"
-                        >
-                          {p.name}
-                        </a>
-                      ))}
-                    </div>
-                  )}
+              {/* 分隔線（需要就留，不需要可移除） */}
+              {partnerRegions.length > 0 && (
+                <div className="pl-4 my-2">
+                  <hr className="border-green-100" />
                 </div>
-              ))}
+              )}
             </div>
           )}
         </li>
@@ -112,6 +115,7 @@ export default function MobileNav({
           </Link>
         </li>
 
+        {/* 聯絡我們（LINE） */}
         <li>
           <a
             href="https://line.me/ti/p/@464hptwo"
