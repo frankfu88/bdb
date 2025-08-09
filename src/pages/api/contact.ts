@@ -61,31 +61,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     });
 
     return res.status(200).json({ ok: true, message: '信件已成功送出' });
-  } catch (err: any) {
-    // 轉換 nodemailer 常見錯誤碼，提供前端更明確訊息
-    const raw = String(err?.code || err?.name || '');
-    const code =
-      raw.includes('EAUTH') ? 'EAUTH' :
-      raw.includes('ECONNREFUSED') ? 'ECONNREFUSED' :
-      raw.includes('ETIMEDOUT') ? 'ETIMEDOUT' :
-      raw.includes('ESOCKET') ? 'ESOCKET' :
-      raw.includes('ENOTFOUND') ? 'ENOTFOUND' :
-      'MAIL_ERROR';
+    } catch (err: unknown) {
+        const codeStr =
+            typeof err === 'object' && err !== null && 'code' in err
+            ? String((err as { code?: unknown }).code)
+            : '';
 
-    console.error('寄信失敗:', { code, raw, msg: err?.message });
+        const raw = codeStr || (err instanceof Error ? err.name : '');
+        const code =
+            raw.includes('EAUTH') ? 'EAUTH' :
+            raw.includes('ECONNREFUSED') ? 'ECONNREFUSED' :
+            raw.includes('ETIMEDOUT') ? 'ETIMEDOUT' :
+            raw.includes('ESOCKET') ? 'ESOCKET' :
+            raw.includes('ENOTFOUND') ? 'ENOTFOUND' :
+            'MAIL_ERROR';
 
-    // 一律回 200，避免前端因狀態碼誤判，但 ok=false 讓前端顯示錯誤
-    return res.status(200).json({
-      ok: false,
-      code,
-      message:
-        code === 'EAUTH' ? 'SMTP 驗證失敗，請檢查帳密或寄件權限' :
-        code === 'ECONNREFUSED' ? '無法連線到郵件伺服器（連線被拒）' :
-        code === 'ETIMEDOUT' ? '連線逾時，請稍後再試' :
-        code === 'ENOTFOUND' ? '找不到郵件伺服器主機名稱' :
-        '寄信失敗，請稍後再試',
-    });
-  }
+        console.error('寄信失敗:', {
+            code,
+            raw,
+            msg: err instanceof Error ? err.message : String(err),
+        });
+
+        return res.status(200).json({
+            ok: false,
+            code,
+            message:
+            code === 'EAUTH' ? 'SMTP 驗證失敗，請檢查帳密或寄件權限' :
+            code === 'ECONNREFUSED' ? '無法連線到郵件伺服器（連線被拒）' :
+            code === 'ETIMEDOUT' ? '連線逾時，請稍後再試' :
+            code === 'ENOTFOUND' ? '找不到郵件伺服器主機名稱' :
+            '寄信失敗，請稍後再試',
+        });
+    }
 }
 
 function escapeHtml(input: string) {

@@ -46,8 +46,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // GET 只做 verify
     return res.status(200).json({ ok: true, mode: 'verify', message: 'SMTP 連線與認證成功' });
-  } catch (err: any) {
-    console.error('SMTP 測試失敗:', err?.message || err);
-    return res.status(500).json({ ok: false, message: 'SMTP 測試失敗', error: String(err?.message || err) });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('SMTP 測試失敗:', msg);
+    return res.status(500).json({ ok: false, message: 'SMTP 測試失敗', error: msg });
   }
+
 }
