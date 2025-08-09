@@ -4,7 +4,7 @@ import Link from "next/link";
 
 type Region = { region: string; items: { name: string; url: string }[] };
 
-export default function DesktopNav({ partnerRegions }: { partnerRegions: Region[] }) {
+export default function DesktopNav({ }: { partnerRegions: Region[] }) {
   return (
     <nav className="hidden sm:flex flex-1 justify-end font-serif font-semibold">
       <ul className="flex items-center text-base text-green-900 divide-x divide-green-700">
