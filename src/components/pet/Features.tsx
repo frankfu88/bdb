@@ -21,7 +21,10 @@ export default function Features() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
         {items.map((it) => (
-          <div key={it.title} className="p-4 sm:p-5 md:p-6 bg-gray-50 shadow rounded-lg md:rounded-xl hover:shadow-lg transition">
+          <div
+            key={it.title}
+            className="p-4 sm:p-5 md:p-6 bg-gray-50 shadow hover:shadow-lg transition"
+          >
             <h3 className="text-xl md:text-2xl font-serif font-semibold text-green-900 mb-2.5 md:mb-3">{it.title}</h3>
             <p className="text-gray-700 leading-relaxed text-sm md:text-base">{it.desc}</p>
           </div>

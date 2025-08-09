@@ -5,7 +5,7 @@ export default function TopBar() {
   const tel = "03-2871723";
 
   return (
-    <div className="bg-white border-b">
+    <div className="bg-white border-b relative z-50">
       <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-10">
         {/* 桌機左右排，手機垂直堆疊 */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center h-auto sm:h-[64px] py-3 sm:py-0">
