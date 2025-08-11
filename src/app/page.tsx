@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Banner from "@/components/banner";
-import ContactSection from '@/components/ContactSection'; /* 共用表單元件 */
+import ContactSection from '@/components/ContactSection';
 
 export default function HomePage() {
   return (
