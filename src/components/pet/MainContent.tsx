@@ -62,7 +62,7 @@ export default function MainContent() {
       title: '近紅外光（700–1,100 nm）',
       points: [
         '深層穿透：波段較長，穿透可達皮下與部分肌肉組織，強化局部微循環與氧合。',
-        '訊號調節：涉及 ROS/NO 訊號，與舒緩僵硬、支持恢復相關（一般性科普）。',
+        '訊號調節：涉及 ROS/NO 訊號，與舒緩僵硬、支持恢復相關。',
         '安全注意：避免直視光源、依指引設定能量密度與時間；合併紅光常見於恢復型方案。',
       ],
     },
@@ -97,75 +97,74 @@ export default function MainContent() {
         </p>
 
         {/* --- 超小/手機（<640px）：垂直版 --- */}
-<div className="block sm:hidden">
-  <div className="mx-auto w-full max-w-[360px] rounded-xl bg-white p-3">
-    <div className="flex flex-col overflow-hidden rounded-lg bg-gray-100">
-      {bands.map((b) => (
-        <div key={b.key} className={`h-16 flex items-center justify-center bg-gradient-to-r ${b.gradient}`}>
-          <div className="text-white font-semibold leading-tight text-[11px] text-center">
-            <div className="whitespace-nowrap">{b.name}</div>
-            <div className="opacity-95 whitespace-nowrap tabular-nums text-[10px]">
-              {b.start}–{b.end}
+        <div className="block sm:hidden">
+          <div className="mx-auto w-full max-w-[360px] rounded-xl bg-white p-3">
+            <div className="flex flex-col overflow-hidden rounded-lg bg-gray-100">
+              {bands.map((b) => (
+                <div key={b.key} className={`h-16 flex items-center justify-center bg-gradient-to-r ${b.gradient}`}>
+                  <div className="text-white font-semibold leading-tight text-[11px] text-center">
+                    <div className="whitespace-nowrap">{b.name}</div>
+                    <div className="opacity-95 whitespace-nowrap tabular-nums text-[10px]">
+                      {b.start}–{b.end}
+                    </div>
+                    <div className="opacity-90 text-[10px]">nm</div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="opacity-90 text-[10px]">nm</div>
+            <div className="mt-2 text-center text-xs text-gray-500">波長 Wavelength (nm)</div>
           </div>
         </div>
-      ))}
-    </div>
-    <div className="mt-2 text-center text-xs text-gray-500">波長 Wavelength (nm)</div>
-  </div>
-</div>
 
-        {/* --- 平板/桌機（≥640px）：水平版 --- */}
-<div className="hidden sm:block overflow-x-auto">
-  <div className="relative sm:min-w-[720px] md:min-w-[880px] w-full max-w-6xl mx-auto rounded-xl md:rounded-2xl bg-white p-4 md:p-8">
-    {/* 軸底色 */}
-    <div className="relative h-16 md:h-24 rounded-lg bg-gray-100 overflow-hidden">
-      {bands.map((b) => {
-        const left = pct(b.start);
-        const width = pct(b.end) - pct(b.start);
-        return (
-          <div key={b.key} className="absolute top-0 h-full select-none" style={{ left: `${left}%`, width: `${width}%` }}>
-            <div className={`h-full w-full bg-gradient-to-r ${b.gradient} opacity-90`} />
-            <div className="absolute inset-0 flex items-center justify-center px-1">
-              <div className="leading-tight tracking-tight text-center text-white font-semibold text-[11px] md:text-sm">
-                <div className="whitespace-nowrap">{b.name}</div>
-                <div className="opacity-95 whitespace-nowrap tabular-nums text-[10px] md:text-xs">
-                  {b.start}–{b.end}
-                </div>
-                <div className="opacity-90 text-[10px] md:text-xs">nm</div>
+                {/* --- 平板/桌機（≥640px）：水平版 --- */}
+        <div className="hidden sm:block overflow-x-auto">
+          <div className="relative sm:min-w-[720px] md:min-w-[880px] w-full max-w-6xl mx-auto rounded-xl md:rounded-2xl bg-white p-4 md:p-8">
+            {/* 軸底色 */}
+            <div className="relative h-16 md:h-24 rounded-lg bg-gray-100 overflow-hidden">
+              {bands.map((b) => {
+                const left = pct(b.start);
+                const width = pct(b.end) - pct(b.start);
+                return (
+                  <div key={b.key} className="absolute top-0 h-full select-none" style={{ left: `${left}%`, width: `${width}%` }}>
+                    <div className={`h-full w-full bg-gradient-to-r ${b.gradient} opacity-90`} />
+                    <div className="absolute inset-0 flex items-center justify-center px-1">
+                      <div className="leading-tight tracking-tight text-center text-white font-semibold text-[11px] md:text-sm">
+                        <div className="whitespace-nowrap">{b.name}</div>
+                        <div className="opacity-95 whitespace-nowrap tabular-nums text-[10px] md:text-xs">
+                          {b.start}–{b.end}
+                        </div>
+                        <div className="opacity-90 text-[10px] md:text-xs">nm</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 刻度：sm 顯示簡版，md 起顯示完整；單位置中 */}
+            <div className="mt-3 md:mt-4 relative h-12 md:h-14">
+              <div className="block md:hidden">
+                {[450, 700, 1100].map((t) => (
+                  <div key={`m-${t}`} className="absolute -translate-x-1/2" style={{ left: `${pct(t)}%` }}>
+                    <div className="w-px h-4 bg-gray-300 mx-auto" />
+                    <div className="text-[12px] text-gray-600 mt-1 text-center">{t}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="hidden md:block">
+                {[450, 500, 600, 700, 900, 1100].map((t) => (
+                  <div key={`d-${t}`} className="absolute -translate-x-1/2" style={{ left: `${pct(t)}%` }}>
+                    <div className="w-px h-4 bg-gray-300 mx-auto" />
+                    <div className="text-sm text-gray-600 mt-1 text-center">{t}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="absolute left-1/2 -bottom-2 md:-bottom-3 -translate-x-1/2 text-[12px] md:text-sm text-gray-500 text-center pointer-events-none">
+                波長 Wavelength (nm)
               </div>
             </div>
           </div>
-        );
-      })}
-    </div>
-
-    {/* 刻度：sm 顯示簡版，md 起顯示完整；單位置中 */}
-    <div className="mt-3 md:mt-4 relative h-12 md:h-14">
-      <div className="block md:hidden">
-        {[450, 700, 1100].map((t) => (
-          <div key={`m-${t}`} className="absolute -translate-x-1/2" style={{ left: `${pct(t)}%` }}>
-            <div className="w-px h-4 bg-gray-300 mx-auto" />
-            <div className="text-[12px] text-gray-600 mt-1 text-center">{t}</div>
-          </div>
-        ))}
-      </div>
-      <div className="hidden md:block">
-        {[450, 500, 600, 700, 900, 1100].map((t) => (
-          <div key={`d-${t}`} className="absolute -translate-x-1/2" style={{ left: `${pct(t)}%` }}>
-            <div className="w-px h-4 bg-gray-300 mx-auto" />
-            <div className="text-sm text-gray-600 mt-1 text-center">{t}</div>
-          </div>
-        ))}
-      </div>
-      <div className="absolute left-1/2 -bottom-2 md:-bottom-3 -translate-x-1/2 text-[12px] md:text-sm text-gray-500 text-center pointer-events-none">
-        波長 Wavelength (nm)
-      </div>
-    </div>
-  </div>
-</div>
-
+        </div>
       </div>
 
       {/* ===== 三種光療說明 ===== */}

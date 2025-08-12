@@ -7,7 +7,7 @@ import ContactSection from '@/components/ContactSection';
 type CompareRow = [string, string, string];
 
 const COMPARISON: CompareRow[] = [
-  ['艙內壓力', '≥ 1.5 ATA（依設備）', '1.2–1.5 ATA（依設備）'],
+  ['艙內壓力', '≥ 1.5 ATA', '1.2–1.5 ATA'],
   ['氧輸送機制重點', '血紅素攜氧 + 血漿溶氧顯著↑', '血紅素攜氧 + 血漿溶氧小幅↑'],
   ['體感特徵', '加壓感較明顯，需適應耳壓變化', '壓力溫和，舒適度高'],
   ['使用模式', '時段較集中、依場域安排', '可較高頻率、規律融入日常'],
@@ -124,23 +124,41 @@ export default function HomePage() {
             高壓氧 vs 微壓氧
           </h2>
 
-          {/* 手機版：表頭 + 卡片式三欄 */}
+          {/* 手機版：每個參數一張卡，內含 HBO / mHBO 對照 */}
           <div className="md:hidden text-green-900">
-            <div className="grid grid-cols-[9rem,1fr,1fr] bg-green-900 text-white overflow-hidden">
-              <div className="px-4 py-2 text-sm text-center border-r border-white/20">比較參數</div>
-              <div className="px-4 py-2 text-sm text-center border-r border-white/20">高壓氧（HBO）</div>
-              <div className="px-4 py-2 text-sm text-center">微壓氧（mHBO）</div>
-            </div>
-            <div className="divide-y divide-gray-200 border border-gray-200 overflow-hidden">
-              {COMPARISON.map(([k, h, m], i) => (
-                <div key={k} className={i % 2 ? 'bg-gray-50' : 'bg-white'}>
-                  <div className="grid grid-cols-[9rem,1fr,1fr] gap-3 px-4 py-3">
-                    <div className="text-sm font-semibold text-green-900">{k}</div>
-                    <div className="text-sm text-green-900 break-words text-center">{h}</div>
-                    <div className="text-sm text-green-900 break-words text-center">{m}</div>
-                  </div>
-                </div>
-              ))}
+            <div className="rounded-xl border border-gray-200 overflow-visible">
+              {/* 上方固定顯示兩個對照標籤 */}
+              <div className="grid grid-cols-2 text-center bg-green-900 text-white text-xs font-serif">
+                <div className="py-2 border-r border-white/20">高壓氧（HBO）</div>
+                <div className="py-2">微壓氧（mHBO）</div>
+              </div>
+
+              <ul className="divide-y divide-gray-200">
+                {COMPARISON.map(([label, hbo, mhbo]) => (
+                  <li key={label} className="p-4">
+                    {/* 參數名稱 */}
+                    <div className="font-serif font-semibold text-sm mb-3">
+                      {label}
+                    </div>
+
+                    {/* 內容：<420px 單欄直排；≥420px 兩欄並排 */}
+                    <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
+                      {/* HBO */}
+                      <div className="min-w-0 rounded-lg border border-gray-200 p-3">
+                        <div className="text-sm leading-relaxed break-words">
+                          {hbo}
+                        </div>
+                      </div>
+                      {/* mHBO */}
+                      <div className="min-w-0 rounded-lg border border-gray-200 p-3">
+                        <div className="text-sm leading-relaxed break-words">
+                          {mhbo}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
