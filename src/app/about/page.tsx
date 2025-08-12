@@ -183,7 +183,7 @@ export default function AboutPage() {
           <h2 className="font-serif text-3xl font-semibold text-green-900">
             相關技術證書
           </h2>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-500">
             產品經 CQC 與 CNAS 認證檢測，符合國際品質與安全標準，安心選用
           </p>
         </div>

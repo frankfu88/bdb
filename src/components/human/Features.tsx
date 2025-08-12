@@ -30,10 +30,10 @@ export default function Features() {
   return (
     <>
       <h2 className="text-4xl font-serif font-semibold text-center text-green-900 mb-6">
-        特點說明
+        產品優勢
       </h2>
 
-      <p className="text-center text-gray-700 max-w-3xl mx-auto mb-12">
+      <p className="text-center text-gray-500 max-w-3xl mx-auto mb-12">
         人用微壓氧艙結合安全、抑菌與舒適設計，提供穩定氧療體驗並兼顧日常保養放鬆。
       </p>
 

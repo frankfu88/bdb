@@ -4,30 +4,37 @@ import Image from "next/image";
 import Banner from "@/components/banner";
 import ContactSection from '@/components/ContactSection';
 
+type CompareRow = [string, string, string];
+
+const COMPARISON: CompareRow[] = [
+  ['艙內壓力', '≥ 1.5 ATA（依設備）', '1.2–1.5 ATA（依設備）'],
+  ['氧輸送機制重點', '血紅素攜氧 + 血漿溶氧顯著↑', '血紅素攜氧 + 血漿溶氧小幅↑'],
+  ['體感特徵', '加壓感較明顯，需適應耳壓變化', '壓力溫和，舒適度高'],
+  ['使用模式', '時段較集中、依場域安排', '可較高頻率、規律融入日常'],
+  ['場域導入', '艙體規格完整、配套較多', '門檻較低、配置彈性高'],
+  ['操作複雜度', '流程較完整、管理較嚴謹', '流程簡化、操作友善'],
+];
+
 export default function HomePage() {
   return (
     <div className="w-full">
-       {/*  
-        這裡讓 Banner 滿版 (full-bleed)
-        去掉父層 container 的左右 padding/內邊距
-      */}
+      {/* ===== Full-bleed Banner ===== */}
       <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
         <Banner
           imageSrc="/images/banner/home.jpg"
           mobileImageSrc="/images/products/drawer-chamber.png"
         />
       </div>
-      
-      {/* 🔹 內容區域恢復最大寬度 */}
+
+      {/* ===== Main Container ===== */}
       <div className="max-w-6xl mx-auto px-6">
-        {/* 🔹 關於諾亞高壓氧艙 */}
+        {/* ===== 產品列表 ===== */}
         <section className="mt-20 px-6 max-w-7xl mx-auto">
           <h2 className="font-serif text-4xl text-center font-semibold text-green-900">產品列表</h2>
           <p className="mt-2 text-center text-gray-600">引領未來，創新無限</p>
 
-          {/* 高壓氧艙種類展示：改為圖片底部藍色遮罩樣式 */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[ 
+            {[
               { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "/products/pet" },
               { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "/products/pet" },
               { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "/products/human" }
@@ -42,6 +49,7 @@ export default function HomePage() {
                   alt={item.title}
                   width={600}
                   height={400}
+                  className="w-full h-auto"
                 />
                 <div className="font-serif absolute bottom-0 left-0 w-full bg-green-900/80 text-white text-center py-4 px-2">
                   <span className="text-lg font-bold">{item.title}</span>
@@ -52,71 +60,118 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 🔹 什麼是高壓氧 */}
+        {/* ===== 什麼是高壓氧 ===== */}
         <section className="py-20 px-6 max-w-6xl mx-auto text-center">
           <h2 className="font-serif text-4xl text-center font-semibold text-green-900 mb-4">
             什麼是高壓氧？
           </h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            高壓氧 Hyperbaric Oxygen (HBO) 是一種透過增加氧氣濃度來支持身體健康的方式。當寵物進入專門設計的高壓氧艙內，壓力的提升能幫助氧氣更有效地進入體內，使血液中的含氧量增加 40%~50%，有助於維持良好的生理機能。
+            高壓氧（HBO）是在高於大氣壓的環境提供較高濃度氧氣；壓力上升使艙內氧分壓提高，依亨利定律（氣體在液體中的溶解度與分壓成正比，C∝P），更多氧直接溶解於血漿，而不僅依賴血紅素攜氧。血漿溶氧增加使組織氧分壓（PtO₂）與擴散梯度上升，氧可更有效進入微循環與相對缺氧區域；實際壓力與時間設定應依設備與場域規範。
           </p>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mt-4">
-            高氧環境能促進血液循環、維持生理平衡，減少不適與腫脹，讓活動更輕鬆自在，
-            適合作為日常健康管理的一環。
-          </p>
+        </section>
 
-          {/* 功能卡片 */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
-            {[
-              { title: "維持肌膚健康", desc: "提供充足氧氣，支持日常活動的舒適度。" },
-              { title: "調節身體狀態", desc: "幫助適應不同環境變化，日常活動更輕鬆。" },
-              { title: "支持自然防禦力", desc: "維持身體機能，保持良好活力。" },
-              { title: "促進日常恢復", desc: "運動後獲得舒適的放鬆體驗。" },
-              { title: "維持靈活度", desc: "支持循環，維持穩定與靈活。" }
-            ].map((item, index) => (
-              <div key={index} className="border border-gray-200 p-4 hover:shadow-md transition">
-                <h3 className="font-serif font-bold text-[#1B5B49] mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+        {/* ===== 高壓氧艙原理（文字版） ===== */}
+        <section className="py-12 px-6 max-w-3xl mx-auto">
+          <h3 className="font-serif text-4xl font-semibold text-green-900 text-center mb-6">高壓氧艙原理說明</h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            高壓氧艙在高於大氣壓的環境下，使氧氣在血漿中的溶解度大幅提升，能更有效輸送至全身組織，短時間內達到強化供氧與加速擴散的效果。
+          </p>
+          <ol className="list-decimal ml-5 text-gray-800 space-y-3">
+            <li><span className="font-semibold text-green-900">壓力提升（P↑）</span>：艙內壓力高於 1 ATA，空氣被壓縮。</li>
+            <li><span className="font-semibold text-green-900">溶解氧增加</span>：依亨利定律，壓力越高，氧在血漿中的溶解量越多，<span className="whitespace-nowrap">不僅依賴血紅素</span> 攜氧。</li>
+            <li><span className="font-semibold text-green-900">組織氧分壓上升</span>：血液中的溶氧↑ → 組織氧分壓↑ → 氧氣擴散更有效率。</li>
+            <li><span className="font-semibold text-green-900">短時強化供氧</span>：在符合規範的時間與壓力下，達到較明顯的加壓與供氧效果。</li>
+          </ol>
+
+          <div className="mt-5 border border-gray-100 bg-gray-50/40 p-4 text-md text-green-900">
+            <div className="font-serif font-semibold mb-2">作用流程</div>
+            <div>加壓（P↑） → 血漿溶氧（O₂↑） → 組織氧分壓（PtO₂↑） → 氧擴散效率↑</div>
           </div>
         </section>
 
+        {/* ===== 什麼是微壓氧 ===== */}
+        <section className="py-16 px-6 max-w-6xl mx-auto text-center">
+          <h2 className="font-serif text-4xl text-center font-semibold text-green-900 mb-4">
+            什麼是微壓氧？
+          </h2>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            微壓氧（mHBO）是在略高於大氣壓（約 1.2–1.5 ATA）的環境中吸入較高濃度氧氣。壓力與氧分壓的提升，依據菲克擴散定律，會增加肺泡與血液間的氧氣擴散速率，使更多氧氣進入血漿並輸送至全身組織。由於加壓幅度溫和，減少了氣壓相關不適，適合長期、規律地作為日常氧補充與代謝支持。
+          </p>
+        </section>
 
-        {/* 🔹 高壓氧艙原理說明 */}
-        <section className="py-16 px-6 max-w-6xl mx-auto">
-          <h2 className="font-serif text-4xl text-center font-semibold text-green-900 mb-10">
-            高壓氧艙原理說明
+        {/* ===== 微壓氧艙原理（文字版） ===== */}
+        <section className="py-12 px-6 max-w-3xl mx-auto">
+          <h3 className="font-serif text-4xl font-semibold text-green-900 text-center mb-6">微壓氧艙原理說明</h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            微壓氧以「輕度加壓 + 較高氧濃度」為主，強調舒適穩定的補氧體驗。
+          </p>
+          <ol className="list-decimal ml-5 text-gray-800 space-y-3">
+            <li><span className="font-semibold text-green-900">輕度加壓</span>：在 1.2–1.5 ATA 範圍內，溶氧小幅提升。</li>
+            <li><span className="font-semibold text-green-900">穩定補氧</span>：在舒適的壓力條件下維持較高氧分壓，帶來漸進式的氧供應。</li>
+            <li><span className="font-semibold text-green-900">可持續性</span>：體感溫和、門檻低，便於較高頻率或規律性的使用安排。</li>
+            <li><span className="font-semibold text-green-900">導入彈性</span>：艙體與場域需求較簡化，配置彈性高。</li>
+          </ol>
+
+          <div className="mt-5 border border-gray-100 bg-gray-50/40 p-4 text-md text-green-900">
+            <div className="font-serif font-semibold mb-2">作用流程</div>
+            <div>輕度加壓（P↗） + 較高氧濃度 → 血漿溶氧（小幅↑） → 組織氧分壓（穩定↑）</div>
+          </div>
+        </section>
+
+        {/* ===== 高壓氧 vs 微壓氧｜規格表風格（依你提供的設計） ===== */}
+        <section className="py-20 px-6 max-w-6xl mx-auto font-serif">
+          <h2 className="text-4xl font-semibold text-center text-green-900 mb-6">
+            高壓氧 vs 微壓氧
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "提升溶解度",
-                desc: "壓力提升可增加氧氣在血液中的溶解度，加速輸送至全身。"
-              },
-              {
-                title: "提高血氧",
-                desc: "穩定的高氧環境讓氧氣更易進入血液並傳至全身，維持日常能量。"
-              },
-              {
-                title: "補充細胞能量",
-                desc: "促進ATP合成，提供細胞運作所需能量，支持穩定狀態。"
-              },
-              {
-                title: "穩定循環代謝",
-                desc: "支持正常循環與代謝，幫助排除廢物並維持自然運作。"
-              }
-            ].map((item, index) => (
-              <div key={index} className="p-6 border border-gray-200 hover:shadow-md transition">
-                <h3 className="text-xl font-serif font-bold text-[#1B5B49] mb-2">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+          {/* 手機版：表頭 + 卡片式三欄 */}
+          <div className="md:hidden text-green-900">
+            <div className="grid grid-cols-[9rem,1fr,1fr] bg-green-900 text-white overflow-hidden">
+              <div className="px-4 py-2 text-sm text-center border-r border-white/20">比較參數</div>
+              <div className="px-4 py-2 text-sm text-center border-r border-white/20">高壓氧（HBO）</div>
+              <div className="px-4 py-2 text-sm text-center">微壓氧（mHBO）</div>
+            </div>
+            <div className="divide-y divide-gray-200 border border-gray-200 overflow-hidden">
+              {COMPARISON.map(([k, h, m], i) => (
+                <div key={k} className={i % 2 ? 'bg-gray-50' : 'bg-white'}>
+                  <div className="grid grid-cols-[9rem,1fr,1fr] gap-3 px-4 py-3">
+                    <div className="text-sm font-semibold text-green-900">{k}</div>
+                    <div className="text-sm text-green-900 break-words text-center">{h}</div>
+                    <div className="text-sm text-green-900 break-words text-center">{m}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* 桌機版：條紋表格、全框線、置中 */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full max-w-6xl mx-auto text-green-900 border-collapse border border-gray-200 text-base">
+              <thead>
+                <tr className="bg-green-900 text-white">
+                  <th className="p-4 border border-gray-200 text-center">比較參數</th>
+                  <th className="p-4 border border-gray-200 text-center">高壓氧（HBO）</th>
+                  <th className="p-4 border border-gray-200 text-center">微壓氧（mHBO）</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON.map(([k, h, m]) => (
+                  <tr key={k} className="odd:bg-gray-50">
+                    <td className="p-4 border border-gray-200 text-center font-semibold whitespace-nowrap">{k}</td>
+                    <td className="p-4 border border-gray-200 text-center whitespace-pre-line">{h}</td>
+                    <td className="p-4 border border-gray-200 text-center whitespace-pre-line">{m}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-center text-gray-500 text-sm mt-4">
+            以上內容為一般性比較與示意，實際操作請依設備型號與場域規範。
+          </p>
         </section>
 
-        {/* ✅ 共用表單：用元件引入 */}
+        {/* ===== 共用表單 ===== */}
         <ContactSection />
       </div>
     </div>

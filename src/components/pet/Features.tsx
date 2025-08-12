@@ -13,9 +13,9 @@ export default function Features() {
   return (
     <section className="mt-12 md:mt-16 mb-14 md:mb-16">
       <h2 className="text-3xl md:text-4xl font-serif font-semibold text-center text-green-900 mb-4 md:mb-6">
-        特點說明
+        產品優勢
       </h2>
-      <p className="text-center text-gray-700 text-sm md:text-base max-w-3xl mx-auto mb-8 md:mb-12">
+      <p className="text-center text-gray-500 text-sm md:text-base max-w-3xl mx-auto mb-8 md:mb-12">
         高壓氧艙採用多層抽屜設計與光療技術，穩定供氧並結合紫外線、負離子、藍／紅光等多重淨化與放鬆功能。
       </p>
 
