@@ -1,21 +1,20 @@
-import type { Config } from "tailwindcss";
+// tailwind.config.ts
+import type { Config } from 'tailwindcss';
 
-export default {
+const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/app/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/data/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
       fontFamily: {
-        serif: ['"Noto Serif TC"', 'serif'], // 加這一段
+        sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'Noto Sans TC', 'sans-serif'],
+        serif: ['var(--font-serif)', 'ui-serif', 'Times New Roman', 'Noto Serif TC', 'serif'],
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+export default config;
