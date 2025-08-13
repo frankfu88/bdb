@@ -1,7 +1,7 @@
 'use client';
 
 import PageHeader from '@/components/PageHeader';
-import Features from '@/components/human/Features';
+import MainContent from '@/components/human/MainContent';
 import SpecsTable from '@/components/human/SpecsTable';
 import ContactSection from '@/components/ContactSection';
 
@@ -17,9 +17,9 @@ export default function Page() {
           />
         </section>
 
-        {/* 特點說明 */}
+        {/* 主要資訊 */}
         <section className="mt-16 mb-16">
-          <Features />
+          <MainContent />
         </section>
 
         {/* 規格說明 */}

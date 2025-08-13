@@ -1,4 +1,3 @@
-// src/data/partnerRegions.ts
 import type { PartnerRegion } from "@/types/locations";
 
 export const partnerRegions: PartnerRegion[] = [
@@ -7,6 +6,7 @@ export const partnerRegions: PartnerRegion[] = [
     region: "中部",
     items: [
       { name: "東南動物醫院", url: "https://www.dongnan.bdb.com.tw" },
+      { name: "BoneBone蹦蹦寵物", url: "" },
       { name: "毛貓寵動物醫院", url: "https://www.maomeowpet.bdb.com.tw" },
       { name: "鈞懋動物醫院", url: "https://www.junmao.bdb.com.tw" },
       { name: "羅大宇動物醫院", url: "https://www.luodayu.bdb.com.tw" },

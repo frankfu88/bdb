@@ -1,4 +1,3 @@
-// src/data/hospitalDetails.ts
 export const hospitalDetails: Record<
   string,
   {
@@ -18,7 +17,15 @@ export const hospitalDetails: Record<
     mapUrl: 'https://maps.google.com/?q=台中市北屯區崇德路二段30號',
     siteUrl: 'https://www.dongnan.bdb.com.tw',
     tags: ['犬貓', '預約制'],
-    },
+  },
+    BoneBone蹦蹦寵物: {
+    address: '406台中市北屯區文心路四段963號',
+    hours: '週一至週日 11:30-21:30',
+    phone: '04-2243-2963',
+    mapUrl: 'https://maps.google.com/?q=台中市北屯區文心路四段963號',
+    siteUrl: '',
+    tags: ['寵物食品', '寵物用品', '線上購物(O2O)']
+  },
   毛貓寵動物醫院: {
     address: '408台中市南屯區文心路一段372號',
     hours: '週一至週日 09:00–21:00',
@@ -28,31 +35,29 @@ export const hospitalDetails: Record<
     tags: ['犬貓', '預約制'],
   },
   鈞懋動物醫院: {
-  address: '406台中市北屯區軍福十六路283號',
-  hours: '週二至週五 10:00–12:30, 14:30–17:30, 18:30–21:00；週六、週日、週一 休息',
-  phone: '04-2435-1283',
-  mapUrl: 'https://maps.google.com/?q=台中市北屯區軍福十六路283號',
-  siteUrl: 'https://www.junmao.bdb.com.tw',
-  tags: ['犬貓', '預約制'],
-},
-
+    address: '406台中市北屯區軍福十六路283號',
+    hours: '週二至週五 10:00–12:30, 14:30–17:30, 18:30–21:00；週六、週日、週一 休息',
+    phone: '04-2435-1283',
+    mapUrl: 'https://maps.google.com/?q=台中市北屯區軍福十六路283號',
+    siteUrl: 'https://www.junmao.bdb.com.tw',
+    tags: ['犬貓', '預約制'],
+  },
   羅大宇動物醫院: {
-  address: '403台中市西區存中街153號',
-  hours: '週一至週六 09:30–12:00, 13:00–17:00, 18:00–21:30；週日 09:30–12:00, 13:00–17:00, 18:00–22:00',
-  phone: '04-2372-8378',
-  mapUrl: 'https://maps.google.com/?q=台中市西區存中街153號',
-  siteUrl: 'https://www.luodayu.bdb.com.tw',
-  tags: ['犬貓', '預約制'],
-},
-文志動物醫院: {
-  address: '640雲林縣斗六市文化路344號',
-  hours: '週一至週五 09:00–11:30, 14:00–17:30, 19:00–20:00；週六 09:00–11:30；週日 休息',
-  phone: '05-532-2735',
-  mapUrl: 'https://maps.google.com/?q=雲林縣斗六市文化路344號',
-  siteUrl: 'https://www.wenzhi.bdb.com.tw',
-  tags: ['犬貓', '預約制'],
-},
-
+    address: '403台中市西區存中街153號',
+    hours: '週一至週六 09:30–12:00, 13:00–17:00, 18:00–21:30；週日 09:30–12:00, 13:00–17:00, 18:00–22:00',
+    phone: '04-2372-8378',
+    mapUrl: 'https://maps.google.com/?q=台中市西區存中街153號',
+    siteUrl: 'https://www.luodayu.bdb.com.tw',
+    tags: ['犬貓', '預約制'],
+  },
+  文志動物醫院: {
+    address: '640雲林縣斗六市文化路344號',
+    hours: '週一至週五 09:00–11:30, 14:00–17:30, 19:00–20:00；週六 09:00–11:30；週日 休息',
+    phone: '05-532-2735',
+    mapUrl: 'https://maps.google.com/?q=雲林縣斗六市文化路344號',
+    siteUrl: 'https://www.wenzhi.bdb.com.tw',
+    tags: ['犬貓', '預約制'],
+  },
   人人動物醫院: {
     address: '403台中市西區公正路146號',
     hours: '週一至週六 17:00–18:00, 18:30–21:00；週日休息',
@@ -89,14 +94,13 @@ export const hospitalDetails: Record<
     tags: ['犬貓', '預約制'],
   },
   宏愛動物醫院: {
-  address: '701台南市東區東寧路331號',
-  hours: '週一至週六 10:30–20:00；週日休息',
-  phone: '06-238-5816',
-  mapUrl: 'https://maps.google.com/?q=台南市東區東寧路331號',
-  siteUrl: 'https://www.hongai.bdb.com.tw',
-  tags: ['犬貓', '預約制'],
-},
-
+    address: '701台南市東區東寧路331號',
+    hours: '週一至週六 10:30–20:00；週日休息',
+    phone: '06-238-5816',
+    mapUrl: 'https://maps.google.com/?q=台南市東區東寧路331號',
+    siteUrl: 'https://www.hongai.bdb.com.tw',
+    tags: ['犬貓', '預約制'],
+  },
   亞幸動物醫院: {
     address: '802高雄市苓雅區光華一路12-1號',
     hours: '週一至週五 10:00–12:00, 13:00–21:00；週六 10:00–12:00, 14:00–19:00；週日休息',

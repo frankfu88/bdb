@@ -124,42 +124,39 @@ export default function HomePage() {
             高壓氧 vs 微壓氧
           </h2>
 
-          {/* 手機版：每個參數一張卡，內含 HBO / mHBO 對照 */}
+          {/* 手機版：每個參數一張卡，標頭水平並排，下面顯示對應內容 */}
           <div className="md:hidden text-green-900">
-            <div className="rounded-xl border border-gray-200 overflow-visible">
-              {/* 上方固定顯示兩個對照標籤 */}
-              <div className="grid grid-cols-2 text-center bg-green-900 text-white text-xs font-serif">
-                <div className="py-2 border-r border-white/20">高壓氧（HBO）</div>
-                <div className="py-2">微壓氧（mHBO）</div>
-              </div>
+            <ul className="space-y-4">
+              {COMPARISON.map(([label, hbo, mhbo]) => (
+                <li key={label} className="bg-white p-4">
+                  <div className="font-serif font-semibold text-base mb-3">{label}</div>
 
-              <ul className="divide-y divide-gray-200">
-                {COMPARISON.map(([label, hbo, mhbo]) => (
-                  <li key={label} className="p-4">
-                    {/* 參數名稱 */}
-                    <div className="font-serif font-semibold text-sm mb-3">
-                      {label}
-                    </div>
-
-                    {/* 內容：<420px 單欄直排；≥420px 兩欄並排 */}
-                    <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
-                      {/* HBO */}
-                      <div className="min-w-0 rounded-lg border border-gray-200 p-3">
-                        <div className="text-sm leading-relaxed break-words">
-                          {hbo}
-                        </div>
+                  <div className="border border-gray-200 overflow-hidden">
+                    {/* 標頭列：<360 有 bottom 線；≥360 拿掉 bottom 線 */}
+                    <div className="grid grid-cols-1 min-[360px]:grid-cols-2 text-center text-s bg-gray-50">
+                      <div className="py-2 font-medium border-b min-[360px]:border-b-0 min-[360px]:border-r border-gray-200">
+                        高壓氧（HBO）
                       </div>
-                      {/* mHBO */}
-                      <div className="min-w-0 rounded-lg border border-gray-200 p-3">
-                        <div className="text-sm leading-relaxed break-words">
-                          {mhbo}
-                        </div>
+                      <div className="py-2 font-medium border-b min-[360px]:border-b-0 border-gray-200">
+                        微壓氧（mHBO）
                       </div>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
+                    {/* 內容列：≥360 兩欄都加 top 線；左欄另加右邊界線 */}
+                    <div className="grid grid-cols-1 min-[360px]:grid-cols-2 text-center">
+                      <div className="min-w-0 p-3 text-sm text-gray-800 leading-relaxed break-words
+                                      min-[360px]:border-t min-[360px]:border-r border-gray-200">
+                        {hbo}
+                      </div>
+                      <div className="min-w-0 p-3 text-sm text-gray-800 leading-relaxed break-words
+                                      border-t border-gray-200">
+                        {mhbo}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* 桌機版：條紋表格、全框線、置中 */}
