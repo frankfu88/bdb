@@ -1,3 +1,4 @@
+// /src/components/ContactSection.tsx
 'use client';
 
 import Image from 'next/image';
@@ -6,77 +7,85 @@ import { MSG, isEmail, fetchJsonWithTimeout } from '@/lib/contact';
 
 export default function ContactSection() {
   const [sending, setSending] = useState(false);
-  const [ok, setOk] = useState<string | null>(null);
+  const [note, setNote] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (sending) return;
+
     setSending(true);
-    setOk(null);
+    setNote(null);
 
     const el = e.currentTarget;
     const fd = new FormData(el);
-    const website = String(fd.get('website') ?? '').trim();
+
+    const website = String(fd.get('website') ?? '').trim();   // 蜜罐
     const name = String(fd.get('name') ?? '').trim();
     const phone = String(fd.get('phone') ?? '').trim();
     const email = String(fd.get('email') ?? '').trim();
     const message = String(fd.get('message') ?? '').trim();
 
-    // ✅ 關鍵修正：明確標註為 string，避免被推斷成字面量型別
-    let msg: string = MSG.fail;
-    let reset = false;
-
     try {
-      if (website) { msg = MSG.ok; reset = true; return; }
-      if (!name || !phone || !email || !message) { msg = MSG.fill; return; }
-      if (!isEmail(email)) { msg = MSG.email; return; }
-
-      const payload = { name, phone, email, message, website };
-      const first = await fetchJsonWithTimeout('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (first === 'success') { msg = MSG.ok; reset = true; return; }
-
-      if (first.error === 'NETWORK') {
-        await new Promise(r => setTimeout(r, 1000));
-        const second = await fetchJsonWithTimeout('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (second === 'success') { msg = MSG.ok; reset = true; return; }
-        msg = second.error === 'TIMEOUT'
-          ? MSG.timeout
-          : second.error === 'NETWORK'
-          ? MSG.net
-          : second.msg || MSG.fail;
+      if (website) {
+        // bot：直接當成功處理，但不顯示任何錯誤
+        el.reset();
+        setNote(MSG.ok);
+        return;
+      }
+      if (!name || !phone || !email || !message) {
+        setNote(MSG.fill);
+        return;
+      }
+      if (!isEmail(email)) {
+        setNote(MSG.email);
         return;
       }
 
-      msg = first.error === 'TIMEOUT' ? MSG.timeout : first.msg || MSG.fail;
+      const payload = { name, phone, email, message, website };
+
+      const r = await fetchJsonWithTimeout('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }, 30000);
+
+      if (r === 'success') {
+        // 201/202 皆屬成功，API 內已正確回 2xx
+        el.reset();
+        setNote(MSG.ok);
+      } else {
+        if (r.error === 'TIMEOUT') setNote(MSG.timeout);
+        else if (r.error === 'NETWORK') setNote(MSG.net);
+        else setNote(MSG.fail);
+      }
     } finally {
-      if (reset) el.reset();
-      setOk(msg);
-      setSending(false); // 按鈕一律回復原文
+      setSending(false);
     }
   }
 
   return (
     <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-16 md:py-20 overflow-hidden">
-      <Image src="/images/customer-service/city.png" alt="城市背景" fill className="object-cover object-center" priority />
+      <Image
+        src="/images/customer-service/city.png"
+        alt="城市背景"
+        fill
+        className="object-cover object-center"
+        priority
+      />
       <div className="absolute inset-0 bg-black/40" />
 
       <div className="relative max-w-6xl mx-auto px-6 text-center">
-        <h2 className="font-serif font-semibold text-4xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">聯絡我們</h2>
-        <p className="mt-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">我們重視您的聲音，提供即時且專業的協助！</p>
+        <h2 className="font-serif font-semibold text-4xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          聯絡我們
+        </h2>
+        <p className="mt-4 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          我們重視您的聲音，提供即時且專業的協助！
+        </p>
       </div>
 
       <div className="relative mt-10 max-w-4xl mx-auto px-6">
         <form onSubmit={onSubmit} className="space-y-5" noValidate>
-          {/* 蜜罐欄位 */}
+          {/* 蜜罐欄位（請勿移除） */}
           <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -145,9 +154,9 @@ export default function ContactSection() {
             >
               {sending ? '送出中…' : '填完送出 →'}
             </button>
-            {ok && (
+            {note && (
               <p className="mt-3 text-green-100" role="status" aria-live="polite">
-                {ok}
+                {note}
               </p>
             )}
           </div>
