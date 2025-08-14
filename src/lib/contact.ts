@@ -5,7 +5,9 @@ export const MSG = {
   timeout: '連線逾時，請稍後再試。',
   net: '網路異常，請檢查連線後重試。',
   fail: '送出失敗，請稍後再試。',
+  mailIssue: '我們已收到表單，但通知信暫時未寄出；我們會儘快處理。',
 } as const;
+
 
 export const isEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 
