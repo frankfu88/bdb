@@ -13,7 +13,6 @@ async function rateLimit(ip: string) {
   if (!url || !token) return { allowed: true, remaining: RL_MAX }; // 未設定則不啟用
 
   const key = `rl:contact:${ip}`;
-  // 使用 pipeline: INCR + EXPIRE
   const resp = await fetch(`${url}/pipeline`, {
     method: 'POST',
     headers: {
@@ -27,7 +26,7 @@ async function rateLimit(ip: string) {
     ]),
   });
 
-  if (!resp.ok) return { allowed: true, remaining: RL_MAX }; // 故障時不擋流（不中斷服務）
+  if (!resp.ok) return { allowed: true, remaining: RL_MAX };
   const data = (await resp.json()) as { result: [number, number, string] };
   const count = Number(data?.result?.[2] ?? '1');
   return { allowed: count <= RL_MAX, remaining: Math.max(RL_MAX - count, 0) };
@@ -51,6 +50,15 @@ function escapeHtml(input: string) {
     .replaceAll(/'/g, '&#039;');
 }
 
+// 小工具：從 unknown 取錯誤代碼
+function getErrorCode(e: unknown): string {
+  if (typeof e === 'object' && e !== null && 'code' in e) {
+    const c = (e as { code?: unknown }).code;
+    return typeof c === 'string' ? c : '';
+  }
+  return '';
+}
+
 // ===== 寄信：SMTP（Nodemailer） =====
 async function sendViaSMTP(payload: {
   name: string; phone: string; email: string; message: string;
@@ -63,8 +71,8 @@ async function sendViaSMTP(payload: {
     throw Object.assign(new Error('SMTP not configured'), { code: 'SMTP_CONFIG_MISSING' });
   }
 
-  // 動態 import，避免在沒裝 nodemailer 的環境失敗建置
-  let nodemailer: any;
+  // 動態 import，型別使用模組型別
+  let nodemailer: typeof import('nodemailer') | undefined;
   try {
     nodemailer = await import('nodemailer');
   } catch {
@@ -97,7 +105,7 @@ async function sendViaSMTP(payload: {
   });
 }
 
-// ===== 寄信：SendGrid HTTP API（作為回退 or 單一供應商） =====
+// ===== 寄信：SendGrid HTTP API（回退或主供應商） =====
 async function sendViaSendGrid(payload: {
   name: string; phone: string; email: string; message: string;
 }) {
@@ -139,7 +147,6 @@ async function sendViaSendGrid(payload: {
     body: JSON.stringify(body),
   });
 
-  // SendGrid 成功會回 202
   if (resp.status !== 202) {
     const txt = await resp.text().catch(() => '');
     throw Object.assign(new Error(`SendGrid error ${resp.status}: ${txt}`), { code: 'SG_SEND_FAILED' });
@@ -164,7 +171,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return res.status(400).json({ ok: false, message: 'Missing required fields', code: 'BAD_REQUEST' });
   }
 
-  // 速率限制（若有設 Upstash ）
+  // 速率限制（若有設 Upstash）
   try {
     const ip = getIp(req);
     const rl = await rateLimit(ip);
@@ -177,13 +184,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     // 速率限制故障時不擋流
   }
 
-  // 寄信策略：優先順序可用環境變數調整（預設 SMTP → SendGrid）
+  // 寄信優先順序（預設 SMTP → SendGrid）
   const order = (process.env.MAIL_PRIORITY || 'SMTP,SENDGRID')
     .split(',')
     .map((s) => s.trim().toUpperCase())
     .filter(Boolean);
 
-  let lastErr: any = null;
+  let lastErr: unknown = null;
 
   for (const provider of order) {
     try {
@@ -195,16 +202,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         await sendViaSendGrid({ name, phone, email, message });
         return res.status(200).json({ ok: true, message: '信件已成功送出' });
       }
-    } catch (err) {
-      lastErr = err;
-      // 繼續嘗試下一個供應商
+    } catch (err: unknown) {
+      lastErr = err; // 紀錄並嘗試下一個供應商
     }
   }
 
-  // 全部失敗：回 502，前端會顯示「寄信失敗，請稍後再試」之類訊息
-  const code =
-    lastErr?.code ||
-    (lastErr instanceof Error ? lastErr.name : 'MAIL_ERROR');
+  const code = getErrorCode(lastErr) || (lastErr instanceof Error ? lastErr.name : 'MAIL_ERROR');
 
   console.error('寄信失敗（所有供應商皆失敗）:', {
     code,
