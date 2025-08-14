@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -8,66 +8,33 @@ import {
   ClockIcon,
   MapPinIcon,
   EnvelopeIcon,
-  ChevronDownIcon,
 } from '@heroicons/react/24/outline';
 
-type DisclosureItem = { href: string; label: string };
+type ChipLink = { href: string; label: string };
 
-function FooterDisclosure({
-  title,
-  items,
-  defaultOpen = false,
-}: {
-  title: string;
-  items: DisclosureItem[];
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  const pathname = usePathname();
+const PRODUCT_LINKS: ChipLink[] = [
+  { href: '/products/pet', label: '寵物高壓氧艙' },
+  { href: '/products/human', label: '人用微壓氧艙' },
+];
 
-  // close when route changes
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  return (
-    <li className="border-b border-white/10 last:border-b-0 pb-3 mb-3">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="w-full flex items-center justify-between gap-3 text-left hover:text-green-200 transition-colors"
-      >
-        <span className="inline-flex items-center">－{title}</span>
-        <ChevronDownIcon
-          className={`h-5 w-5 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      <div
-        className={`grid transition-all duration-300 ease-out ${
-          open ? 'max-h-40 opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'
-        } overflow-hidden`}
-      >
-        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-          {items.map((it) => (
-            <Link
-              key={it.href}
-              href={it.href}
-              onClick={() => setOpen(false)} // close immediately on click
-              className="inline-flex items-center rounded-full border border-white/30 px-2.5 py-1 text-xs text-white hover:bg-white hover:text-[#003E1F] transition"
-            >
-              {it.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </li>
-  );
-}
+const LOCATION_LINKS: ChipLink[] = [
+  { href: '/locations/pet-hospitals', label: '寵物醫院' },
+  { href: '/locations/gyms', label: '健身房' },
+];
 
 export default function Footer() {
   const [year] = useState<number>(new Date().getFullYear());
+  const pathname = usePathname();
+
+  // 兩個獨立開關：各自展開在對應的清單項目之下
+  const [openProducts, setOpenProducts] = useState(false);
+  const [openLocations, setOpenLocations] = useState(false);
+
+  // 換頁自動收合
+  useEffect(() => {
+    setOpenProducts(false);
+    setOpenLocations(false);
+  }, [pathname]);
 
   const companyInfo = [
     { Icon: PhoneIcon, label: '服務電話', value: '03-2871723' },
@@ -79,7 +46,9 @@ export default function Footer() {
   return (
     <footer className="bg-green-900 text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 三欄資訊區 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-12 justify-items-center sm:justify-items-start">
+          {/* 公司資訊 */}
           <div className="w-full">
             <h3 className="text-lg font-bold mb-6 text-center sm:text-left">寶的寶有限公司</h3>
             <ul className="space-y-6">
@@ -95,6 +64,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* 快速導覽（點擊項目 → 在該項目下方顯示 chips） */}
           <div className="w-full">
             <h3 className="text-lg font-bold mb-4 text-center sm:text-left">快速導覽</h3>
             <ul className="space-y-1 text-center sm:text-left">
@@ -105,21 +75,76 @@ export default function Footer() {
                 <Link href="/about" className="hover:text-green-200">－關於寶的寶</Link>
               </li>
 
-              <FooterDisclosure
-                title="產品介紹"
-                items={[
-                  { href: '/products/pet', label: '寵物高壓氧艙' },
-                  { href: '/products/human', label: '人用微壓氧艙' },
-                ]}
-              />
+              {/* 產品介紹 */}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpenProducts((v) => !v);
+                    // 若打開產品，關掉據點；反之亦然
+                    if (!openProducts) setOpenLocations(false);
+                  }}
+                  className="w-full text-left hover:text-green-200 text-center sm:text-left"
+                  aria-expanded={openProducts}
+                >
+                  －產品介紹
+                </button>
 
-              <FooterDisclosure
-                title="服務據點"
-                items={[
-                  { href: '/locations/pet-hospitals', label: '寵物醫院' },
-                  { href: '/locations/gyms', label: '健身房' },
-                ]}
-              />
+                {/* chips：就在「產品介紹」這一行的下方 */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    openProducts ? 'max-h-24 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                    {PRODUCT_LINKS.map((it) => (
+                      <Link
+                        key={it.href}
+                        href={it.href}
+                        onClick={() => setOpenProducts(false)}
+                        className="inline-flex items-center rounded-full border border-white/30 px-2.5 py-1 text-xs text-white hover:bg-white hover:text-[#003E1F] transition"
+                      >
+                        {it.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </li>
+
+              {/* 服務據點 */}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpenLocations((v) => !v);
+                    if (!openLocations) setOpenProducts(false);
+                  }}
+                  className="w-full text-left hover:text-green-200 text-center sm:text-left"
+                  aria-expanded={openLocations}
+                >
+                  －服務據點
+                </button>
+
+                {/* chips：就在「服務據點」這一行的下方 */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-out ${
+                    openLocations ? 'max-h-24 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                    {LOCATION_LINKS.map((it) => (
+                      <Link
+                        key={it.href}
+                        href={it.href}
+                        onClick={() => setOpenLocations(false)}
+                        className="inline-flex items-center rounded-full border border-white/30 px-2.5 py-1 text-xs text-white hover:bg-white hover:text-[#003E1F] transition"
+                      >
+                        {it.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </li>
 
               <li>
                 <Link href="/customer-service" className="hover:text-green-200">－客戶服務</Link>
@@ -127,6 +152,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* 產品連結 */}
           <div className="w-full">
             <h3 className="text-lg font-bold mb-4 text-center sm:text-left">產品連結</h3>
             <ul className="space-y-3 text-center sm:text-left">
@@ -137,6 +163,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* CTA */}
         <div className="mt-16 text-center">
           <Link
             href="https://line.me/ti/p/@464hptwo"
@@ -147,8 +174,10 @@ export default function Footer() {
           </Link>
         </div>
 
+        {/* 分隔線 */}
         <div className="mt-16 border-t border-white/20 mx-auto max-w-6xl" />
 
+        {/* 版權聲明 */}
         <div className="pt-4 text-center text-sm">
           &copy; {year} 寶的寶有限公司 | BDB International Co, Ltd.
         </div>
