@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (isSpam) {
     return res.status(201).json({ ok: true, message: '已收到', provider: undefined });
   }
-
+  
   const html = `
     <h3>新的客服表單</h3>
     <p><strong>姓名：</strong> ${escapeHtml(name!)} </p>
