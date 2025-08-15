@@ -1,3 +1,5 @@
+// /src/lib/contact.ts
+
 export const MSG = {
   ok: '已送出，我們會盡快與您聯繫。',
   fill: '請完整填寫必填欄位。',

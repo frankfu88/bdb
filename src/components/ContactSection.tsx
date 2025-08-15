@@ -2,12 +2,23 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MSG, isEmail, fetchJsonWithTimeout } from '@/lib/contact';
 
 export default function ContactSection() {
   const [sending, setSending] = useState(false);
   const [note, setNote] = useState<string | null>(null);
+  const clearNoteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 元件卸載或下次設定前，清理計時器
+  useEffect(() => {
+    return () => {
+      if (clearNoteTimer.current) {
+        clearTimeout(clearNoteTimer.current);
+        clearNoteTimer.current = null;
+      }
+    };
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,7 +30,7 @@ export default function ContactSection() {
     const el = e.currentTarget;
     const fd = new FormData(el);
 
-    const website = String(fd.get('website') ?? '').trim();   // 蜜罐
+    const website = String(fd.get('website') ?? '').trim(); // 蜜罐
     const name = String(fd.get('name') ?? '').trim();
     const phone = String(fd.get('phone') ?? '').trim();
     const email = String(fd.get('email') ?? '').trim();
@@ -30,6 +41,11 @@ export default function ContactSection() {
         // bot：直接當成功處理，但不顯示任何錯誤
         el.reset();
         setNote(MSG.ok);
+
+        // 成功訊息 5 秒後自動清除
+        if (clearNoteTimer.current) clearTimeout(clearNoteTimer.current);
+        clearNoteTimer.current = setTimeout(() => setNote(null), 5000);
+
         return;
       }
       if (!name || !phone || !email || !message) {
@@ -43,16 +59,24 @@ export default function ContactSection() {
 
       const payload = { name, phone, email, message, website };
 
-      const r = await fetchJsonWithTimeout('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }, 30000);
+      const r = await fetchJsonWithTimeout(
+        '/api/contact',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        },
+        30000
+      );
 
       if (r === 'success') {
         // 201/202 皆屬成功，API 內已正確回 2xx
         el.reset();
         setNote(MSG.ok);
+
+        // 成功訊息 5 秒後自動清除
+        if (clearNoteTimer.current) clearTimeout(clearNoteTimer.current);
+        clearNoteTimer.current = setTimeout(() => setNote(null), 5000);
       } else {
         if (r.error === 'TIMEOUT') setNote(MSG.timeout);
         else if (r.error === 'NETWORK') setNote(MSG.net);
@@ -154,6 +178,8 @@ export default function ContactSection() {
             >
               {sending ? '送出中…' : '填完送出 →'}
             </button>
+
+            {/* 狀態訊息 */}
             {note && (
               <p className="mt-3 text-green-100" role="status" aria-live="polite">
                 {note}
