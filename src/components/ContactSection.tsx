@@ -3,14 +3,40 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { MSG, isEmail, fetchJsonWithTimeout } from '@/lib/contact';
+import { MSG, fetchJsonWithTimeout } from '@/lib/contact';
 
 export default function ContactSection() {
   const [sending, setSending] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const clearNoteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 元件卸載或下次設定前，清理計時器
+  // 統一顯示訊息（可自動清除）
+  function showNote(msg: string, autoClearMs = 5000) {
+    setNote(msg);
+    if (clearNoteTimer.current) {
+      clearTimeout(clearNoteTimer.current);
+      clearNoteTimer.current = null;
+    }
+    if (autoClearMs > 0) {
+      clearNoteTimer.current = setTimeout(() => {
+        setNote(null);
+        clearNoteTimer.current = null;
+      }, autoClearMs);
+    }
+  }
+
+  // 任一輸入時清掉下方提示文字
+  function handleAnyInput() {
+    if (note) {
+      setNote(null);
+      if (clearNoteTimer.current) {
+        clearTimeout(clearNoteTimer.current);
+        clearNoteTimer.current = null;
+      }
+    }
+  }
+
+  // 卸載時清理計時器
   useEffect(() => {
     return () => {
       if (clearNoteTimer.current) {
@@ -21,7 +47,7 @@ export default function ContactSection() {
   }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+    e.preventDefault(); // 表單通過原生驗證後才會進到這裡
     if (sending) return;
 
     setSending(true);
@@ -37,26 +63,14 @@ export default function ContactSection() {
     const message = String(fd.get('message') ?? '').trim();
 
     try {
+      // 若是 bot（填了蜜罐），直接當成功處理
       if (website) {
-        // bot：直接當成功處理，但不顯示任何錯誤
         el.reset();
-        setNote(MSG.ok);
-
-        // 成功訊息 5 秒後自動清除
-        if (clearNoteTimer.current) clearTimeout(clearNoteTimer.current);
-        clearNoteTimer.current = setTimeout(() => setNote(null), 5000);
-
-        return;
-      }
-      if (!name || !phone || !email || !message) {
-        setNote(MSG.fill);
-        return;
-      }
-      if (!isEmail(email)) {
-        setNote(MSG.email);
+        showNote(MSG.ok);
         return;
       }
 
+      // 這裡不再檢查必填與 email 格式，交給瀏覽器原生驗證
       const payload = { name, phone, email, message, website };
 
       const r = await fetchJsonWithTimeout(
@@ -70,17 +84,12 @@ export default function ContactSection() {
       );
 
       if (r === 'success') {
-        // 201/202 皆屬成功，API 內已正確回 2xx
         el.reset();
-        setNote(MSG.ok);
-
-        // 成功訊息 5 秒後自動清除
-        if (clearNoteTimer.current) clearTimeout(clearNoteTimer.current);
-        clearNoteTimer.current = setTimeout(() => setNote(null), 5000);
+        showNote(MSG.ok);
       } else {
-        if (r.error === 'TIMEOUT') setNote(MSG.timeout);
-        else if (r.error === 'NETWORK') setNote(MSG.net);
-        else setNote(MSG.fail);
+        if (r?.error === 'TIMEOUT') showNote(MSG.timeout);
+        else if (r?.error === 'NETWORK') showNote(MSG.net);
+        else showNote(MSG.fail);
       }
     } finally {
       setSending(false);
@@ -96,7 +105,7 @@ export default function ContactSection() {
         className="object-cover object-center"
         priority
       />
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-black/20" />
 
       <div className="relative max-w-6xl mx-auto px-6 text-center">
         <h2 className="font-serif font-semibold text-4xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -108,7 +117,8 @@ export default function ContactSection() {
       </div>
 
       <div className="relative mt-10 max-w-4xl mx-auto px-6">
-        <form onSubmit={onSubmit} className="space-y-5" noValidate>
+        {/* ⚠️ 移除 noValidate，啟用瀏覽器原生驗證泡泡 */}
+        <form onSubmit={onSubmit} onInput={handleAnyInput} className="space-y-5">
           {/* 蜜罐欄位（請勿移除） */}
           <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
 
@@ -138,6 +148,7 @@ export default function ContactSection() {
                 pattern="^[0-9\\-+\\s()]{6,}$"
                 placeholder="請輸入您的電話"
                 className="mt-2 w-full bg-black/30 text-white placeholder-white/80 border border-black rounded-md px-4 py-3 caret-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-black"
+                title="請輸入有效的電話號碼"
               />
             </div>
           </div>
@@ -179,7 +190,7 @@ export default function ContactSection() {
               {sending ? '送出中…' : '填完送出 →'}
             </button>
 
-            {/* 狀態訊息 */}
+            {/* 送出後的狀態訊息（與原生必填泡泡互不衝突） */}
             {note && (
               <p className="mt-3 text-green-100" role="status" aria-live="polite">
                 {note}
