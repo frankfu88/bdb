@@ -13,6 +13,8 @@ export const partnerRegions: PartnerRegion[] = [
       { name: "文志動物醫院", url: "https://www.wenzhi.bdb.com.tw" },
       { name: "人人動物醫院", url: "" },
       { name: "仁心動物醫院", url: "" },
+      { name: "冠生動物醫院", url: "" },
+      { name: "大森林動物醫院", url: "" },
     ],
   },
   {
@@ -24,6 +26,7 @@ export const partnerRegions: PartnerRegion[] = [
       { name: "亞幸動物醫院", url: "" },
       { name: "登羣動物醫院", url: "" },
       { name: "史密斯動物醫院", url: "" },
+      { name: "佳愛動物醫院", url: "" },
     ],
   },
 ];

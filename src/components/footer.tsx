@@ -177,10 +177,18 @@ export default function Footer() {
         {/* 分隔線 */}
         <div className="mt-16 border-t border-white/20 mx-auto max-w-6xl" />
 
-        {/* 版權聲明 */}
-        <div className="pt-4 text-center text-sm">
-          &copy; {year} 寶的寶有限公司 | BDB International Co, Ltd.
+        {/* 版權聲明 + 免責聲明連結 */}
+        <div className="pt-4 text-center text-sm space-x-1">
+          <span>&copy; {year} 寶的寶有限公司 | BDB International Co, Ltd.</span>
+          <span className="opacity-50">｜</span>
+          <Link
+            href="/disclaimer"
+            className="underline-offset-4 hover:text-green-200"
+          >
+            免責聲明
+          </Link>
         </div>
+
       </div>
     </footer>
   );

@@ -18,7 +18,7 @@ export const hospitalDetails: Record<
     siteUrl: 'https://www.dongnan.bdb.com.tw',
     tags: ['犬貓', '預約制'],
   },
-    BoneBone蹦蹦寵物: {
+  BoneBone蹦蹦寵物: {
     address: '406台中市北屯區文心路四段963號',
     hours: '週一至週日 11:30-21:30',
     phone: '04-2243-2963',
@@ -74,6 +74,24 @@ export const hospitalDetails: Record<
     siteUrl: '',
     tags: ['犬貓', '預約制'],
   },
+  冠生動物醫院: {
+    address: '407台中市西屯區河南路二段108號',
+    hours: '週一至週五 09:30–12:00, 14:00–20:00；週六 09:30–15:30；週日休息',
+    phone: '04-2292-8102',
+    mapUrl: 'https://maps.google.com/?q=台中市西屯區河南路二段108號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  },
+  大森林動物醫院: {
+    address: '500彰化縣彰化市中正路二段338號',
+    hours: '週一、週三至週五 09:00–12:00, 14:00–17:00, 18:00-20:00；週二 09:00–12:00；週六 09:00–12:00, 14:00–17:00；週日休息',
+    phone: '04-728-7562',
+    mapUrl: 'https://maps.google.com/?q=彰化縣彰化市中正路二段338號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  },
+
+
 
   // ===== 南部 =====
     名仁動物醫院: {
@@ -122,6 +140,14 @@ export const hospitalDetails: Record<
     hours: '週一至週日 14:00–18:00, 19:00–22:00',
     phone: '07-222-6565',
     mapUrl: 'https://maps.google.com/?q=高雄市新興區民生一路199號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  },
+  佳愛動物醫院: {
+    address: '701台南市東區崇明路167號',
+    hours: '週一至週日 10:00–12:00, 14:30-17:30, 19:00–21:00',
+    phone: '06-260-7358',
+    mapUrl: 'https://maps.google.com/?q=台南市東區崇明路167號',
     siteUrl: '',
     tags: ['犬貓', '預約制'],
   },
