@@ -1,6 +1,8 @@
+// /src/components/MobileNav.tsx
 'use client';
 
 import Link from 'next/link';
+import { FaChevronDown } from 'react-icons/fa';
 
 type Region = { region: string; items: { name: string; url: string }[] };
 
@@ -15,7 +17,12 @@ export default function MobileNav({
   mobileRegionOpen: Record<string, boolean>;
   closeMenu: () => void;
 }) {
+  const isProductsOpen = !!mobileRegionOpen['產品介紹'];
   const isLocationsOpen = !!mobileRegionOpen['服務據點'];
+  const isResourcesOpen = !!mobileRegionOpen['相關資訊'];
+
+  const caretCls = (open: boolean) =>
+    `shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`;
 
   return (
     <nav className="sm:hidden bg-white border-t font-serif font-semibold">
@@ -32,19 +39,20 @@ export default function MobileNav({
           </Link>
         </li>
 
-        {/* 產品介紹（展開兩個分類） */}
+        {/* 產品介紹 */}
         <li className="w-full">
           <button
             onClick={() => toggleRegion('產品介紹')}
-            className="w-full text-left hover:text-green-700"
-            aria-expanded={!!mobileRegionOpen['產品介紹']}
+            className="w-full flex items-center justify-between hover:text-green-700"
+            aria-expanded={isProductsOpen}
             aria-controls="mobile-products-panel"
           >
-            產品介紹
+            <span>產品介紹</span>
+            <FaChevronDown className={caretCls(isProductsOpen)} aria-hidden />
           </button>
 
-          {mobileRegionOpen['產品介紹'] && (
-            <div id="mobile-products-panel" className="pl-4 mt-1 space-y-1">
+          {isProductsOpen && (
+            <div id="mobile-products-panel" className="pl-4 mt-2 space-y-2">
               <Link
                 href="/products/pet"
                 onClick={closeMenu}
@@ -63,43 +71,75 @@ export default function MobileNav({
           )}
         </li>
 
-        {/* 服務據點（先顯示兩個分類捷徑，再可選的合作夥伴清單） */}
+        {/* 服務據點 */}
         <li className="w-full">
           <button
             onClick={() => toggleRegion('服務據點')}
-            className="w-full text-left hover:text-green-700"
+            className="w-full flex items-center justify-between hover:text-green-700"
             aria-expanded={isLocationsOpen}
             aria-controls="mobile-locations-panel"
           >
-            服務據點
+            <span>服務據點</span>
+            <FaChevronDown className={caretCls(isLocationsOpen)} aria-hidden />
           </button>
 
           {isLocationsOpen && (
-            <div id="mobile-locations-panel" className="mt-2 w-full">
-              {/* 分類捷徑（比照 DesktopNav） */}
-              <div className="pl-4 space-y-1 mb-2">
-                <Link
-                  href="/locations/pet-hospitals"
-                  onClick={closeMenu}
-                  className="block text-green-900 hover:text-green-700"
-                >
-                  寵物醫院
-                </Link>
-                <Link
-                  href="/locations/gyms"
-                  onClick={closeMenu}
-                  className="block text-green-900 hover:text-green-700"
-                >
-                  健身房
-                </Link>
-              </div>
+            <div id="mobile-locations-panel" className="pl-4 mt-2 space-y-2">
+              {/* 分類捷徑 */}
+              <Link
+                href="/locations/pet-hospitals"
+                onClick={closeMenu}
+                className="block text-green-900 hover:text-green-700"
+              >
+                寵物醫院
+              </Link>
+              <Link
+                href="/locations/gyms"
+                onClick={closeMenu}
+                className="block text-green-900 hover:text-green-700"
+              >
+                健身房
+              </Link>
 
-              {/* 分隔線（需要就留，不需要可移除） */}
+              {/* 分隔線（需要就留） */}
               {partnerRegions.length > 0 && (
-                <div className="pl-4 my-2">
+                <div className="my-2">
                   <hr className="border-green-100" />
                 </div>
               )}
+              {/* 若未來要列出區域性夥伴，可在此渲染 partnerRegions */}
+            </div>
+          )}
+        </li>
+
+        {/* 相關資訊 */}
+        <li className="w-full">
+          <button
+            onClick={() => toggleRegion('相關資訊')}
+            className="w-full flex items-center justify-between hover:text-green-700"
+            aria-expanded={isResourcesOpen}
+            aria-controls="mobile-resources-panel"
+          >
+            <span>相關資訊</span>
+            <FaChevronDown className={caretCls(isResourcesOpen)} aria-hidden />
+          </button>
+
+          {isResourcesOpen && (
+            <div id="mobile-resources-panel" className="pl-4 mt-2 space-y-2">
+              <Link
+                href="/resources/papers"
+                onClick={closeMenu}
+                className="block text-green-900 hover:text-green-700"
+              >
+                醫學文獻
+              </Link>
+              <Link
+                href="/resources/news"
+                onClick={closeMenu}
+                className="block text-green-900 hover:text-green-700"
+              >
+                新聞報導
+              </Link>
             </div>
           )}
         </li>
