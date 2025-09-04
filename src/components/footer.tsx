@@ -187,6 +187,13 @@ export default function Footer() {
           >
             免責聲明
           </Link>
+          <span className="opacity-50">｜</span>
+          <Link
+            href="/statement"
+            className="underline-offset-4 hover:text-green-200"
+          >
+            特別聲明
+          </Link>
         </div>
 
       </div>
