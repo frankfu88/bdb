@@ -1,4 +1,4 @@
-// DesktopNav.tsx
+// /src/components/DesktopNav.tsx
 'use client';
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
@@ -14,22 +14,25 @@ export default function DesktopNav({}: { partnerRegions: Region[] }) {
         <li className="px-2 sm:px-2.5 md:px-3 lg:px-5 whitespace-nowrap">
           <Link href="/">首頁</Link>
         </li>
+
         <li className="px-2 sm:px-2.5 md:px-3 lg:px-5 whitespace-nowrap">
           <Link href="/about">關於寶的寶</Link>
         </li>
 
-        {/* 產品介紹（加下拉箭頭） */}
+        {/* 產品介紹（改為：氧艙系列＋醫美產品） */}
         <li className="relative px-2 sm:px-2.5 md:px-3 lg:px-5 group whitespace-nowrap">
           <span className="cursor-pointer inline-flex items-center gap-1">
             產品介紹
             <FaChevronDown className="transition-transform duration-200 group-hover:rotate-180" aria-hidden />
           </span>
+
           {/* 提高可滑入區域，避免移出後閃爍 */}
           <span className="absolute left-0 right-0 top-full h-2 block" />
+
           <div
             className="
               absolute left-1/2 -translate-x-1/2 top-full mt-2
-              w-52 md:w-56
+              w-[280px] md:w-[320px]
               bg-white shadow-lg border border-gray-100 z-10
               opacity-0 invisible transition-opacity duration-200
               group-hover:opacity-100 group-hover:visible
@@ -37,16 +40,30 @@ export default function DesktopNav({}: { partnerRegions: Region[] }) {
             role="menu"
             aria-label="產品介紹選單"
           >
-            <Link href="/products/pet" className="block px-4 py-2 text-gray-600 hover:bg-gray-50" role="menuitem">
-              寵物高壓氧艙
-            </Link>
-            <Link href="/products/human" className="block px-4 py-2 text-gray-600 hover:bg-gray-50" role="menuitem">
-              人用微壓氧艙
-            </Link>
+            <div className="py-1">
+              <div className="px-4 pt-3 pb-1 font-bold text-green-800/80 tracking-wider">氧艙系列</div>
+              <Link href="/products/oxy-series/human" className="block px-4 py-2 text-gray-700 hover:bg-gray-50" role="menuitem">
+                人用微壓氧艙
+              </Link>
+              <Link href="/products/oxy-series/pet" className="block px-4 py-2 text-gray-700 hover:bg-gray-50" role="menuitem">
+                寵物高壓氧艙
+              </Link>
+
+              {/* <div className="px-4 pt-4 pb-1 text-s font-bold text-green-800/80 tracking-wider border-t border-gray-100 mt-1">保養系列</div>
+              <Link href="/products/aesthetics/exosome-microcrystal-mask" className="block px-4 py-2 text-gray-700 hover:bg-gray-50" role="menuitem">
+                外泌體微晶貼膜
+              </Link>
+              <Link href="/products/aesthetics/hair-serum" className="block px-4 py-2 text-gray-700 hover:bg-gray-50" role="menuitem">
+                靈芝多肽生髮液
+              </Link>
+              <Link href="/products/aesthetics/qi-blood-essence" className="block px-4 py-2 text-gray-700 hover:bg-gray-50" role="menuitem">
+                氣血提升精華
+              </Link> */}
+            </div>
           </div>
         </li>
 
-        {/* 服務據點（加下拉箭頭） */}
+        {/* 服務據點（維持原設計） */}
         <li className="relative px-2 sm:px-2.5 md:px-3 lg:px-5 group whitespace-nowrap">
           <span className="cursor-pointer inline-flex items-center gap-1">
             服務據點
@@ -75,7 +92,7 @@ export default function DesktopNav({}: { partnerRegions: Region[] }) {
           </div>
         </li>
 
-        {/* 相關資訊（新） */}
+        {/* 相關資訊（維持原設計） */}
         <li className="relative px-2 sm:px-2.5 md:px-3 lg:px-5 group whitespace-nowrap">
           <span className="cursor-pointer inline-flex items-center gap-1">
             相關資訊
