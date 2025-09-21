@@ -54,14 +54,14 @@ export default function MobileNav({
           {isProductsOpen && (
             <div id="mobile-products-panel" className="pl-4 mt-2 space-y-2">
               <Link
-                href="/products/pet"
+                href="/products/oxy-series/pet"
                 onClick={closeMenu}
                 className="block text-green-900 hover:text-green-700"
               >
                 寵物高壓氧艙
               </Link>
               <Link
-                href="/products/human"
+                href="/products/oxy-series/human"
                 onClick={closeMenu}
                 className="block text-green-900 hover:text-green-700"
               >
