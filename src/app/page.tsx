@@ -26,34 +26,39 @@ export default function HomePage() {
         />
       </div>
 
-      {/* ===== Main Container ===== */}
-      <div className="max-w-6xl mx-auto px-6">
-        {/* ===== 產品列表 ===== */}
-        <section className="mt-20 px-6 max-w-7xl mx-auto">
+      {/* ===== Main Container（放大寬度） ===== */}
+      <div className="max-w-[1400px] xl:max-w-[1500px] 2xl:max-w-[1660px] mx-auto px-6">
+        {/* ===== 產品列表（維持比例，等比例放大） ===== */}
+        <section className="mt-20 mx-auto">
           <h2 className="font-serif text-4xl text-center font-semibold text-green-900">產品列表</h2>
           <p className="mt-2 text-center text-gray-600">引領未來，創新無限</p>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {[
-              { title: "寵物用高壓氧艙（單體艙）", img: "/images/products/single-chamber.png", link: "/products/pet" },
-              { title: "寵物用高壓氧艙（抽屜式艙體）", img: "/images/products/drawer-chamber.png", link: "/products/pet" },
-              { title: "人用微壓氧艙", img: "/images/products/human-oxygen-chamber.jpg", link: "/products/human" }
+              { title: "寵物用高壓氧艙", img: "/images/products/pet.jpg", link: "/products/oxy-series/pet" },
+              { title: "人用微壓氧艙", img: "/images/products/human.jpg", link: "/products/oxy-series/human" },
+              { title: "豪華高壓氧艙", img: "/images/products/lux.jpg", link: "/" },
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.link}
-                className="relative block group overflow-hidden shadow-md"
+                className="group block overflow-hidden rounded-lg shadow-md"
               >
-                <Image
-                  src={item.img}
-                  alt={item.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                />
-                <div className="font-serif absolute bottom-0 left-0 w-full bg-green-900/80 text-white text-center py-4 px-2">
-                  <span className="text-lg font-bold">{item.title}</span>
-                  <span className="ml-2 inline-block transform transition-transform group-hover:translate-x-1">→</span>
+                {/* 手機：5/4；桌機：4/3；圖片不變形 */}
+                <div className="relative w-full aspect-[5/4] md:aspect-[4/3]">
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width:1660px) 520px, (min-width:1500px) 480px, (min-width:1280px) 450px, (min-width:768px) 44vw, 100vw"
+                    priority={index === 0}
+                  />
+                </div>
+
+                <div className="font-serif bg-green-900/80 text-white text-center px-2 py-2.5 md:py-3 leading-tight">
+                  <span className="text-base md:text-lg font-bold align-middle">{item.title}</span>
+                  <span className="ml-1.5 inline-block align-middle transition-transform group-hover:translate-x-1">→</span>
                 </div>
               </a>
             ))}
@@ -124,7 +129,7 @@ export default function HomePage() {
             高壓氧 vs 微壓氧
           </h2>
 
-          {/* 手機版：每個參數一張卡，標頭水平並排，下面顯示對應內容 */}
+          {/* 手機版卡片表格 */}
           <div className="md:hidden text-green-900">
             <ul className="space-y-4">
               {COMPARISON.map(([label, hbo, mhbo]) => (
@@ -132,7 +137,6 @@ export default function HomePage() {
                   <div className="font-serif font-semibold text-base mb-3">{label}</div>
 
                   <div className="border border-gray-200 overflow-hidden">
-                    {/* 標頭列：<360 有 bottom 線；≥360 拿掉 bottom 線 */}
                     <div className="grid grid-cols-1 min-[360px]:grid-cols-2 text-center text-s bg-gray-50">
                       <div className="py-2 font-medium border-b min-[360px]:border-b-0 min-[360px]:border-r border-gray-200">
                         高壓氧（HBO）
@@ -142,7 +146,6 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    {/* 內容列：≥360 兩欄都加 top 線；左欄另加右邊界線 */}
                     <div className="grid grid-cols-1 min-[360px]:grid-cols-2 text-center">
                       <div className="min-w-0 p-3 text-sm text-gray-800 leading-relaxed break-words
                                       min-[360px]:border-t min-[360px]:border-r border-gray-200">
@@ -159,7 +162,7 @@ export default function HomePage() {
             </ul>
           </div>
 
-          {/* 桌機版：條紋表格、全框線、置中 */}
+          {/* 桌機版表格 */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full max-w-6xl mx-auto text-green-900 border-collapse border border-gray-200 text-base">
               <thead>
