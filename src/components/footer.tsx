@@ -12,9 +12,15 @@ import {
 
 type ChipLink = { href: string; label: string };
 
-const PRODUCT_LINKS: ChipLink[] = [
+const OXY_LINKS: ChipLink[] = [
   { href: '/products/pet', label: '寵物高壓氧艙' },
   { href: '/products/human', label: '人用微壓氧艙' },
+];
+
+const CHIP_LINKS: ChipLink[] = [
+  { href: '/products/chip-series/pet', label: '寵物芯片' },
+  { href: '/products/chip-series/auto', label: '汽車芯片' },
+  { href: '/products/chip-series/semiconductor', label: '半導體晶圓管理芯片' },
 ];
 
 const LOCATION_LINKS: ChipLink[] = [
@@ -86,18 +92,40 @@ export default function Footer() {
                   }}
                   className="w-full text-left hover:text-green-200 text-center sm:text-left"
                   aria-expanded={openProducts}
+                  aria-controls="footer-products-panel"
                 >
                   －產品介紹
                 </button>
 
                 {/* chips：就在「產品介紹」這一行的下方 */}
                 <div
+                  id="footer-products-panel"
                   className={`overflow-hidden transition-all duration-300 ease-out ${
-                    openProducts ? 'max-h-24 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                    openProducts ? 'max-h-64 opacity-100 mt-2' : 'max-h-0 opacity-0'
                   }`}
                 >
+                  {/* 氧艙系列 */}
+                  <div className="text-xs text-white/80 mb-2 select-none">氧艙系列</div>
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                    {PRODUCT_LINKS.map((it) => (
+                    {OXY_LINKS.map((it) => (
+                      <Link
+                        key={it.href}
+                        href={it.href}
+                        onClick={() => setOpenProducts(false)}
+                        className="inline-flex items-center rounded-full border border-white/30 px-2.5 py-1 text-xs text-white hover:bg-white hover:text-[#003E1F] transition"
+                      >
+                        {it.label}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* 分隔線 */}
+                  <div className="my-3 border-t border-white/20" />
+
+                  {/* 芯片系列 */}
+                  <div className="text-xs text-white/80 mb-2 select-none">芯片系列</div>
+                  <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                    {CHIP_LINKS.map((it) => (
                       <Link
                         key={it.href}
                         href={it.href}
@@ -121,12 +149,14 @@ export default function Footer() {
                   }}
                   className="w-full text-left hover:text-green-200 text-center sm:text-left"
                   aria-expanded={openLocations}
+                  aria-controls="footer-locations-panel"
                 >
                   －服務據點
                 </button>
 
                 {/* chips：就在「服務據點」這一行的下方 */}
                 <div
+                  id="footer-locations-panel"
                   className={`overflow-hidden transition-all duration-300 ease-out ${
                     openLocations ? 'max-h-24 opacity-100 mt-2' : 'max-h-0 opacity-0'
                   }`}
@@ -158,6 +188,9 @@ export default function Footer() {
             <ul className="space-y-3 text-center sm:text-left">
               <li>
                 <Link href="/products" className="hover:text-green-200">－BDB 高壓氧艙</Link>
+              </li>
+              <li>
+                <Link href="/products/chip-series" className="hover:text-green-200">－BDB 芯片系列</Link>
               </li>
             </ul>
           </div>

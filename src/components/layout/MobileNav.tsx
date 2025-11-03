@@ -53,19 +53,51 @@ export default function MobileNav({
 
           {isProductsOpen && (
             <div id="mobile-products-panel" className="pl-4 mt-2 space-y-2">
+              {/* 氧艙系列 */}
+              <div className="tracking-wide text-green-800/80 select-none">
+                氧艙系列
+              </div>
               <Link
                 href="/products/oxy-series/pet"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 寵物高壓氧艙
               </Link>
               <Link
                 href="/products/oxy-series/human"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 人用微壓氧艙
+              </Link>
+
+              <hr className="my-3 border-green-100" />
+
+              {/* 芯片系列 */}
+              <div className="tracking-wide text-green-800/80 select-none">
+                芯片系列
+              </div>
+              <Link
+                href="/products/chip-series/pet"
+                onClick={closeMenu}
+                className="block text-gray-700 hover:text-green-700"
+              >
+                寵物芯片
+              </Link>
+              <Link
+                href="/products/chip-series/auto"
+                onClick={closeMenu}
+                className="block text-gray-700 hover:text-green-700"
+              >
+                汽車芯片
+              </Link>
+              <Link
+                href="/products/chip-series/semiconductor"
+                onClick={closeMenu}
+                className="block text-gray-700 hover:text-green-700"
+              >
+                半導體芯片
               </Link>
             </div>
           )}
@@ -89,25 +121,24 @@ export default function MobileNav({
               <Link
                 href="/locations/pet-hospitals"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 寵物醫院
               </Link>
               <Link
                 href="/locations/gyms"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 健身房
               </Link>
 
-              {/* 分隔線（需要就留） */}
+              {/* 區域夥伴（預留） */}
               {partnerRegions.length > 0 && (
                 <div className="my-2">
                   <hr className="border-green-100" />
                 </div>
               )}
-              {/* 若未來要列出區域性夥伴，可在此渲染 partnerRegions */}
             </div>
           )}
         </li>
@@ -129,14 +160,14 @@ export default function MobileNav({
               <Link
                 href="/resources/papers"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 醫學文獻
               </Link>
               <Link
                 href="/resources/news"
                 onClick={closeMenu}
-                className="block text-green-900 hover:text-green-700"
+                className="block text-gray-700 hover:text-green-700"
               >
                 新聞報導
               </Link>
