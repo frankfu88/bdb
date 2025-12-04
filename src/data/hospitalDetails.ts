@@ -90,8 +90,22 @@ export const hospitalDetails: Record<
     siteUrl: '',
     tags: ['犬貓', '預約制'],
   },
-
-
+  佳群動物醫院: {
+    address: '407彰化縣彰化市中正路二段338號',
+    hours: '週一至週六 10:00-12:00, 14:00-20:00；週日休息',
+    phone: '04-2463-6366',
+    mapUrl: 'https://maps.google.com/?q=彰化縣彰化市中正路二段338號',
+    siteUrl: 'http://joypet.smartweb.tw/index.php?module=intro&mn=3&id=16687',
+    tags: ['犬貓', '預約制'],
+  },
+  何康動物醫院: {
+    address: '401台中市東區十甲東路657號',
+    hours: '週一至週五 10:00-12:30, 18:00-21:30；週休二日',
+    phone: '04-2215-2869',
+    mapUrl: 'https://maps.google.com/?q=台中市東區十甲東路657號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  },
 
   // ===== 南部 =====
     名仁動物醫院: {
@@ -151,6 +165,21 @@ export const hospitalDetails: Record<
     siteUrl: '',
     tags: ['犬貓', '預約制'],
   },
-
+  我的動物醫院: {
+    address: '700台南市中西區和緯路五段235號',
+    hours: '週二至週六 10:30-20:00；週日、週一休息',
+    phone: '06-250-1567',
+    mapUrl: 'https://maps.google.com/?q=台南市中西區和緯路五段235號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  },
+  希安動物醫院: {
+    address: '80145高雄市前金區中華三路23之7＆23號之8號',
+    hours: '',
+    phone: '0932-637-705',
+    mapUrl: 'https://maps.google.com/?q=高雄市前金區中華三路23之7＆23號之8號',
+    siteUrl: '',
+    tags: ['犬貓', '預約制'],
+  }
   // ===== 北部（目前無資料，可後續補） =====
 };

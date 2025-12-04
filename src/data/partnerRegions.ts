@@ -15,6 +15,8 @@ export const partnerRegions: PartnerRegion[] = [
       { name: "仁心動物醫院", url: "" },
       { name: "冠生動物醫院", url: "" },
       { name: "大森林動物醫院", url: "" },
+      { name: "佳群動物醫院", url: "" },
+      { name: "何康動物醫院", url: "" },
     ],
   },
   {
@@ -27,6 +29,8 @@ export const partnerRegions: PartnerRegion[] = [
       { name: "登羣動物醫院", url: "" },
       { name: "史密斯動物醫院", url: "" },
       { name: "佳愛動物醫院", url: "" },
+      { name: "我的動物醫院", url: "" },
+      { name: "希安動物醫院", url: "" },
     ],
   },
 ];
